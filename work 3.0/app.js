@@ -4,11 +4,17 @@ const app = express();
 const path = require('path');
 const authRoutes = require('./routes/auth');
 const dashboardRoutes = require('./routes/dashboard'); 
+const port = 3000;
 
 // Use CORS middleware
 app.use(cors());
-
 app.use(express.json()); // For parsing application/json
+app.use(express.urlencoded({ extended: true }));
+
+// Route to serve the home page
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/home.html'));
+});
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
