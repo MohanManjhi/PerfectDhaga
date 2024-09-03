@@ -1,38 +1,21 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const connection = require('../config/db');
+const connection = require('../config/db'); // Ensure this path is correct
 
-exports.signup = (req, res) => {
-  const { firstName, middleName, phoneNumber, email, role, password } = req.body;
-  
-  // Hash the password
-  bcrypt.hash(password, 10, (err, hashedPassword) => {
-    if (err) return res.status(500).json({ error: 'Password hashing failed' });
+const signup = (req, res) => {
+    const { firstName, middleName, phoneNumber, email, role, password } = req.body;
 
-    // Insert new user into the database
+    console.log('Received data:', req.body); // Log the received data
+
     const query = 'INSERT INTO users (firstName, middleName, phoneNumber, email, role, password) VALUES (?, ?, ?, ?, ?, ?)';
-    connection.query(query, [firstName, middleName, phoneNumber, email, role, hashedPassword], (err, result) => {
-      if (err) return res.status(500).json({ error: 'Database error' });
-      res.status(201).json({ message: 'User registered successfully' });
+    const values = [firstName, middleName, phoneNumber, email, role, password];
+
+    connection.query(query, values, (error, results) => {
+        if (error) {
+            console.error('Database query error:', error);
+            return res.status(500).json({ success: false, message: 'Database error', error });
+        }
+        console.log('Insert results:', results);
+        res.json({ success: true, message: 'User signed up successfully' });
     });
-  });
 };
 
-exports.login = (req, res) => {
-  const { email, password } = req.body;
-
-  const query = 'SELECT * FROM users WHERE email = ?';
-  connection.query(query, [email], (err, users) => {
-    if (err) return res.status(500).json({ error: 'Database error' });
-    if (users.length === 0) return res.status(401).json({ error: 'Invalid email or password' });
-
-    const user = users[0];
-    bcrypt.compare(password, user.password, (err, isMatch) => {
-      if (err) return res.status(500).json({ error: 'Password comparison failed' });
-      if (!isMatch) return res.status(401).json({ error: 'Invalid email or password' });
-
-      const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      res.status(200).json({ token });
-    });
-  });
-};
+module.exports = { signup };

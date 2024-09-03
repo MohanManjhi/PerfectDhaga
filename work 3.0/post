@@ -1,0 +1,23 @@
+{
+  "firstName": "rohan",
+  "lastName": "manjhi",
+  "phoneNumber": "1245567890",
+  "email": "rohan.doe@example.com",
+  "role": "user",
+  "password": "password123"
+}
+ //for login
+ //http://localhost:3000/auth/login,
+
+{
+    "email": "rohan.doe@example.com",
+    "password": "password123"
+  }
+  
+
+  {"message":"Login successful","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJyb2hhbi5kb2VAZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcyNTMyNjk0OSwiZXhwIjoxNzI1MzMwNTQ5fQ.7Uovy_VWgBamQkWMThdBnvkag4oGg_V9ZXgNPi07EWs"}
+ 
+  do postman for authentication 
+  select headers 
+  key : Authorization
+  value : Bearer jwt token
