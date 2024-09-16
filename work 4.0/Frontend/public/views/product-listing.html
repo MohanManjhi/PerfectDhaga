@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - PerfectDhaga</title>
+    <link href="../css/tailwind.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="bg-gray-800 p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <a href="/" class="text-white text-lg font-semibold">PerfectDhaga</a>
+                <ul class="flex space-x-4">
+                    <li><a href="/login.html" class="text-white">Login</a></li>
+                    <li><a href="/register.html" class="text-white">Register</a></li>
+                    <li><a href="/cart.html" class="text-white">Cart</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto py-8">
+        <h1 class="text-2xl font-bold mb-8">Product Listing</h1>
+        <div class="grid grid-cols-4 gap-4">
+            <!-- Product Card -->
+            <div class="border p-4 rounded-lg bg-white shadow">
+                <img src="/images/product1.jpg" alt="Product 1" class="h-40 w-full object-cover mb-2">
+                <h3 class="text-lg font-semibold">Product Name</h3>
+                <p>$100</p>
+                <a href="/product-details.html" class="block text-blue-500 mt-2">View Details</a>
+            </div>
+            <!-- Repeat for more products -->
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 p-4 mt-8">
+        <div class="container mx-auto text-white text-center">
+            &copy; 2024 PerfectDhaga. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
