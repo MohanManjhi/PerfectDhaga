@@ -17,54 +17,52 @@ import AdminOrders from './pages/adminOrders';
 import SignInSignUp from './pages/SignInSignUp.jsx';
 
 const App = () => {
-    const userRole = 'user'; // This should be dynamically set based on logged-in user
-
+    const userRole = 'user'; 
     return (
         <Router>
             <Routes>
-                <Route path="/" exact component={<Home/>} />
-                <Route path="/login" component={<Login/>} />
-                <Route path="/register" component={<Register/>} />
+                {/* Define your routes with the "element" prop */}
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
                 <Route path="/sign-in-sign-up" element={<SignInSignUp />} />
-
 
                 {/* User routes */}
                 {userRole === 'user' && (
                     <>
-                        <Route path="/user/dashboard" component={<UserDashboard/>} />
-                        <Route path="/user/profile" component={<UserProfile/>} />
-                        <Route path="/wishlist" component={<Wishlist/>} />
+                        <Route path="/user/dashboard" element={<UserDashboard />} />
+                        <Route path="/user/profile" element={<UserProfile />} />
+                        <Route path="/wishlist" element={<Wishlist />} />
                     </>
                 )}
 
                 {/* Tailor routes */}
                 {userRole === 'tailor' && (
                     <>
-                        <Route path="/tailor/dashboard" component={<TailorDashboard/>} />
-                        <Route path="/tailor/profile" component={<TailorProfile/>} />
+                        <Route path="/tailor/dashboard" element={<TailorDashboard />} />
+                        <Route path="/tailor/profile" element={<TailorProfile />} />
                     </>
                 )}
 
                 {/* Vendor routes */}
                 {userRole === 'vendor' && (
                     <>
-                        <Route path="/vendor/dashboard" component={<VendorDashboard/>} />
-                        <Route path="/vendor/profile" component={<VendorProfile/>} />
+                        <Route path="/vendor/dashboard" element={<VendorDashboard />} />
+                        <Route path="/vendor/profile" element={<VendorProfile />} />
                     </>
                 )}
 
                 {/* Admin routes */}
                 {userRole === 'admin' && (
                     <>
-                        <Route path="/admin/dashboard" component={<AdminDashboard/>} />
-                        <Route path="/admin/users" component={<AdminUsers/>} />
-                        <Route path="/admin/orders" component={<AdminOrders/>} />
-                        {/* Add more admin routes here... */}
+                        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                        <Route path="/admin/users" element={<AdminUsers />} />
+                        <Route path="/admin/orders" element={<AdminOrders />} />
                     </>
                 )}
 
                 {/* Fallback route */}
-                <Route path="*" component={() => <div>404 Not Found</div>} />
+                <Route path="*" element={<div>404 Not Found</div>} />
             </Routes>
         </Router>
     );
