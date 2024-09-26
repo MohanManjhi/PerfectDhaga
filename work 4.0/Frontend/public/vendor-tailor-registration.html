@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfect Dhaaga - Vendor/Tailor Registration</title>
+  <link rel="stylesheet" href="../css/vendor-tailor-registration.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Perfect Dhaaga</h1>
+      <p>Join Our Network of Excellence</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2>Register as a Vendor or Tailor</h2>
+        <p>Provide your details to join Perfect Dhaaga and offer your services</p>
+      </div>
+
+      <form id="registrationForm" class="card-content">
+        <div class="form-group">
+          <label for="role">Register as</label>
+          <select id="role" class="input">
+            <option value="vendor">Vendor (Fabric Merchant)</option>
+            <option value="tailor">Tailor (Sewing Service)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input id="fullName" type="text" placeholder="John Doe" required class="input">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input id="email" type="email" placeholder="john@example.com" required class="input">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input id="phone" type="tel" placeholder="+1 (555) 123-4567" required class="input">
+        </div>
+        <div class="form-group">
+          <label for="address">Business Address</label>
+          <textarea id="address" placeholder="123 Main St, City, Country" required class="input"></textarea>
+        </div>
+
+        <div id="vendorFields" class="hidden">
+          <div class="form-group">
+            <label for="fabricTypes">Types of Fabric Offered</label>
+            <input id="fabricTypes" type="text" placeholder="Cotton, Silk, Wool, etc." class="input">
+          </div>
+          <div class="form-group">
+            <label for="minimumOrder">Minimum Order Quantity</label>
+            <input id="minimumOrder" type="number" placeholder="100" class="input">
+          </div>
+        </div>
+
+        <div id="tailorFields" class="hidden">
+          <div class="form-group">
+            <label for="specializations">Specializations</label>
+            <input id="specializations" type="text" placeholder="Wedding Dresses, Suits, Alterations, etc." class="input">
+          </div>
+          <div class="form-group">
+            <label for="experience">Years of Experience</label>
+            <input id="experience" type="number" placeholder="5" class="input">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Brief Description of Your Services</label>
+          <textarea id="description" placeholder="Tell us about your business and services..." required class="input"></textarea>
+        </div>
+
+        <button type="submit" id="submitButton" class="btn">Register</button>
+      </form>
+
+      <div class="card-footer">
+        <p>
+          By registering, you agree to Perfect Dhaaga's 
+          <a href="#">Terms of Service</a> and 
+          <a href="#">Privacy Policy</a>.
+        </p>
+      </div>
+    </div>
+
+    <div class="icons">
+      <div class="icon-item">
+        <i class="fas fa-store"></i>
+        <span>Vendor Services</span>
+      </div>
+      <div class="icon-item">
+        <i class="fas fa-tshirt"></i>
+        <span>Tailor Services</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -6,32 +6,47 @@
     <title>Fashion Store</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body><header class="header">
-    <div class="logo">
-        <img src="" alt="Perfect धागा logo" style="color:aliceblue"> <!-- Add your logo image here -->
+<body>
+    <header>
+        <div class="search-bar">
+            <input type="text" placeholder="Search Product Here">
+            <div class="header-right">
+                <div class="filter-section">
+                    <button class="filter-btn" onclick="toggleDropdown()">Filter</button>
+                    <div class="dropdown-content" id="filterDropdown">
+                        <a href="#">Price Low to High</a>
+                        <a href="#">Price High to Low</a>
+                        <a href="#">Popularity</a>
+                        <a href="#">New Arrivals</a>
+                    </div>
+                </div>
+            
+                <!-- Add to Cart Button -->
+                <div class="cart-login">
+                    <img src="cart-icon.png" alt="Cart" class="cart-icon">
+        <span>Cart</span>
     </div>
 
-    <div class="search-bar">
-        <input type="text" placeholder="Search Product Here">
-        <div class="logo">
-            <img src="" alt="Search logo" style="color:aliceblue"> <!-- Add your logo image here -->
+                    <!-- Cart Icon -->
+                    <div class="cart-section">
+                        <div class="login-icon-circle">
+                            <img src="login-icon.png" alt="Login/Signup" class="login-icon">
+                        </div>
+                        <span>Cart</span>
+                    </div>
+            
+                    <!-- Login/Signup Icon -->
+                    <div class="login-section">
+                        <div class="login-icon-circle">
+                            <img src="pictures/login.png" alt="Login/Signup" class="login-icon">
+                        </div>
+                        <span>Login/Signup</span>
+                    </div>
+            </div>
+            
         </div>
-    </div>
+    </header>
 
-    <div class="header-right">
-        <!-- Cart Section -->
-        <div class="cart-section">
-            <img src="cart-icon.png" alt="Cart" class="cart-icon">
-            <span>Cart</span>
-        </div>
-
-        <!-- Login Section -->
-        <div class="login-section">
-            <img src="pictures/login.png" alt="Login/Signup" class="login-icon">
-            <span>Login/Signup</span>
-        </div>
-    </div>
-</header>
     <div class="scrolling-banner">
         <div class="scrolling-content">
             <p>Special Offer: Get 50% off on all formals! | Free Shipping on orders above $100! | Hurry, limited time only!</p>

@@ -1,0 +1,492 @@
+/* Global reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    min-height: 100vh; /* Ensure body occupies at least full viewport height */
+    overflow-y: hidden; /* Allow vertical scrolling if needed */
+}
+
+header {
+    background-color: #000000;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000; /* Background color of header */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header .search-bar {
+    flex-grow: 1; /* Expands to fill the available space */
+    display: flex;
+    justify-content: center;
+}
+
+.header .search-bar input {
+    width: 100%;
+    max-width: 500px; /* Sets max width for the search bar */
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+
+/* Styles for Header Right Section */
+/* Container for Filter, Cart, and Login/Signup */
+.header-right {
+    display: flex;
+    gap: 20px; /* Space between the cart and login sections */
+    align-items: center;
+}
+
+/* Styling the Filter Button */
+.filter-section {
+    position: relative;
+}
+
+.filter-section .filter-btn {
+    padding: 10px 20px;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Dropdown Content Hidden by Default */
+
+.dropdown-content.show {
+    display: block;  /* Display dropdown when .show is added */
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Cart Section Styling */
+.cart-section {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cart-icon {
+    width: 24px; /* Size of the cart icon */
+    height: 24px;
+}
+
+.cart-section img {
+    width: 30px; /* Adjust the size of the cart icon */
+    height: 30px;
+}
+
+.cart-section span {
+    font-size: 16px;
+    color: #ffffff; /* Text color */
+}
+
+/* Login/Signup Section Styling */
+.login-section {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.login-section img {
+    width: 30px; /* Adjust the size of the login icon */
+    height: 30px;
+}
+
+
+.login-icon {
+    width: 20px; /* Size of the login/signup icon */
+    height: 20px;
+}
+
+.login-section span {
+    font-size: 14px;
+    color: #ffffff;
+    text-align: center;
+}
+
+
+
+.search-bar button {
+    padding: 10px;
+    font-size: 16px;
+    margin-left: 10px;
+    background-color: #f8a5c2;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+/*scrolling banner*/
+.scrolling-banner {
+    width: 100%;
+    background-color: #f0f0f0; /* Dark background */
+    color: #000000; /* White text */
+    overflow: hidden; /* Hide content that goes outside the box */
+    white-space: nowrap; /* Prevent line break */
+    padding: 10px 0; /* Padding around the text */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for effect */
+    font-weight: bold; /* Make the text bold */
+}
+
+.scrolling-content {
+    display: inline-block;
+    animation: scroll 15s linear infinite; /* Repeat infinitely */
+}
+
+/* Keyframes for scrolling animation */
+@keyframes scroll {
+    0% {
+        transform: translateX(100%); /* Start from the right (off-screen) */
+    }
+    100% {
+        transform: translateX(-100%); /* Move completely to the left (off-screen) */
+    }
+}
+.quote-banner {
+    margin-top: 10px;
+}
+
+.quote-banner p {
+    font-size: 20px;
+    font-style: italic;
+}
+
+.main-banner {
+    background-color: #e0bbff; /* Background color of the banner */
+    height: 400px; /* Height of the banner */
+    display: flex; /* Enables flexbox layout */
+    justify-content: flex-end; /* Aligns content to the right */
+    align-items: center; /* Vertically centers the content */
+    position: relative; /* For positioning elements absolutely if needed */
+}
+.banner-content {
+    width: auto; /* Adjusts width to fit content */
+    max-width: 100%; /* Prevents overflow */
+    height: 100%; /* Full height of the parent */
+    display: flex; /* Enables flexbox for its children */
+    justify-content: centre; /* Aligns image to the right */
+}
+.banner-content img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+
+}
+
+.categories {
+    padding: 20px;
+    background-color: #fff;
+    margin-bottom: 40px;
+}
+
+.categories h2 {
+    text-align: center;
+    font-size: smaller;
+    margin-bottom: 20px;
+}
+
+.categories .c1 {
+    height: 130px;
+    width: 130px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    overflow: hidden;  /* Ensures anything outside the circle is hidden */
+    display: flex;
+    background: linear-gradient(180deg, rgba(47, 18, 18, 0) 39.73%, rgba(47, 18, 18, 0.3) 87.78%), #CB9677;
+    box-shadow: 0 5px 8px rgba(6, 6, 6, 0.3);
+
+}
+
+
+.categories img{
+    height: 130px;
+    width: 130px;
+    object-fit:cover;
+}
+
+.categories .circle-layer {
+    /* background-color: whitesmoke; */
+  width: 140px;  /* Set the width of the circle */
+  height: 140px; /* Set the height of the circle */ /* Makes it a circle */
+  overflow: hidden;  /* Ensures anything outside the circle is hidden */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-list {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
+    scroll-behavior: smooth;
+    padding: 5px 0;
+}
+
+/* Hide scrollbar */
+.category-list::-webkit-scrollbar {
+    display: none;
+}
+
+.category-list {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.category {
+    color: #000;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    width: 150px;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;            /* Use flexbox to center content */
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Horizontal scroll for images */
+.horizontal-scroll {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.horizontal-scroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.work-showcase, .vendor-products, .top-products, .customer-reviews {
+    padding: 20px;
+    background-color: #fff;
+    margin-bottom: 40px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.image-grid {
+    display: flex;
+    gap: 20px;
+}
+
+.work-item, .product-item, .review-image {
+    background-color: #000;
+    width: 150px;
+    height: 200px;
+    flex: 0 0 auto;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    background-color: #E6E7E2;
+    
+}
+
+.work-item img{
+    width: 150px;
+    height: 200px;
+}
+
+.product-item img{
+    width: 150px;
+    height: 200px;
+}
+
+.review-image img{
+    height: 300px;
+    width: 250px;
+}
+
+
+.review-image {
+    height: 450px;
+    width: 250px;
+}
+
+.product-item {
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+/* Customer reviews section */
+.customer-reviews {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff; /* Added background for better visibility */
+}
+
+.review-slider {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.review-content {
+    position: absolute;
+    background-color: #e0bbff;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    transition: left 0.5s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    height: 100%;
+}
+
+.review-content.active {
+    left: 0;
+    opacity: 1;
+    visibility: visible;
+}
+
+.review-text p {
+    font-size: 1rem; /* Reduced the font size */
+    color: #000; /* Text color to ensure visibility */
+    background-color: #e0bbff; /* Background for better contrast */
+    margin: 0;
+    padding: 20px;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 5px; /* Reduced padding for smaller arrows */
+    font-size: 18px; /* Reduced font size for arrows */
+    font-weight: bold;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    user-select: none;
+    z-index: 100;
+}
+
+.arrow.prev {
+    left: 10px;
+}
+
+.arrow.next {
+    right: 10px;
+}
+
+.arrow:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+
+section {
+    margin-bottom: 40px;
+}
+
+.box {
+    background-color: #f8a5c2;
+}
+
+.inner-box{
+ background-color: #e0bbff;   
+}
+/*footer*/
+/* Footer styles */
+footer {
+    background-color: #000;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 20px;
+}
+
+.footer-section h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    color: #f8a5c2;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #f8a5c2; /* Hover effect for links */
+}
+
+/* Footer bottom for copyright */
+.footer-bottom {
+    background-color: #333;
+    padding: 10px 0;
+    color: #ccc;
+    font-size: 12px;
+}
