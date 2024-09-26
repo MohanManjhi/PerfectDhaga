@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart - PerfectDhaga</title>
     <link href="../css/tailwind.css" rel="stylesheet">
+    <style>
+        /* Optional: Add custom styles here */
+    </style>
 </head>
 <body>
     <header>
@@ -26,18 +29,14 @@
             <div>
                 <h2 class="text-lg font-semibold mb-4">Products in Cart</h2>
                 <!-- Cart Items -->
-                <div class="border p-4 rounded-lg bg-white shadow mb-4">
-                    <img src="/images/product1.jpg" alt="Product" class="w-24 h-24 object-cover float-left mr-4">
-                    <h3 class="text-lg font-bold">Product Name</h3>
-                    <p class="text-sm">$100</p>
-                    <button class="text-red-500 mt-2">Remove</button>
+                <div id="cart-items" class="space-y-4">
+                    <!-- Dynamic cart items will be injected here -->
                 </div>
-                <!-- Repeat for more items -->
             </div>
             <div class="border p-4 rounded-lg bg-white shadow">
                 <h2 class="text-lg font-semibold mb-4">Order Summary</h2>
-                <p class="mb-4">Total: <strong>$100</strong></p>
-                <a href="/checkout.html" class="bg-blue-500 text-white px-4 py-2 rounded">Proceed to Checkout</a>
+                <p class="mb-4">Total: <strong id="total-price">$0</strong></p>
+                <a id="checkout-button" href="./checkout.html" class="bg-blue-500 text-white px-4 py-2 rounded hidden">Proceed to Checkout</a>
             </div>
         </div>
     </main>
@@ -47,5 +46,52 @@
             &copy; 2024 PerfectDhaga. All rights reserved.
         </div>
     </footer>
+
+    <script>
+        // Sample cart items
+        const cartItems = [
+            { id: 1, name: "Product 1", price: 100, image: "/images/product1.jpg" },
+            { id: 2, name: "Product 2", price: 200, image: "/images/product2.jpg" },
+            { id: 3, name: "Product 3", price: 300, image: "/images/product3.jpg" }
+        ];
+
+        const cartContainer = document.getElementById("cart-items");
+        const totalPriceElement = document.getElementById("total-price");
+        const checkoutButton = document.getElementById("checkout-button");
+
+        // Function to render cart items
+        function renderCartItems() {
+            cartContainer.innerHTML = ""; // Clear existing items
+            let total = 0;
+
+            cartItems.forEach(item => {
+                total += item.price; // Calculate total price
+                const cartItemDiv = document.createElement("div");
+                cartItemDiv.className = "border p-4 rounded-lg bg-white shadow";
+                cartItemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-24 h-24 object-cover float-left mr-4">
+                    <h3 class="text-lg font-bold">${item.name}</h3>
+                    <p class="text-sm">$${item.price}</p>
+                    <button class="text-red-500 mt-2" onclick="removeItem(${item.id})">Remove</button>
+                `;
+                cartContainer.appendChild(cartItemDiv);
+            });
+
+            totalPriceElement.innerText = `$${total}`;
+            checkoutButton.classList.toggle("hidden", total === 0); // Show/Hide checkout button
+        }
+
+        // Function to remove item from cart
+        function removeItem(id) {
+            const index = cartItems.findIndex(item => item.id === id);
+            if (index !== -1) {
+                cartItems.splice(index, 1); // Remove item from cart
+                renderCartItems(); // Re-render the cart items
+            }
+        }
+
+        // Initial render
+        renderCartItems();
+    </script>
 </body>
 </html>
