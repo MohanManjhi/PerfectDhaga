@@ -1,51 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vendor Profile - PerfectDhaga</title>
-    <link href="../css/tailwind.css" rel="stylesheet">
+    <title>Update Profile</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/vendor_home1.css">
+    <link rel="stylesheet" href="../css/vendor_profile.css">
+    <!-- Link to your CSS file -->
 </head>
+
+
 <body>
-    <header>
-        <nav class="bg-gray-800 p-4">
-            <div class="container mx-auto flex justify-between items-center">
-                <a href="/" class="text-white text-lg font-semibold">PerfectDhaga</a>
-                <ul class="flex space-x-4">
-                    <li><a href="/login.html" class="text-white">Login</a></li>
-                    <li><a href="/signup.html" class="text-white">Sign Up</a></li>
-                    <li><a href="/logout.html" class="text-white">Logout</a></li>
-                </ul>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="../images/tailoricon.jpg" alt="Tailor" class="avatar">
+                <div class="profile-info">
+                    <h2>Tailor Name</h2>
+                    <p>Master Craftsman</p>
+                </div>
             </div>
-        </nav>
-    </header>
+            <nav class="nav">
+                <ul>
+                    <li><a href="vendor_home.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="vender_order_details.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Orders</a></li>
+                    
+                    <li><a href="vendor-profile.html" class="nav-link"><i class="fas fa-user-circle"></i> Profile</a></li>
+                    <li><a href="vendor_payment.html" class="nav-link"><i class="fas fa-dollar-sign"></i> Payments</a></li>
+                    <li><a href="vendor_review.html" class="nav-link"><i class="fas fa-star"></i> Reviews</a></li>
+                    <li><a href="vendor_contact.html" class="nav-link"><i class="fas fa-map-marker-alt"></i> Location</a></li>
+                </ul>
+            </nav>
+        </aside>
 
-    <main class="container mx-auto py-8">
-        <h1 class="text-2xl font-bold mb-8">Vendor Profile</h1>
-        <div class="bg-white p-4 rounded-lg shadow">
-            <h2 class="text-xl font-semibold mb-4">Profile Information</h2>
-            <form action="/update-vendor-profile" method="POST">
-                <div class="mb-4">
-                    <label class="block text-gray-700">Name</label>
-                    <input type="text" name="name" class="w-full p-2 border border-gray-300 rounded" value="Vendor 1" required>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700">Email</label>
-                    <input type="email" name="email" class="w-full p-2 border border-gray-300 rounded" value="vendor1@example.com" required>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700">Business Name</label>
-                    <input type="text" name="businessName" class="w-full p-2 border border-gray-300 rounded" value="Vendor Business" required>
-                </div>
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Update Profile</button>
-            </form>
+        <main class="main-content">
+    <section class="profile-update">
+        <h1>Update Profile</h1>
+        <div class="card">
+            <div class="card-header">
+                <h2>Personal Information</h2>
+            </div>
+            <div class="card-content">
+                <form class="profile-form">
+                    <div class="grid">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" value="Tailor Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" value="tailor@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" value="+1234567890">
+                        </div>
+                        <div class="form-group">
+                            <label for="specialization">Specialization</label>
+                            <input type="text" id="specialization" value="Wedding and Formal Wear">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea id="bio">Experienced tailor specializing in wedding and formal wear with over 10 years of experience.</textarea>
+                    </div>
+                    <button type="submit" class="button">Update Profile</button>
+                </form>
+            </div>
         </div>
-    </main>
+    </section>
+</main>
 
-    <footer class="bg-gray-800 p-4 mt-8">
-        <div class="container mx-auto text-white text-center">
-            &copy; 2024 PerfectDhaga. All rights reserved.
-        </div>
-    </footer>
+    </div>
 </body>
+
 </html>

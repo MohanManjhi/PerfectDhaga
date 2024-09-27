@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Serwani Booking Form</title>
+      <link rel="stylesheet" href="../css/sherwani_measurment.css">
+</head>
+
+<body>
+      <div class="container">
+            <h1 class="title">Serwani Booking Information</h1>
+
+            <form class="booking-form">
+                  <!-- Image Row with Upload Option in the last box -->
+      <div class="image-row">
+            <div class="image-placeholder">
+                  <img src="../images/serwani.jpg" alt="Sherwani 1" class="placeholder-img">
+            </div>
+            <div class="image-placeholder">
+                  <img src="../images/serwani2.jpg" alt="Sherwani 2" class="placeholder-img">
+            </div>
+            <div class="image-placeholder">
+                  <img src="../images/serwani3.jpg" alt="Sherwani 3" class="placeholder-img">
+            </div>
+            <div class="image-placeholder">
+                  <img src="../images/serwani4.jpg" alt="Sherwani 4" class="placeholder-img">
+            </div>
+            <div class="image-upload">
+                  <label for="upload-image">
+                        <div class="upload-box">
+                              <span class="upload-icon">+</span>
+                              <span class="upload-text">Upload Image</span>
+                        </div>
+                  </label>
+                  <input type="file" id="upload-image" class="file-input" accept="image/*">
+            </div>
+      </div>
+
+                  <!-- Form Inputs for Measurements and Booking Details -->
+                  <div class="form-group">
+                        <div class="input-box">
+                              <label for="length">Length (in inches)</label>
+                              <input type="text" id="length" placeholder="Enter length">
+                        </div>
+                        <div class="input-box">
+                              <label for="chest">Chest (in inches)</label>
+                              <input type="text" id="chest" placeholder="Enter chest size">
+                        </div>
+                  </div>
+
+                  <div class="form-group">
+                        <div class="input-box">
+                              <label for="waist">Waist (in inches)</label>
+                              <input type="text" id="waist" placeholder="Enter waist size">
+                        </div>
+                        <div class="input-box">
+                              <label for="shoulder">Shoulder (in inches)</label>
+                              <input type="text" id="shoulder" placeholder="Enter shoulder width">
+                        </div>
+                  </div>
+
+                  <div class="form-group">
+                        <div class="input-box">
+                              <label for="sleeve-length">Sleeve Length (in inches)</label>
+                              <input type="text" id="sleeve-length" placeholder="Enter sleeve length">
+                        </div>
+                        <div class="input-box">
+                              <label for="preferred-color">Preferred Color</label>
+                              <select id="preferred-color">
+                                    <option>Select color</option>
+                                    <option>Red</option>
+                                    <option>Blue</option>
+                                    <option>Black</option>
+                              </select>
+                        </div>
+                  </div>
+
+                  <div class="form-group">
+                        <div class="input-box">
+                              <label for="embroidery-style">Embroidery Style</label>
+                              <select id="embroidery-style">
+                                    <option>Select style</option>
+                                    <option>Traditional</option>
+                                    <option>Modern</option>
+                                    <option>Custom</option>
+                              </select>
+                        </div>
+                        <div class="input-box">
+                              <label for="occasion">Occasion</label>
+                              <select id="occasion">
+                                    <option>Select occasion</option>
+                                    <option>Wedding</option>
+                                    <option>Party</option>
+                                    <option>Festival</option>
+                              </select>
+                        </div>
+                  </div>
+
+                  <div class="form-group">
+                        <div class="input-box">
+                              <label for="additional-notes">Additional Notes</label>
+                              <textarea id="additional-notes" rows="4"
+                                    placeholder="Any special requests or additional information?"></textarea>
+                        </div>
+                  </div>
+
+                  <div class="form-group">
+                        <button type="submit" class="submit-button">Submit Booking Request</button>
+                  </div>
+                  
+            </form>
+      </div>
+</body>
+
+</html>
