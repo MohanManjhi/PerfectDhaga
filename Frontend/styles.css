@@ -8,8 +8,8 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
-    min-height: 100vh; /* Ensure body occupies at least full viewport height */
-    overflow-y: hidden; /* Allow vertical scrolling if needed */
+ /* Ensure body occupies at least full viewport height */
+    /* Allow vertical scrolling if needed */
 }
 
 header {
