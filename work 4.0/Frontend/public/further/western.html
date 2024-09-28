@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Western Page</title>
+    <link rel="stylesheet" href="../../css/further/western.css"> <!-- Your page's CSS -->
+    <link rel="stylesheet" href="../../css/index.css"><!-- for header's css-->
+</head>
+<body>
+    <!-- Container for the dynamically loaded header -->
+    <div id="header"></div> <!-- Header -->
+
+    <!-- Main content area -->
+    <main>
+        <div class="choose-style">
+            <h2>Choose your style</h2>
+            <div class="dress-grid">
+                <div class="frame">
+                    <img src="https://via.placeholder.com/300x400" alt="Evening Gown">
+                    <div class="dress-title">Evening Gown</div>
+                </div>
+                <div class="frame">
+                    <img src="https://via.placeholder.com/300x400" alt="Evening Gown">
+                    <div class="dress-title">Evening Gown</div>
+                </div>
+                <div class="frame">
+                    <img src="https://via.placeholder.com/300x400" alt="Evening Gown">
+                    <div class="dress-title">Evening Gown</div>
+                </div>
+                <div>
+                    <img src="https://via.placeholder.com/300x400" alt="Wrap Dress">
+                    <div class="dress-title">Wrap Dress</div>
+                </div>
+                <div>
+                    <img src="https://via.placeholder.com/300x400" alt="Maxi Dress">
+                    <div class="dress-title">Maxi Dress</div>
+                </div>
+                <div>
+                    <img src="https://via.placeholder.com/300x400" alt="Shirt Dress">
+                    <div class="dress-title">Shirt Dress</div>
+                </div>
+            </div>
+
+        <div class="dress-grid">
+            <div class="frame">
+                <img src="https://via.placeholder.com/300x400" alt="Evening Gown">
+                <div class="dress-title">Evening Gown</div>
+            </div>
+            <div class="frame">
+                <img src="https://via.placeholder.com/300x400" alt="Evening Gown">
+                <div class="dress-title">Evening Gown</div>
+            </div>
+            <div class="frame">
+                <img src="https://via.placeholder.com/300x400" alt="Evening Gown">
+                <div class="dress-title">Evening Gown</div>
+            </div>
+            <div>
+                <img src="https://via.placeholder.com/300x400" alt="Wrap Dress">
+                <div class="dress-title">Wrap Dress</div>
+            </div>
+            <div>
+                <img src="https://via.placeholder.com/300x400" alt="Maxi Dress">
+                <div class="dress-title">Maxi Dress</div>
+            </div>
+            <div>
+                <img src="https://via.placeholder.com/300x400" alt="Shirt Dress">
+                <div class="dress-title">Shirt Dress</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+        <section class="Explore">
+            <h2>Explore Other Products</h2>
+            <div class="horizontal-scroll image-grid">
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+                <div class="product-item"><img src="../images/dress1.png" alt="main"></div>
+            </div>
+        </div>
+
+        
+        </section>
+
+        <section class="customer-reviews">
+            <h2>Customer Reviews</h2>
+            <div class="review-slider">
+                <div class="review-content">
+                    <img src="path/to/review-image1.jpg" alt="Review 1" class="review-image">
+                    <p>Great product!</p>
+                </div>
+                <div class="review-content">
+                    <img src="path/to/review-image2.jpg" alt="Review 2" class="review-image">
+                    <p>Excellent quality!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Container for the dynamically loaded footer -->
+    <div id="footer"></div> <!-- Footer -->
+
+    <!-- JavaScript to load header and footer -->
+    <script>
+        // Function to load header dynamically
+        function loadHeader() {
+            fetch("../header.html")  // Path to your header file
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+        }
+
+        // Function to load footer dynamically
+        function loadFooter() {
+            fetch("../footer.html")  // Path to your footer file
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading footer:', error));
+        }
+
+        // Call the functions to load the header and footer
+        loadHeader();
+        loadFooter();
+    </script>
+
+</body>
+</html>

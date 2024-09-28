@@ -3,95 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart - PerfectDhaga</title>
-    <link href="../css/tailwind.css" rel="stylesheet">
-    <style>
-        /* Optional: Add custom styles here */
-    </style>
+    <title>Product Categories</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <nav class="bg-gray-800 p-4">
-            <div class="container mx-auto flex justify-between items-center">
-                <a href="/" class="text-white text-lg font-semibold">PerfectDhaga</a>
-                <ul class="flex space-x-4">
-                    <li><a href="login.html" class="text-white">Login</a></li>
-                    <li><a href="register.html" class="text-white">Register</a></li>
-                    <li><a href="cart.html" class="text-white">Cart</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    <div class="main-content">
+        <h1>Explore Our Products</h1>
 
-    <main class="container mx-auto py-8">
-        <h1 class="text-2xl font-bold mb-8">Your Cart</h1>
-        <div class="grid grid-cols-2 gap-4">
-            <div>
-                <h2 class="text-lg font-semibold mb-4">Products in Cart</h2>
-                <!-- Cart Items -->
-                <div id="cart-items" class="space-y-4">
-                    <!-- Dynamic cart items will be injected here -->
+        <div class="horizontal-scroll-container">
+            <button class="scroll-button left" id="scroll-left">←</button>
+            <div class="horizontal-scroll" id="horizontal-scroll">
+                <div class="category" data-product="Shirt" data-fabric="Cotton" data-tailor="Tailor A">
+                    <div class="circle-layer">
+                        <img src="shirt.jpg" alt="Shirt">
+                    </div>
+                    <span>Shirt</span>
                 </div>
+                <div class="category" data-product="Pant" data-fabric="Linen" data-tailor="Tailor B">
+                    <div class="circle-layer">
+                        <img src="pant.jpg" alt="Pant">
+                    </div>
+                    <span>Pant</span>
+                </div>
+                <div class="category" data-product="Dress" data-fabric="Silk" data-tailor="Tailor C">
+                    <div class="circle-layer">
+                        <img src="dress.jpg" alt="Dress">
+                    </div>
+                    <span>Dress</span>
+                </div>
+                <div class="category" data-product="Jacket" data-fabric="Leather" data-tailor="Tailor D">
+                    <div class="circle-layer">
+                        <img src="jacket.jpg" alt="Jacket">
+                    </div>
+                    <span>Jacket</span>
+                </div>
+                <div class="category" data-product="Shorts" data-fabric="Denim" data-tailor="Tailor E">
+                    <div class="circle-layer">
+                        <img src="shorts.jpg" alt="Shorts">
+                    </div>
+                    <span>Shorts</span>
+                </div>
+                <!-- Add more categories as needed -->
             </div>
-            <div class="border p-4 rounded-lg bg-white shadow">
-                <h2 class="text-lg font-semibold mb-4">Order Summary</h2>
-                <p class="mb-4">Total: <strong id="total-price">$0</strong></p>
-                <a id="checkout-button" href="./checkout.html" class="bg-blue-500 text-white px-4 py-2 rounded hidden">Proceed to Checkout</a>
-            </div>
+            <button class="scroll-button right" id="scroll-right">→</button>
         </div>
-    </main>
+    </div>
 
-    <footer class="bg-gray-800 p-4 mt-8">
-        <div class="container mx-auto text-white text-center">
-            &copy; 2024 PerfectDhaga. All rights reserved.
-        </div>
-    </footer>
-
-    <script>
-        // Sample cart items
-        const cartItems = [
-            { id: 1, name: "Product 1", price: 100, image: "/images/product1.jpg" },
-            { id: 2, name: "Product 2", price: 200, image: "/images/product2.jpg" },
-            { id: 3, name: "Product 3", price: 300, image: "/images/product3.jpg" }
-        ];
-
-        const cartContainer = document.getElementById("cart-items");
-        const totalPriceElement = document.getElementById("total-price");
-        const checkoutButton = document.getElementById("checkout-button");
-
-        // Function to render cart items
-        function renderCartItems() {
-            cartContainer.innerHTML = ""; // Clear existing items
-            let total = 0;
-
-            cartItems.forEach(item => {
-                total += item.price; // Calculate total price
-                const cartItemDiv = document.createElement("div");
-                cartItemDiv.className = "border p-4 rounded-lg bg-white shadow";
-                cartItemDiv.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}" class="w-24 h-24 object-cover float-left mr-4">
-                    <h3 class="text-lg font-bold">${item.name}</h3>
-                    <p class="text-sm">$${item.price}</p>
-                    <button class="text-red-500 mt-2" onclick="removeItem(${item.id})">Remove</button>
-                `;
-                cartContainer.appendChild(cartItemDiv);
-            });
-
-            totalPriceElement.innerText = `$${total}`;
-            checkoutButton.classList.toggle("hidden", total === 0); // Show/Hide checkout button
-        }
-
-        // Function to remove item from cart
-        function removeItem(id) {
-            const index = cartItems.findIndex(item => item.id === id);
-            if (index !== -1) {
-                cartItems.splice(index, 1); // Remove item from cart
-                renderCartItems(); // Re-render the cart items
-            }
-        }
-
-        // Initial render
-        renderCartItems();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
