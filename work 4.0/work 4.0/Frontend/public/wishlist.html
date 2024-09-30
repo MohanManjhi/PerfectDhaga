@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/wishlist.css">
+    <link rel="stylesheet" href="../css/further/western.css">
+</head>
+<body>
+    <div id="header"></div> <!-- Header -->
+
+    <!-- Main content area -->
+    <main>
+        <div class="main-content">
+            <h1>Your Wishlist</h1>
+    
+            <div class="container">
+                <button class="scroll-button left" id="scroll-left">←</button>
+                <div class="dress-grid">
+                    <div class="frame">
+                        <img src="https://via.placeholder.com/300x400" alt="Evening Gown">
+                        <div class="dress-title">Evening Gown</div>
+                    </div>
+                    <div class="frame">
+                        <img src="https://via.placeholder.com/300x400" alt="Evening Gown">
+                        <div class="dress-title">Evening Gown</div>
+                    </div>
+                    <div class="frame">
+                        <img src="https://via.placeholder.com/300x400" alt="Evening Gown">
+                        <div class="dress-title">Evening Gown</div>
+                    </div>
+                    <div class="frame">
+                        <img src="https://via.placeholder.com/300x400" alt="Wrap Dress">
+                        <div class="dress-title">Wrap Dress</div>
+                    </div>
+                    <div class="frame">
+                        <img src="https://via.placeholder.com/300x400" alt="Maxi Dress">
+                        <div class="dress-title">Maxi Dress</div>
+                    </div>
+                    <div class="frame">
+                        <img src="https://via.placeholder.com/300x400" alt="Shirt Dress">
+                        <div class="dress-title">Shirt Dress</div>
+                    </div>
+                </div>
+    
+                <div class="container">
+                <button class="scroll-button left" id="scroll-left">←</button>
+                <div class="dress-grid">
+                    <div class="frame">
+                        <img src="https://via.placeholder.com/300x400" alt="Evening Gown">
+                        <div class="dress-title">Evening Gown</div>
+                    </div>
+                    <div class="frame">
+                        <img src="https://via.placeholder.com/300x400" alt="Evening Gown">
+                        <div class="dress-title">Evening Gown</div>
+                    </div>
+                    <div class="frame">
+                        <img src="https://via.placeholder.com/300x400" alt="Evening Gown">
+                        <div class="dress-title">Evening Gown</div>
+                    </div>
+                    <div class="frame">
+                        <img src="https://via.placeholder.com/300x400" alt="Wrap Dress">
+                        <div class="dress-title">Wrap Dress</div>
+                    </div>
+                    <div class="frame">
+                        <img src="https://via.placeholder.com/300x400" alt="Maxi Dress">
+                        <div class="dress-title">Maxi Dress</div>
+                    </div>
+                    <div class="frame">
+                        <img src="https://via.placeholder.com/300x400" alt="Shirt Dress">
+                        <div class="dress-title">Shirt Dress</div>
+                    </div>
+                </div>
+            
+            
+                    <!-- Add more wishlist items as needed -->
+                </div>
+                <button class="scroll-button right" id="scroll-right">→</button>
+            </div>
+        </div>
+    
+    </main>
+
+    <!-- Container for the dynamically loaded footer -->
+    <div id="footer"></div> <!-- Footer -->
+
+    <!-- JavaScript to load header and footer -->
+    <script>
+        // Function to load header dynamically
+        function loadHeader() {
+            fetch("header.html")  // Path to your header file
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+        }
+
+        // Function to load footer dynamically
+        function loadFooter() {
+            fetch("footer.html")  // Path to your footer file
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('footer').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading footer:', error));
+        }
+
+        // Call the functions to load the header and footer
+        loadHeader();
+        loadFooter();
+    </script>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - PerfectDhaga</title>
+    <link href="../css/tailwind.css" rel="stylesheet">
+    <style>
+        /* Styling to hide and show answers */
+        .faq-answer {
+            display: none;
+            margin-top: 8px;
+            padding-left: 16px;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: #4a90e2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="bg-gray-800 p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <a href="/" class="text-white text-lg font-semibold">PerfectDhaga</a>
+                <ul class="flex space-x-4">
+                    <li><a href="login.html" class="text-white">Login</a></li>
+                    <li><a href="signup.html" class="text-white">Sign Up</a></li>
+                    <li><a href="faq.html" class="text-white">FAQ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto py-8">
+        <h1 class="text-2xl font-bold mb-8">Frequently Asked Questions</h1>
+        <div class="bg-white p-4 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-4">General Questions</h2>
+            
+            <!-- FAQ Item 1 -->
+            <div class="faq-item mb-4">
+                <h3 class="faq-question font-semibold text-lg">What is PerfectDhaga?</h3>
+                <div class="faq-answer text-gray-700">
+                    <p>PerfectDhaga is an eCommerce platform that connects users with skilled tailors and vendors for custom clothing.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 2 -->
+            <div class="faq-item mb-4">
+                <h3 class="faq-question font-semibold text-lg">How do I create an account?</h3>
+                <div class="faq-answer text-gray-700">
+                    <p>You can create an account by signing up on the registration page. Fill in your details and choose your role (user, tailor, vendor).</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 3 -->
+            <div class="faq-item mb-4">
+                <h3 class="faq-question font-semibold text-lg">What payment methods do you accept?</h3>
+                <div class="faq-answer text-gray-700">
+                    <p>We accept major credit and debit cards (Visa, Mastercard, American Express), PayPal, and secure payment gateways.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 4 -->
+            <div class="faq-item mb-4">
+                <h3 class="faq-question font-semibold text-lg">Can I track my order?</h3>
+                <div class="faq-answer text-gray-700">
+                    <p>Once your order is shipped, you will receive a confirmation email with a tracking number. You can track your order in the 'Order Tracking' section.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 5 -->
+            <div class="faq-item mb-4">
+                <h3 class="faq-question font-semibold text-lg">Do you offer international shipping?</h3>
+                <div class="faq-answer text-gray-700">
+                    <p>Yes, we offer international shipping. Shipping fees and delivery times vary based on location and will be calculated at checkout.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 p-4 mt-8">
+        <div class="container mx-auto text-white text-center">
+            &copy; 2024 PerfectDhaga. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript to toggle the FAQ answers on click
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                
+                // Toggle visibility
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                } else {
+                    answer.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
