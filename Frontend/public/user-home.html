@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>User-Dashboard</title>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="../css/vendor_home1.css">
+      <link rel="stylesheet" href="../css/vendor_dashboard.css">
+</head>
+
+<body>
+
+      <div class="dashboard">
+            <aside class="sidebar">
+                  <div class="profile">
+                        <img src="../images/tailoricon.jpg" alt="Tailor" class="avatar">
+                        <div class="profile-info">
+                              <h2>User Name</h2>
+                        </div>
+                  </div>
+                  <nav class="nav">
+                        <ul>
+                              <li><a href="user-home.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+                              <li><a href="user_order_details.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Orders</a></li> 
+                              <li><a href="user-profile.html" class="nav-link"><i class="fas fa-user-circle"></i> Profile</a></li>
+                        </ul>
+                  </nav>
+            </aside>
+
+            <main class="main-content">
+                  <section class="welcome">
+                        <div class="background-image">
+                              <img src="../images/product1.jpg" alt="Tailor Workshop">
+                        </div>
+                        <div class="welcome-text">
+                              <h1>Welcome, User</h1>
+                              <p>Browse Customized Clothes</p>
+                        </div>
+                  </section>
+
+                  <section class="stats">
+                        <div class="stat-card">
+                              <h3>New Orders</h3>
+                              <p class="stat-value">12</p>
+                              <p>Pending orders</p>
+                              <a href="#">View details</a>
+                        </div>
+                        <div class="stat-card">
+                              <h3>Total Revenue</h3>
+                              <p class="stat-value">$15,280</p>
+                              <p>This month</p>
+                              <a href="#">View details</a>
+                        </div>
+                        <div class="stat-card">
+                              <h3>Customer Rating</h3>
+                              <p class="stat-value">4.9</p>
+                              <p>Out of 5 stars</p>
+                              <a href="#">View details</a>
+                        </div>
+                  </section>
+
+                  <section class="details">
+                        <div class="card">
+                              <h4>Recent Orders</h4>
+                              <ul class="order-list">
+                                    <li>
+                                          <p><strong>John Doe</strong> - Wedding Suit</p>
+                                          <span class="badge">In Progress</span>
+                                    </li>
+                                    <li>
+                                          <p><strong>Jane Smith</strong> - Evening Gown</p>
+                                          <span class="badge pending">Pending</span>
+                                    </li>
+                                    <li>
+                                          <p><strong>Bob Johnson</strong> - Business Shirt</p>
+                                          <span class="badge completed">Completed</span>
+                                    </li>
+                              </ul>
+                              <a href="#" class="button">View All Orders</a>
+                        </div>
+
+                        <div class="card">
+                              <h4>Achievements</h4>
+                              <div class="achievement">
+                                    <p>Customer Satisfaction</p>
+                                    <div class="progress-bar">
+                                          <div class="progress" style="width: 98%;"></div>
+                                    </div>
+                                    <span>98%</span>
+                              </div>
+                              <div class="achievement">
+                                    <p>On-Time Delivery</p>
+                                    <div class="progress-bar">
+                                          <div class="progress" style="width: 95%;"></div>
+                                    </div>
+                                    <span>95%</span>
+                              </div>
+                              <div class="badges">
+                                    <span class="badge secondary">Master Tailor</span>
+                                    <span class="badge secondary">Wedding Specialist</span>
+                                    <span class="badge secondary">5 Years Experience</span>
+                                    <span class="badge secondary">Custom Design Expert</span>
+                              </div>
+                        </div>
+                  </section>
+            </main>
+      </div>
+
+</body>
+
+</html>
