@@ -1,164 +1,63 @@
+// Backend/controllers/authController.js
+const db = require('../config/db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const Admin = require('../models/Admin'); // Ensure you have an Admin model similar to User
 
-const authController = {
-    signup: (req, res) => {
-        const { name, email, password, role } = req.body;
+// Registration Handler
+exports.register = async (req, res) => {
+  const { name, email, password, role } = req.body;
 
-        // Check if user already exists
-        User.findByEmail(email, (err, results) => {
-            if (results.length > 0) {
-                return res.status(400).json({ message: 'Email already exists' });
-            }
+  try {
+    // Check if user already exists
+    const [existingUser] = await db.execute('SELECT * FROM users WHERE email = ?', [email]);
+    if (existingUser.length > 0) {
+      return res.status(400).send('User already exists');
+    }
 
-            // Hash the password
-            bcrypt.hash(password, 10, (err, hashedPassword) => {
-                if (err) throw err;
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-                // Create the user
-                User.create({ name, email, password: hashedPassword, role }, (err, result) => {
-                    if (err) throw err;
-                    res.status(201).json({ message: 'User registered successfully' });
-                });
-            });
-        });
-    },
+    // Insert user into database
+    await db.execute('INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)', [
+      name,
+      email,
+      hashedPassword,
+      role,
+    ]);
 
-    login: (req, res) => {
-        const { email, password } = req.body;
-
-        // Check if user is an Admin first
-        Admin.findByUsername(email, (err, adminResults) => {
-            if (adminResults.length > 0) {
-                const admin = adminResults[0];
-
-                // Compare password
-                bcrypt.compare(password, admin.password, (err, isMatch) => {
-                    if (err) throw err;
-
-                    if (!isMatch) {
-                        return res.status(400).json({ message: 'Invalid email or password' });
-                    }
-
-                    // Generate JWT for admin
-                    const token = jwt.sign({ id: admin.id, role: 'admin' }, process.env.JWT_SECRET, {
-                        expiresIn: '1h',
-                    });
-
-                    return res.json({
-                        token,
-                        user: {
-                            id: admin.id,
-                            username: admin.username,
-                            role: 'admin',
-                        },
-                    });
-                });
-            } else {
-                // Check if user is a regular user
-                User.findByEmail(email, (err, userResults) => {
-                    if (userResults.length === 0) {
-                        return res.status(400).json({ message: 'Invalid email or password' });
-                    }
-
-                    const user = userResults[0];
-
-                    // Compare password
-                    bcrypt.compare(password, user.password, (err, isMatch) => {
-                        if (err) throw err;
-
-                        if (!isMatch) {
-                            return res.status(400).json({ message: 'Invalid email or password' });
-                        }
-
-                        // Generate JWT for user
-                        const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
-                            expiresIn: '1h',
-                        });
-
-                        res.json({
-                            token,
-                            user: {
-                                id: user.id,
-                                name: user.name,
-                                email: user.email,
-                                role: user.role,
-                            },
-                        });
-                    });
-                });
-            }
-        });
-    },
+    res.redirect('/login.html'); // Redirect to login page after successful registration
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+  }
 };
 
-module.exports = authController;
+// Login Handler
+exports.login = async (req, res) => {
+  const { email, password } = req.body;
 
-/* 
-code version 1.0
+  try {
+    // Fetch user from database
+    const [user] = await db.execute('SELECT * FROM users WHERE email = ?', [email]);
+    if (user.length === 0) {
+      return res.status(400).send('Invalid credentials');
+    }
 
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+    const validPassword = await bcrypt.compare(password, user[0].password);
+    if (!validPassword) {
+      return res.status(400).send('Invalid credentials');
+    }
 
-const authController = {
-    signup: (req, res) => {
-        const { name, email, password, role } = req.body;
+    // Generate JWT Token (optional)
+    const token = jwt.sign({ id: user[0].id, role: user[0].role }, 'your_jwt_secret', {
+      expiresIn: '1h',
+    });
 
-        // Check if user already exists
-        User.findByEmail(email, (err, results) => {
-            if (results.length > 0) {
-                return res.status(400).json({ message: 'Email already exists' });
-            }
-
-            // Hash the password
-            bcrypt.hash(password, 10, (err, hashedPassword) => {
-                if (err) throw err;
-
-                // Create the user
-                User.create({ name, email, password: hashedPassword, role }, (err, result) => {
-                    if (err) throw err;
-                    res.status(201).json({ message: 'User registered successfully' });
-                });
-            });
-        });
-    },
-
-
-    
-    login: (req, res) => {
-        const { email, password } = req.body;
-    
-        // Check if user exists
-        User.findByEmail(email, (err, results) => {
-            if (results.length === 0) {
-                return res.status(400).json({ message: 'Invalid email or password' });
-            }
-    
-            const user = results[0];
-    
-            // Compare password
-            bcrypt.compare(password, user.password, (err, isMatch) => {
-                if (err) throw err;
-    
-                if (!isMatch) {
-                    return res.status(400).json({ message: 'Invalid email or password' });
-                }
-    
-                // Generate JWT
-                const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
-                    expiresIn: '1h',
-                });
-    
-                res.json({ token, user: { id: user.id, name: user.name, email: user.email, role: user.role } });
-            });
-        });
-    },
+    // Set token in cookies or send it to the client
+    res.cookie('token', token, { httpOnly: true });
+    res.redirect('/dashboard.html'); // Redirect to dashboard
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+  }
 };
-
-
-module.exports = authController;
-
-*/
