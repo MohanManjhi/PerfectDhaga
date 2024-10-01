@@ -1,0 +1,27 @@
+<!-- views/partials/login-modal.ejs -->
+<div class="hidden fixed inset-0 flex items-center justify-center z-50" id="loginModal">
+    <div class="absolute inset-0 bg-black opacity-80 blurred-bg"></div>
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96 relative z-10">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class=" text-2xl font-semibold">Login</h2>
+        <button class="text-gray-500" id="closeModalBtn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <form>
+        <div class="mb-4">
+          <label class="block text-gray-700" for="email">Email</label>
+          <input class="w-full border rounded px-3 py-2 mt-1 text-gray-700" id="email" placeholder="Enter your email" type="email"/>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700" for="password">Password</label>
+          <input class="w-full border rounded px-3 py-2 mt-1 text-gray-700" id="password" placeholder="Enter your password" type="password"/>
+        </div>
+        <button class="w-full bg-black text-white py-2 rounded" type="submit">Login</button>
+      </form>
+      <p class="text-center text-gray-500 mt-4">
+        Don't have an account?
+        <a class="text-blue-500" href="/register">Sign up</a>
+      </p>
+    </div>
+  </div>
