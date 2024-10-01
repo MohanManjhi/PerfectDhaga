@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Users</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .btn {
+      padding: 6px 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    .btn.destructive {
+      background-color: #dc3545;
+    }
+    .btn.destructive:hover {
+      background-color: #c82333;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 50%;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .form-group {
+      display: flex;
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      width: 100px;
+      text-align: right;
+      padding-right: 10px;
+    }
+    .form-group input, .form-group select {
+      flex: 1;
+      padding: 8px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Manage Users</h1>
+
+  <table id="usersTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="usersBody">
+      <!-- Users will be dynamically injected here -->
+    </tbody>
+  </table>
+
+  <!-- Modal for Edit User -->
+  <div id="userModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Edit User</h2>
+      <form id="editUserForm">
+        <div class="form-group">
+          <label for="editName">Name</label>
+          <input type="text" id="editName" name="editName" required>
+        </div>
+        <div class="form-group">
+          <label for="editEmail">Email</label>
+          <input type="email" id="editEmail" name="editEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="editRole">Role</label>
+          <select id="editRole" name="editRole">
+            <option value="Admin">Admin</option>
+            <option value="Customer">Customer</option>
+          </select>
+        </div>
+        <button type="submit" class="btn">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Simulated Users Data
+    const users = [
+      { id: '1', name: 'John Doe', email: 'john@example.com', role: 'Customer' },
+      { id: '2', name: 'Jane Smith', email: 'jane@example.com', role: 'Admin' },
+      { id: '3', name: 'Bob Johnson', email: 'bob@example.com', role: 'Customer' },
+    ];
+
+    let selectedUserId = null;
+
+    // Dynamically populate the users table
+    const usersBody = document.getElementById('usersBody');
+
+    function populateUsers() {
+      usersBody.innerHTML = '';
+      users.forEach(user => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+          <td>${user.name}</td>
+          <td>${user.email}</td>
+          <td>${user.role}</td>
+          <td>
+            <button class="btn" onclick="editUser('${user.id}')">Edit</button>
+            <button class="btn destructive" onclick="deleteUser('${user.id}')">Delete</button>
+          </td>
+        `;
+
+        usersBody.appendChild(row);
+      });
+    }
+
+    // Open the modal for editing a user
+    function editUser(userId) {
+      selectedUserId = userId;
+      const user = users.find(u => u.id === userId);
+      
+      document.getElementById('editName').value = user.name;
+      document.getElementById('editEmail').value = user.email;
+      document.getElementById('editRole').value = user.role;
+
+      const modal = document.getElementById('userModal');
+      modal.style.display = 'block';
+    }
+
+    // Delete a user
+    function deleteUser(userId) {
+      const userIndex = users.findIndex(u => u.id === userId);
+      if (userIndex !== -1) {
+        users.splice(userIndex, 1);
+        populateUsers();
+      }
+    }
+
+    // Modal close functionality
+    const modal = document.getElementById('userModal');
+    const closeBtn = document.getElementsByClassName('close')[0];
+    closeBtn.onclick = function() {
+      modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    }
+
+    // Handle form submission to save the changes
+    const editUserForm = document.getElementById('editUserForm');
+    editUserForm.onsubmit = function(event) {
+      event.preventDefault();
+
+      const updatedUser = {
+        id: selectedUserId,
+        name: document.getElementById('editName').value,
+        email: document.getElementById('editEmail').value,
+        role: document.getElementById('editRole').value,
+      };
+
+      const userIndex = users.findIndex(u => u.id === selectedUserId);
+      if (userIndex !== -1) {
+        users[userIndex] = updatedUser;
+        populateUsers();
+      }
+
+      modal.style.display = 'none';
+    }
+
+    // Populate the users on page load
+    window.onload = populateUsers;
+  </script>
+
+</body>
+</html>

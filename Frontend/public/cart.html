@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Categories</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-content">
+        <h1>Explore Our Products</h1>
+
+        <div class="horizontal-scroll-container">
+            <button class="scroll-button left" id="scroll-left">←</button>
+            <div class="horizontal-scroll" id="horizontal-scroll">
+                <div class="category" data-product="Shirt" data-fabric="Cotton" data-tailor="Tailor A">
+                    <div class="circle-layer">
+                        <img src="shirt.jpg" alt="Shirt">
+                    </div>
+                    <span>Shirt</span>
+                </div>
+                <div class="category" data-product="Pant" data-fabric="Linen" data-tailor="Tailor B">
+                    <div class="circle-layer">
+                        <img src="pant.jpg" alt="Pant">
+                    </div>
+                    <span>Pant</span>
+                </div>
+                <div class="category" data-product="Dress" data-fabric="Silk" data-tailor="Tailor C">
+                    <div class="circle-layer">
+                        <img src="dress.jpg" alt="Dress">
+                    </div>
+                    <span>Dress</span>
+                </div>
+                <div class="category" data-product="Jacket" data-fabric="Leather" data-tailor="Tailor D">
+                    <div class="circle-layer">
+                        <img src="jacket.jpg" alt="Jacket">
+                    </div>
+                    <span>Jacket</span>
+                </div>
+                <div class="category" data-product="Shorts" data-fabric="Denim" data-tailor="Tailor E">
+                    <div class="circle-layer">
+                        <img src="shorts.jpg" alt="Shorts">
+                    </div>
+                    <span>Shorts</span>
+                </div>
+                <!-- Add more categories as needed -->
+            </div>
+            <button class="scroll-button right" id="scroll-right">→</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fancy Review Page</title>
+  <link rel="stylesheet" href="../css/reviewStyleN.css">
+</head>
+<body>
+  <div class="max-w-2xl mx-auto p-6 space-y-8">
+    <h1 class="text-3xl font-bold text-center mb-6">Share Your Experience</h1>
+    <form id="reviewForm" class="space-y-6">
+      <div class="space-y-2">
+        <label for="rating" class="text-lg font-semibold">How would you rate your experience?</label>
+        <div class="flex justify-center items-center space-x-2" id="starRating">
+          <!-- Stars go here, dynamically added by JavaScript -->
+        </div>
+        <div id="ratingFeedback" class="flex justify-center items-center mt-2 text-lg font-medium">
+          <!-- Emoji and rating text will appear here dynamically -->
+        </div>
+      </div>
+      <div class="space-y-2">
+        <label for="review" class="text-lg font-semibold block">
+          Tell us more about your experience
+        </label>
+        <textarea id="review" placeholder="Share your thoughts..." class="min-h-[150px] py-2 px-4 block w-full"></textarea>
+      </div>
+      <div class="space-y-2">
+        <label class="text-lg font-semibold">Would you recommend us?</label>
+        <div class="flex items-center space-x-2">
+          <input type="radio" name="recommend" id="yes" value="yes" checked>
+          <label for="yes">Yes</label>
+        </div>
+        <div class="flex items-center space-x-2">
+          <input type="radio" name="recommend" id="no" value="no">
+          <label for="no">No</label>
+        </div>
+        <div class="flex items-center space-x-2">
+          <input type="radio" name="recommend" id="maybe" value="maybe">
+          <label for="maybe">Maybe</label>
+        </div>
+      </div>
+      <button type="submit" class="w-full" id="submitReview">
+        <span>Submit Review</span>
+      </button>
+    </form>
+  </div>
+  <script src="../js/reviewScriptN.js"></script>
+</body>
+</html>

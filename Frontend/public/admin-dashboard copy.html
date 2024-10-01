@@ -1,0 +1,93 @@
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-gray-900 h-screen">
+            <div class="p-6 text-white text-2xl font-bold">PerfectDhaga</div>
+            <nav class="mt-10">
+                <a class="flex items-center py-2 px-6 bg-gray-800 text-white" href="index.html">
+                    <i class="fas fa-tachometer-alt mr-3"></i>
+                    Dashboard
+                </a>
+                <a class="flex items-center py-2 px-6 text-gray-400 hover:bg-gray-700 hover:text-white" href="admin-products.html">
+                    <i class="fas fa-box mr-3"></i>
+                    Manage Products
+                </a>
+                <a class="flex items-center py-2 px-6 text-gray-400 hover:bg-gray-700 hover:text-white" href="admin-orders.html">
+                    <i class="fas fa-shopping-cart mr-3"></i>
+                    Manage Orders
+                </a>
+                <a class="flex items-center py-2 px-6 text-gray-400 hover:bg-gray-700 hover:text-white" href="admin-users.html">
+                    <i class="fas fa-users mr-3"></i>
+                    Manage Users
+                </a>
+                <a class="flex items-center py-2 px-6 text-gray-400 hover:bg-gray-700 hover:text-white" href="admin-reports.html">
+                    <i class="fas fa-chart-line mr-3"></i>
+                    Reports
+                </a>
+            </nav>
+            <div class="absolute bottom-0 w-full">
+                <a class="flex items-center py-2 px-6 text-gray-400 hover:bg-gray-700 hover:text-white" href="#">
+                    <i class="fas fa-sign-out-alt mr-3"></i>
+                    Logout
+                </a>
+            </div>
+        </div>
+        <!-- Main content -->
+        <div class="flex-1 p-10">
+            <h1 class="text-3xl font-bold mb-6">Admin Dashboard</h1>
+            <div class="grid grid-cols-4 gap-6 mb-6">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-gray-600">Total Orders</h2>
+                    <p class="text-3xl font-bold">1234</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-gray-600">Total Users</h2>
+                    <p class="text-3xl font-bold">5678</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-gray-600">Total Products</h2>
+                    <p class="text-3xl font-bold">910</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-gray-600">Total Revenue</h2>
+                    <p class="text-3xl font-bold">$123456.78</p>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-gray-600 mb-4">Sales Overview</h2>
+                <canvas id="salesChart" width="600" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+    <script>
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Sales',
+                    data: [3000, 2000, 4500, 4000, 5000, 4500],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
