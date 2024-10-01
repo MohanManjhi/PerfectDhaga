@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - PerfectDhaga</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <style>
         .button-primary {
             background-color: #2563eb;
@@ -22,10 +25,93 @@
             background-color: gray;
             cursor: not-allowed;
         }
+        .py-8 {
+           padding-top: 10rem;
+           padding-bottom: 2rem;
+        }
     </style>
 </head>
 <body>
-    <header class="bg-gray-800 p-4">
+
+    <div class="absolute top-0 left-0 w-full p-4 flex justify-between items-center bg-white shadow-md">
+    <div class="flex items-center">
+        <img alt="YourBrand logo" class="mr-2" height="40" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-RcpoXHkzChYnDbFAyeQ8tamr/user-ehrvabJ3DufsCu8YJ7PqY5gl/img-XTAKymtzls4nPsnvdxdSoNPy.png?st=2024-09-30T19%3A11%3A59Z&amp;se=2024-09-30T21%3A11%3A59Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-30T17%3A24%3A55Z&amp;ske=2024-10-01T17%3A24%3A55Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=vPQzKgxWPZVJ5%2B63TTzX27T%2BZGygOPm4Rw1u%2BFTI8m4%3D" width="40"/>
+        <span class="text-gray-500 text-lg font-semibold">YourBrand</span>
+    </div>
+    <div class="hidden md:flex items-center space-x-4">
+        <div class="relative">
+            <input class="border rounded-full px-4 py-2 text-gray-500 pl-10" placeholder="Search products..." type="text"/>
+            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+        </div>
+        <div class="flex items-center text-gray-500">
+            <i class="fas fa-map-marker-alt mr-1"></i>
+            <span>Location</span>
+        </div>
+        <a class="text-gray-500" href="#">Become a Seller</a>
+        <button class="text-gray-500 flex items-center" id="loginSignupBtn">
+            <i class="fas fa-user mr-1"></i>
+            Login / Signup
+        </button>
+        <a class="text-gray-500 flex items-center" href="#">
+            <i class="fas fa-shopping-cart mr-1"></i>
+            <span class="bg-gray-300 rounded-full px-2">3</span>
+        </a>
+    </div>
+    <button class="md:hidden text-gray-500" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+</div>
+<div class="hidden fixed inset-0 flex items-center justify-center z-50" id="loginModal">
+    <div class="absolute inset-0 bg-black opacity-50 blurred-bg"></div>
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96 relative z-10">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-semibold">Login</h2>
+            <button class="text-gray-500" id="closeModalBtn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <form>
+            <div class="mb-4">
+                <label class="block text-gray-700" for="email">Email</label>
+                <input class="w-full border rounded px-3 py-2 mt-1 text-gray-700" id="email" placeholder="Enter your email" type="email"/>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700" for="password">Password</label>
+                <input class="w-full border rounded px-3 py-2 mt-1 text-gray-700" id="password" placeholder="Enter your password" type="password"/>
+            </div>
+            <button class="w-full bg-black text-white py-2 rounded" type="submit">Login</button>
+        </form>
+        <p class="text-center text-gray-500 mt-4">
+            Don't have an account?
+            <a class="text-blue-500" href="#">Sign up</a>
+        </p>
+    </div>
+</div>
+<div class="hidden fixed inset-0 z-40 bg-black bg-opacity-50" id="mobileMenuOverlay"></div>
+<div class="hidden fixed top-0 right-0 w-64 h-full bg-white shadow-lg z-50 p-4" id="mobileMenu">
+    <button class="text-gray-500 mb-4" id="closeMobileMenuBtn">
+        <i class="fas fa-times"></i>
+    </button>
+    <div class="relative mb-4">
+        <input class="border rounded-full px-4 py-2 text-gray-500 pl-10 w-full" placeholder="Search products..." type="text"/>
+        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+    </div>
+    <div class="flex items-center text-gray-500 mb-4">
+        <i class="fas fa-map-marker-alt mr-1"></i>
+        <span>Location</span>
+    </div>
+    <a class="text-gray-500 block mb-4" href="#">Become a Seller</a>
+    <button class="text-gray-500 flex items-center mb-4" id="mobileLoginSignupBtn">
+        <i class="fas fa-user mr-1"></i>
+        Login / Signup
+    </button>
+    <a class="text-gray-500 flex items-center" href="#">
+        <i class="fas fa-shopping-cart mr-1"></i>
+        <span class="bg-gray-300 rounded-full px-2">3</span>
+    </a>
+</div>
+
+    <!-- <header class="bg-gray-800 p-4">
         <div class="container mx-auto flex justify-between items-center">
             <a href="/" class="text-white text-lg font-semibold">PerfectDhaga</a>
             <ul class="flex space-x-4">
@@ -34,7 +120,7 @@
                 <li><a href="faq.html" class="text-white">FAQ</a></li>
             </ul>
         </div>
-    </header>
+    </header> -->
 
     <main class="container mx-auto py-8">
         <h1 class="text-2xl font-bold mb-6">Contact Us</h1>
@@ -61,7 +147,96 @@
             <p id="formMessage" class="text-green-600 mt-4" style="display:none;">Your message has been sent!</p>
         </div>
     </main>
+    <footer class="bg-gray-800 text-white py-8 absolute left-0 w-full p-4">
+        <div class="container mx-auto grid grid-cols-4 gap-4">
+          <div>
+            <h3 class="font-bold mb-2">About Us</h3>
+            <ul>
+              <li><a href="#" class="text-gray-400 hover:text-white">Our Story</a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white">Careers</a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white">Press</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-bold mb-2">Customer Service</h3>
+            <ul>
+              <li><a href="#" class="text-gray-400 hover:text-white">Contact Us</a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white">FAQ</a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white">Returns & Exchanges</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-bold mb-2">Policies</h3>
+            <ul>
+              <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+              <li><a href="#" class="text-gray-400 hover:text-white">Shipping Information</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-bold mb-2">Connect With Us</h3>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-8 text-gray-400">
+          © 2024 YourBrand. All rights reserved.
+        </div>
+      </footer>
+  </main>
 
+  <script>
+    const loginSignupBtn = document.getElementById('loginSignupBtn');
+    const loginModal = document.getElementById('loginModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    loginSignupBtn.addEventListener('click', () => {
+      loginModal.classList.remove('hidden');
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      loginModal.classList.add('hidden');
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target == loginModal) {
+        loginModal.classList.add('hidden');
+      }
+    });
+
+    document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.remove('hidden');
+            document.getElementById('mobileMenuOverlay').classList.remove('hidden');
+        });
+
+        document.getElementById('closeMobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.add('hidden');
+            document.getElementById('mobileMenuOverlay').classList.add('hidden');
+        });
+
+        document.getElementById('mobileMenuOverlay').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.add('hidden');
+            document.getElementById('mobileMenuOverlay').classList.add('hidden');
+        });
+
+        document.getElementById('loginSignupBtn').addEventListener('click', function() {
+            document.getElementById('loginModal').classList.remove('hidden');
+        });
+
+        document.getElementById('closeModalBtn').addEventListener('click', function() {
+            document.getElementById('loginModal').classList.add('hidden');
+        });
+
+        document.getElementById('mobileLoginSignupBtn').addEventListener('click', function() {
+            document.getElementById('loginModal').classList.remove('hidden');
+            document.getElementById('mobileMenu').classList.add('hidden');
+            document.getElementById('mobileMenuOverlay').classList.add('hidden');
+        });
+  </script>
+<!-- 
     <footer class="bg-gray-800 p-4 mt-8">
         <div class="container mx-auto text-white text-center">
             &copy; 2024 PerfectDhaga. All rights reserved.
@@ -91,6 +266,6 @@
                 document.getElementById('contactForm').reset();
             }, 1000);
         });
-    </script>
+    </script> -->
 </body>
 </html>
