@@ -1,6 +1,8 @@
-// app.js
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const { testConnection } = require('./models/db');
 
 const app = express();
 const port = 3000;
@@ -9,23 +11,20 @@ const port = 3000;
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Serve static files from the public directory
+// Middleware
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    secret: 'your_secret_key',
+    resave: false,
+    saveUninitialized: true
+}));
 
-// Define routes
-app.get('/', (req, res) => {
-    res.render('index');
-});
+// Routes
+const indexRoutes = require('./routes/index');
+app.use('/', indexRoutes);
 
-app.get('/about', (req, res) => {
-    res.render('about');
-});
-
-app.get('/register', (req, res) => {
-    res.render('login-register');
-});
-
-// Start the server
-app.listen(port, () => {
+app.listen(port, async () => {
     console.log(`Server is running on http://localhost:${port}`);
+    await testConnection();
 });
