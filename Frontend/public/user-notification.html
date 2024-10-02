@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link rel="stylesheet" href="../css/user-notification.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/vendor_home1.css">
+    <link rel="stylesheet" href="../css/vendor_order.css">
+
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="../images/tailoricon.jpg" alt="Tailor" class="avatar">
+                <div class="profile-info">
+                    <h2>User Name</h2>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="user-home.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="user_order_details.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Orders</a></li>
+                    <li><a href="user-profile.html" class="nav-link"><i class="fas fa-user-circle"></i> Profile</a></li>
+                    <li><a href="user-wishlist.html" class="nav-link"><i class="fas fa-heart"></i> Wishlist</a></li>
+                    <li><a href="user-notification.html" class="nav-link"><i class="fas fa-bell"></i> Notification</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <h1>Notifications</h1>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="order">Order Updates</button>
+                <button class="filter-btn" data-filter="promotions">Promotions</button>
+                <button class="filter-btn" data-filter="general">General Notifications</button>
+            </div>
+
+            <!-- Notification List -->
+            <div class="notification-list">
+                <!-- Order Update Notification -->
+                <div class="notification-item order" data-type="order">
+                    <h3>Order Completed</h3>
+                    <p>Your order #1234 has been completed and is ready for pickup.</p>
+                    <span class="timestamp">October 1, 2024, 10:00 AM</span>
+                    <button class="delete-btn">Delete</button>
+                </div>
+
+                <!-- Promotion Notification -->
+                <div class="notification-item promotions" data-type="promotions">
+                    <h3>Special Discount</h3>
+                    <p>Get 20% off on your next purchase. Use code: DISCOUNT20</p>
+                    <span class="timestamp">September 29, 2024, 2:00 PM</span>
+                    <button class="delete-btn">Delete</button>
+                </div>
+
+                <!-- General Notification -->
+                <div class="notification-item general" data-type="general">
+                    <h3>System Maintenance</h3>
+                    <p>We will have a scheduled system maintenance on October 5, 2024. Please expect some downtime.</p>
+                    <span class="timestamp">September 28, 2024, 8:00 AM</span>
+                    <button class="delete-btn">Delete</button>
+                </div>
+            </div>
+
+            <!-- Mark All as Read Button -->
+            <button id="mark-all-read">Mark All as Read</button>
+        </main>
+    </div>
+
+    <script src="../js/user-notification.js"></script>
+</body>
+</html>
