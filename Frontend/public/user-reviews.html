@@ -43,7 +43,7 @@
             <ul class="space-y-4">
                 <li class="flex items-center">
                     <i class="fas fa-user mr-2"></i>
-                    <a href="user-profile.html" class="text-blue-600 font-bold">Profile</a>
+                    <a href="user-profile.html" class="text-black hover:text-blue-500">Profile</a>
                 </li>
                 <li class="flex items-center">
                     <i class="fas fa-box mr-2"></i>
@@ -63,7 +63,7 @@
                 </li>
                 <li class="flex items-center">
                     <i class="fas fa-star mr-2"></i>
-                    <a href="user-reviews.html" class="text-black hover:text-blue-500">Reviews</a>
+                    <a href="user-reviews.html" class="text-blue-600 font-bold">Reviews</a>
                 </li>
                 <li class="flex items-center">
                     <i class="fas fa-gift mr-2"></i>
@@ -81,49 +81,39 @@
         </aside>
 
         <!-- Profile Form -->
-        <main class="w-3/4 bg-white p-8 rounded shadow ml-4">
-            <h2 class="text-3xl font-bold mb-6">Profile Information</h2>
-            <form class="space-y-6">
-                <!-- Personal Info Section -->
-                <div class="grid grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Full Name</label>
-                        <input type="text" value="John Doe" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Email</label>
-                        <input type="email" value="john@example.com" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Phone</label>
-                        <input type="text" value="+1234567890" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Address</label>
-                        <input type="text" value="123 Main St, City, Country" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                </div>
-
-                <!-- Additional Information -->
-                <div class="grid grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Date of Birth</label>
-                        <input type="date" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Gender</label>
-                        <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
-                            <option>Select Gender</option>
-                            <option>Male</option>
-                            <option>Female</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="text-right">
-                    <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700">Update Profile</button>
-                </div>
-            </form>
+            <main class="main-content w-3/4 bg-white p-6 rounded shadow ml-4">
+                <h1 class="text-2xl font-bold mb-6">Your Reviews</h1>
+            
+                <table class="min-w-full bg-white border border-gray-300">
+                    <thead>
+                        <tr>
+                            <th class="border-b-2 border-gray-300 px-4 py-2 text-left">Product</th>
+                            <th class="border-b-2 border-gray-300 px-4 py-2 text-left">Review</th>
+                            <th class="border-b-2 border-gray-300 px-4 py-2 text-left">Rating</th>
+                            <th class="border-b-2 border-gray-300 px-4 py-2 text-left">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border-b border-gray-300 px-4 py-2">Product A</td>
+                            <td class="border-b border-gray-300 px-4 py-2">Great product! Really enjoyed using it.</td>
+                            <td class="border-b border-gray-300 px-4 py-2">⭐⭐⭐⭐⭐</td>
+                            <td class="border-b border-gray-300 px-4 py-2">August 15, 2024</td>
+                        </tr>
+                        <tr>
+                            <td class="border-b border-gray-300 px-4 py-2">Product B</td>
+                            <td class="border-b border-gray-300 px-4 py-2">Not what I expected, but decent.</td>
+                            <td class="border-b border-gray-300 px-4 py-2">⭐⭐⭐</td>
+                            <td class="border-b border-gray-300 px-4 py-2">September 5, 2024</td>
+                        </tr>
+                        <tr>
+                            <td class="border-b border-gray-300 px-4 py-2">Product C</td>
+                            <td class="border-b border-gray-300 px-4 py-2">Excellent quality and performance!</td>
+                            <td class="border-b border-gray-300 px-4 py-2">⭐⭐⭐⭐⭐</td>
+                            <td class="border-b border-gray-300 px-4 py-2">September 20, 2024</td>
+                        </tr>
+                    </tbody>
+                </table>                       
         </main>
     </div>
 

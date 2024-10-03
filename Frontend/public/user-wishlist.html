@@ -1,106 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wishlist</title>
-    <link rel="stylesheet" href="../css/user-wishlist.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/vendor_home1.css">
-    <link rel="stylesheet" href="../css/vendor_order.css">
-</head>
-
-<body>
-    <div class="container">
-        <aside class="sidebar">
-            <div class="profile">
-                <img src="../images/tailoricon.jpg" alt="Tailor" class="avatar">
-                <div class="profile-info">
-                    <h2>Tailor Name</h2>
-                    <p>Master Craftsman</p>
-                </div>
-            </div>
-            <nav class="nav">
-                <ul>
-                    <li><a href="user-home.html" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
-                    <li><a href="user_order_details.html" class="nav-link"><i class="fas fa-clipboard-list"></i> Orders</a></li>
-                    <li><a href="user-profile.html" class="nav-link"><i class="fas fa-user-circle"></i> Profile</a></li>
-                    <li><a href="user-wishlist.html" class="nav-link"><i class="fas fa-heart"></i> Wishlist</a></li>
-                    <li><a href="user-notification.html" class="nav-link"><i class="fas fa-bell"></i> Notification</a></li>
-                </ul>
-            </nav>
-        </aside>
-
-        <main class="main-content">
-            <h1>Your Wishlist</h1>
-            <div class="grid" id="wishlist-grid">
-                <!-- Item 1 -->
-                <div class="card" data-id="1">
-                    <div class="card-header">Elegant Evening Gown</div>
-                    <div class="card-content">
-                        <p>Price: $299.99</p>
-                        <p>Description of the Elegant Evening Gown.</p>
-                        <button class="button remove-btn">Remove</button>
-                    </div>
-                </div>
-
-                <!-- Item 2 -->
-                <div class="card" data-id="2">
-                    <div class="card-header">Classic Suit</div>
-                    <div class="card-content">
-                        <p>Price: $399.99</p>
-                        <p>Description of the Classic Suit.</p>
-                        <button class="button remove-btn">Remove</button>
-                    </div>
-                </div>
-
-                <!-- Item 3 -->
-                <div class="card" data-id="3">
-                    <div class="card-header">Summer Dress</div>
-                    <div class="card-content">
-                        <p>Price: $79.99</p>
-                        <p>Description of the Summer Dress.</p>
-                        <button class="button remove-btn">Remove</button>
-                    </div>
-                </div>
-
-                <!-- Item 4 -->
-                <div class="card" data-id="4">
-                    <div class="card-header">Casual Jeans</div>
-                    <div class="card-content">
-                        <p>Price: $59.99</p>
-                        <p>Description of the Casual Jeans.</p>
-                        <button class="button remove-btn">Remove</button>
-                    </div>
-                </div>
-            </div>
-
-            <div display="hide" class="empty-message" id="empty-message">
-                <p>Your wishlist is empty.</p>
-            </div>
-        </main>
+<html>
+ <head>
+  <title>Wishlist</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+ </head>
+ <body class="bg-gray-100">
+  <header class="bg-white shadow">
+   <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="text-2xl font-bold">YourBrand</div>
+    <div class="flex items-center space-x-4">
+     <div class="relative">
+      <i class="fas fa-shopping-cart text-xl"></i>
+      <span class="absolute top-0 right-0 inline-block w-4 h-4 bg-red-600 text-white text-xs font-bold text-center rounded-full">3</span>
+     </div>
+     <div class="relative dropdown">
+      <button class="flex items-center space-x-2">
+       <i class="fas fa-user text-xl"></i>
+       <span>John Doe</span>
+       <i class="fas fa-chevron-down"></i>
+      </button>
+      <div id="userDropdown" class="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg hidden">
+       <a href="user-home.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"><i class="fas fa-user mr-2"></i> Profile</a>
+       <a href="./index.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"><i class="fas fa-sign-out-alt mr-2"></i> Logout</a>
+      </div>
+     </div>
     </div>
+   </div>
+  </header>
+  
+  <div class="container mx-auto px-4 py-8 flex">
+    <!-- Sidebar -->
+    <aside class="w-1/4 bg-white p-4 rounded shadow">
+        <h1 class="text-2xl font-bold mb-6">YourBrand</h1>
+        <ul class="space-y-4">
+            <li class="flex items-center">
+                <i class="fas fa-user mr-2"></i>
+                <a href="user-profile.html" class="text-black hover:text-blue-500">Profile</a>
+            </li>
+            <li class="flex items-center">
+                <i class="fas fa-box mr-2"></i>
+                <a href="user-order.html" class="text-black hover:text-blue-500">Orders</a>
+            </li>
+            <li class="flex items-center">
+                <i class="fas fa-heart mr-2"></i>
+                <a href="user-wishlist.html" class="text-blue-600 font-bold">Wishlist</a>
+            </li>
+            <li class="flex items-center">
+                <i class="fas fa-credit-card mr-2"></i>
+                <a href="user-payment.html" class="text-black hover:text-blue-500">Payment Methods</a>
+            </li>
+            <li class="flex items-center">
+                <i class="fas fa-life-ring mr-2"></i>
+                <a href="user-support.html" class="text-black hover:text-blue-500">Support</a>
+            </li>
+            <li class="flex items-center">
+                <i class="fas fa-star mr-2"></i>
+                <a href="user-reviews.html" class="text-black hover:text-blue-500">Reviews</a>
+            </li>
+            <li class="flex items-center">
+                <i class="fas fa-gift mr-2"></i>
+                <a href="user-loyalty.html" class="text-black hover:text-blue-500">Loyalty Program</a>
+            </li>
+            <li class="flex items-center">
+                <i class="fas fa-bell mr-2"></i>
+                <a href="user-notifications.html" class="text-black hover:text-blue-500">Notifications</a>
+            </li>
+            <li class="flex items-center">
+                <i class="fas fa-cog mr-2"></i>
+                <a href="user-setting.html" class="text-black hover:text-blue-500">Account Settings</a>
+            </li>
+        </ul>
+    </aside>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const removeButtons = document.querySelectorAll(".remove-btn");
-            const wishlistGrid = document.getElementById("wishlist-grid");
-            const emptyMessage = document.getElementById("empty-message");
-
-            removeButtons.forEach(button => {
-                button.addEventListener("click", function () {
-                    const card = button.closest(".card");
-                    wishlistGrid.removeChild(card);
-
-                    // Check if there are no more items in the wishlist
-                    if (wishlistGrid.children.length === 0) {
-                        emptyMessage.style.display = "block";
-                    }
-                });
-            });
-        });
-    </script>
-</body>
-
+   <!-- Wishlist Section -->
+   <main class="w-3/4 ml-4">
+    <div class="bg-white rounded-lg shadow p-4">
+     <h2 class="text-xl font-bold mb-4">Wishlist</h2>
+     <div class="space-y-4">
+      <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg shadow">
+       <div class="flex items-center space-x-4">
+        <img alt="Image of Product 1" class="w-16 h-16 rounded-lg" height="60" src="https://storage.googleapis.com/a1aa/image/iM1baf22qXXTSqGDCn0AVXsR8uInq4dieyXU5e7eh8gfziYcC.jpg" width="60"/>
+        <div>
+         <h3 class="font-bold">Product Name 1</h3>
+         <p>$100.00</p>
+        </div>
+       </div>
+       <button class="bg-black text-white px-4 py-2 rounded-lg">Add to Cart</button>
+      </div>
+      <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg shadow">
+       <div class="flex items-center space-x-4">
+        <img alt="Image of Product 2" class="w-16 h-16 rounded-lg" height="60" src="https://storage.googleapis.com/a1aa/image/zt2ofcbYvvV8WSO3JPWHtlEElvYbEA9DLkEoAQ02paDRLixJA.jpg" width="60"/>
+        <div>
+         <h3 class="font-bold">Product Name 2</h3>
+         <p>$200.00</p>
+        </div>
+       </div>
+       <button class="bg-black text-white px-4 py-2 rounded-lg">Add to Cart</button>
+      </div>
+      <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg shadow">
+       <div class="flex items-center space-x-4">
+        <img alt="Image of Product 3" class="w-16 h-16 rounded-lg" height="60" src="https://storage.googleapis.com/a1aa/image/42oHRzYpVvaEHFPjpW5Dcck1JfBwENQXdVYhfFLUwtchWEjTA.jpg" width="60"/>
+        <div>
+         <h3 class="font-bold">Product Name 3</h3>
+         <p>$300.00</p>
+        </div>
+       </div>
+       <button class="bg-black text-white px-4 py-2 rounded-lg">Add to Cart</button>
+      </div>
+     </div>
+    </div>
+   </main>
+  </div>
+ </body>
 </html>
