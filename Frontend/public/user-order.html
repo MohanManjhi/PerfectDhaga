@@ -3,6 +3,14 @@
     <title>Orders - YourBrand</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .dropdown-content {
+            display: none;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
     <script>
         function toggleDropdown() {
             document.getElementById("userDropdown").classList.toggle("hidden");
@@ -55,71 +63,71 @@
     </script>
 </head>
 <body class="bg-gray-100">
-    <div class="container mx-auto p-4">
-        <!-- Header -->
-        <div class="flex justify-between items-center bg-white p-4 shadow-md rounded-lg mb-6">
+    <header class="bg-white shadow">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="text-2xl font-bold">YourBrand</div>
             <div class="flex items-center space-x-4">
                 <div class="relative">
                     <i class="fas fa-shopping-cart text-xl"></i>
                     <span class="absolute top-0 right-0 inline-block w-4 h-4 bg-red-600 text-white text-xs font-bold text-center rounded-full">3</span>
                 </div>
-                <div class="flex items-center space-x-2">
-                    <i class="fas fa-user text-xl"></i>
-                    <span>John Doe</span>
-                    <i class="fas fa-chevron-down cursor-pointer" onclick="toggleDropdown()"></i>
-                </div>
-                <div id="userDropdown" class="absolute right-0 mt-12 w-48 bg-white border rounded shadow-lg hidden">
-                    <a href="#" class="block px-4 py-2 text-black hover:bg-gray-200">Profile</a>
-                    <a href="#" class="block px-4 py-2 text-black hover:bg-gray-200">Logout</a>
+                <div class="relative dropdown">
+                    <button class="flex items-center space-x-2">
+                        <i class="fas fa-user text-xl"></i>
+                        <span>John Doe</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-content absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg">
+                        <a href="user-home.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"><i class="fas fa-user mr-2"></i> Profile</a>
+                        <a href="./index.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"><i class="fas fa-sign-out-alt mr-2"></i> Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- Main Content -->
-            <div class="container mx-auto p-8 flex">
-                <!-- Sidebar -->
-                <aside class="w-1/4 bg-white p-4 rounded shadow">
-                    <h1 class="text-2xl font-bold mb-6">YourBrand</h1>
-                    <ul class="space-y-4">
-                        <li class="flex items-center">
-                            <i class="fas fa-user mr-2"></i>
-                            <a href="user-profile.html" class="text-black hover:text-blue-500">Profile</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-box mr-2"></i>
-                            <a href="user-order.html" class="text-blue-600 font-bold">Orders</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-heart mr-2"></i>
-                            <a href="user-wishlist.html" class="text-black hover:text-blue-500">Wishlist</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-credit-card mr-2"></i>
-                            <a href="user-payment.html" class="text-black hover:text-blue-500">Payment Methods</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-life-ring mr-2"></i>
-                            <a href="user-support.html" class="text-black hover:text-blue-500">Support</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-star mr-2"></i>
-                            <a href="user-reviews.html" class="text-black hover:text-blue-500">Reviews</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-gift mr-2"></i>
-                            <a href="user-loyalty.html" class="text-black hover:text-blue-500">Loyalty Program</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-bell mr-2"></i>
-                            <a href="user-notifications.html" class="text-black hover:text-blue-500">Notifications</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-cog mr-2"></i>
-                            <a href="user-setting.html" class="text-black hover:text-blue-500">Account Settings</a>
-                        </li>
-                    </ul>
-                </aside>
+    </header>
+    <div class="container mx-auto p-8 flex">
+        <!-- Sidebar -->
+        <aside class="w-1/4 bg-white p-4 rounded shadow">
+            <h1 class="text-2xl font-bold mb-6">YourBrand</h1>
+            <ul class="space-y-4">
+                <li class="flex items-center">
+                    <i class="fas fa-user mr-2"></i>
+                    <a href="user-profile.html" class="text-black hover:text-blue-500">Profile</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-box mr-2"></i>
+                    <a href="user-order.html" class="text-blue-600 font-bold">Orders</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-heart mr-2"></i>
+                    <a href="user-wishlist.html" class="text-black hover:text-blue-500">Wishlist</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-credit-card mr-2"></i>
+                    <a href="user-payment.html" class="text-black hover:text-blue-500">Payment Methods</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-life-ring mr-2"></i>
+                    <a href="user-support.html" class="text-black hover:text-blue-500">Support</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-star mr-2"></i>
+                    <a href="user-reviews.html" class="text-black hover:text-blue-500">Reviews</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-gift mr-2"></i>
+                    <a href="user-loyalty.html" class="text-black hover:text-blue-500">Loyalty Program</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-bell mr-2"></i>
+                    <a href="user-notifications.html" class="text-black hover:text-blue-500">Notifications</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-cog mr-2"></i>
+                    <a href="user-setting.html" class="text-black hover:text-blue-500">Account Settings</a>
+                </li>
+            </ul>
+        </aside>
             <!-- Orders Section -->
             <div class="w-3/4 bg-white p-8 rounded-lg shadow-md ml-6">
                 <h2 class="text-3xl font-bold mb-6 text-gray-800">Your Orders</h2>
