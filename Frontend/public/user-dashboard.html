@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard - PerfectDhaga</title>
+    <title>Vendor Dashboard - PerfectDhaga</title>
     <link href="../css/tailwind.css" rel="stylesheet">
 </head>
 <body>
@@ -20,19 +20,19 @@
         <h1 class="text-2xl font-bold mb-8">User Dashboard</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-lg font-semibold">Manage Products</h2>
+                <p class="text-gray-700">Add, update, and manage raw materials you sell.</p>
+                <a href="/vendor/products" class="mt-4 block bg-blue-500 text-white px-4 py-2 rounded text-center">Manage Products</a>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
                 <h2 class="text-lg font-semibold">Orders</h2>
                 <p class="text-gray-700">View and manage your orders.</p>
-                <a href="/user/orders" class="mt-4 block bg-blue-500 text-white px-4 py-2 rounded text-center">My Orders</a>
+                <a href="/vendor/orders" class="mt-4 block bg-blue-500 text-white px-4 py-2 rounded text-center">View Orders</a>
             </div>
             <div class="bg-white p-6 rounded-lg shadow">
-                <h2 class="text-lg font-semibold">Account Settings</h2>
-                <p class="text-gray-700">Manage your account details and password.</p>
-                <a href="/user/settings" class="mt-4 block bg-blue-500 text-white px-4 py-2 rounded text-center">Account Settings</a>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow">
-                <h2 class="text-lg font-semibold">Wishlist</h2>
-                <p class="text-gray-700">View your wishlist items.</p>
-                <a href="/wishlist" class="mt-4 block bg-blue-500 text-white px-4 py-2 rounded text-center">View Wishlist</a>
+                <h2 class="text-lg font-semibold">Profile</h2>
+                <p class="text-gray-700">Update your business profile and contact details.</p>
+                <a href="/vendor/profile" class="mt-4 block bg-blue-500 text-white px-4 py-2 rounded text-center">Edit Profile</a>
             </div>
         </div>
     </main>
