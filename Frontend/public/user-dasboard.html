@@ -89,165 +89,199 @@
             <!-- Profile Section -->
             <section id="profile" class="section hidden">
                 <h1 class="text-2xl font-bold mb-6">Profile</h1>
-            <form class="space-y-6">
-                <!-- Personal Info Section -->
-                <div class="grid grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Full Name</label>
-                        <input type="text" value="John Doe" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
+                <form class="space-y-6">
+                    <!-- Profile Picture Section -->
+                    <div class="flex items-center space-x-6">
+                        <div class="shrink-0">
+                            <img id="profileImagePreview" class="h-16 w-16 object-cover rounded-full" src="https://via.placeholder.com/150" alt="Current Profile Photo" />
+                        </div>
+                        <label class="block">
+                            <span class="sr-only">Choose profile photo</span>
+                            <input type="file" accept="image/*" id="profileImage" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                        </label>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Email</label>
-                        <input type="email" value="john@example.com" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
+            
+                    <!-- Personal Info Section -->
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Full Name</label>
+                            <input type="text" value="John Doe" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" value="john@example.com" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Phone</label>
+                            <input type="text" value="+1234567890" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Address</label>
+                            <input type="text" value="123 Main St, City, Country" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Phone</label>
-                        <input type="text" value="+1234567890" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
+            
+                    <!-- Additional Information -->
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                            <input type="date" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Gender</label>
+                            <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
+                                <option>Select Gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Address</label>
-                        <input type="text" value="123 Main St, City, Country" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
+            
+                    <div class="text-right">
+                        <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700">Update Profile</button>
                     </div>
-                </div>
-
-                <!-- Additional Information -->
-                <div class="grid grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Date of Birth</label>
-                        <input type="date" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Gender</label>
-                        <select class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500">
-                            <option>Select Gender</option>
-                            <option>Male</option>
-                            <option>Female</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="text-right">
-                    <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700">Update Profile</button>
-                </div>
-            </form>
+                </form>
             </section>
-
+            
             <!-- Orders Section -->
             <section id="orders" class="section hidden">
                             <!-- Orders Section -->
-            <div class="w-3/4 bg-white p-8 rounded-lg shadow-md ml-6">
-                <h2 class="text-3xl font-bold mb-6 text-gray-800">Your Orders</h2>
-
-                <!-- Order #1001 -->
-                <div class="bg-white p-4 rounded shadow mb-4">
-                    <div class="flex justify-between items-center mb-2">
-                        <div>
-                            <p class="font-bold">Order #1001</p>
-                            <p class="text-sm text-gray-600">Placed on: 2023-01-01</p>
-                        </div>
-                        <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="showOrderDetails(1001)">View Details</button>
-                    </div>
-                    <p class="font-bold mb-2">Order Status: Delivered</p>
-                    <div class="relative pt-1">
-                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
-                            <div style="width:100%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
-                        </div>
-                    </div>
-                    <div class="flex justify-between text-sm text-gray-600 mt-1">
-                        <span>Order Placed</span>
-                        <span>Shipped</span>
-                        <span>Out for Delivery</span>
-                        <span>Delivered</span>
-                    </div>
-                </div>
-
-                <!-- Order #1002 -->
-                <div class="bg-white p-4 rounded shadow mb-4">
-                    <div class="flex justify-between items-center mb-2">
-                        <div>
-                            <p class="font-bold">Order #1002</p>
-                            <p class="text-sm text-gray-600">Placed on: 2023-02-15</p>
-                        </div>
-                        <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="showOrderDetails(1002)">View Details</button>
-                    </div>
-                    <p class="font-bold mb-2">Order Status: Shipped</p>
-                    <div class="relative pt-1">
-                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
-                            <div style="width:75%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-yellow-500"></div>
-                        </div>
-                    </div>
-                    <div class="flex justify-between text-sm text-gray-600 mt-1">
-                        <span>Order Placed</span>
-                        <span>Shipped</span>
-                        <span>Out for Delivery</span>
-                        <span>Delivered</span>
-                    </div>
-                </div>
-
-                <!-- Order #1003 -->
-                <div class="bg-white p-4 rounded shadow">
-                    <div class="flex justify-between items-center mb-2">
-                        <div>
-                            <p class="font-bold">Order #1003</p>
-                            <p class="text-sm text-gray-600">Placed on: 2023-03-30</p>
-                        </div>
-                        <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="showOrderDetails(1003)">View Details</button>
-                    </div>
-                    <p class="font-bold mb-2">Order Status: Processing</p>
-                    <div class="relative pt-1">
-                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
-                            <div style="width:25%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
-                        </div>
-                    </div>
-                    <div class="flex justify-between text-sm text-gray-600 mt-1">
-                        <span>Order Placed</span>
-                        <span>Shipped</span>
-                        <span>Out for Delivery</span>
-                        <span>Delivered</span>
-                    </div>
-                </div>
-            </div>
-            </section>
+                            <div class="w-3/4 bg-white p-8 rounded-lg shadow-md ml-6">
+                                <h2 class="text-3xl font-bold mb-6 text-gray-800">Your Orders</h2>
+                            
+                                <!-- Order #1001 -->
+                                <div class="bg-white p-4 rounded shadow mb-4">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <div>
+                                            <p class="font-bold">Order #1001</p>
+                                            <p class="text-sm text-gray-600">Placed on: 2023-01-01</p>
+                                        </div>
+                                        <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="showOrderDetails(1001, '2023-01-01', 'Delivered')">View Details</button>
+                                    </div>
+                                    <p class="font-bold mb-2">Order Status: Delivered</p>
+                                    <div class="relative pt-1">
+                                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+                                            <div style="width:100%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between text-sm text-gray-600 mt-1">
+                                        <span>Order Placed</span>
+                                        <span>Shipped</span>
+                                        <span>Out for Delivery</span>
+                                        <span>Delivered</span>
+                                    </div>
+                                </div>
+                            
+                                <!-- Order #1002 -->
+                                <div class="bg-white p-4 rounded shadow mb-4">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <div>
+                                            <p class="font-bold">Order #1002</p>
+                                            <p class="text-sm text-gray-600">Placed on: 2023-02-15</p>
+                                        </div>
+                                        <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="showOrderDetails(1002, '2023-02-15', 'Shipped')">View Details</button>
+                                    </div>
+                                    <p class="font-bold mb-2">Order Status: Shipped</p>
+                                    <div class="relative pt-1">
+                                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+                                            <div style="width:75%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-yellow-500"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between text-sm text-gray-600 mt-1">
+                                        <span>Order Placed</span>
+                                        <span>Shipped</span>
+                                        <span>Out for Delivery</span>
+                                        <span>Delivered</span>
+                                    </div>
+                                </div>
+                            
+                                <!-- Order #1003 -->
+                                <div class="bg-white p-4 rounded shadow">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <div>
+                                            <p class="font-bold">Order #1003</p>
+                                            <p class="text-sm text-gray-600">Placed on: 2023-03-30</p>
+                                        </div>
+                                        <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="showOrderDetails(1003, '2023-03-30', 'Processing')">View Details</button>
+                                    </div>
+                                    <p class="font-bold mb-2">Order Status: Processing</p>
+                                    <div class="relative pt-1">
+                                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+                                            <div style="width:25%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between text-sm text-gray-600 mt-1">
+                                        <span>Order Placed</span>
+                                        <span>Shipped</span>
+                                        <span>Out for Delivery</span>
+                                        <span>Delivered</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Modal for Order Details -->
+                            <div id="order-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+                                <div class="bg-white rounded-lg p-6 w-1/3">
+                                    <h2 class="text-2xl font-bold mb-4" id="modal-order-title">Order Details</h2>
+                                    <p class="text-gray-700 mb-2">
+                                        <span class="font-semibold">Order Number:</span> <span id="modal-order-number"></span>
+                                    </p>
+                                    <p class="text-gray-700 mb-2">
+                                        <span class="font-semibold">Order Date:</span> <span id="modal-order-date"></span>
+                                    </p>
+                                    <p class="text-gray-700 mb-4">
+                                        <span class="font-semibold">Order Status:</span> <span id="modal-order-status"></span>
+                                    </p>
+                                    <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="closeModal()">Close</button>
+                                </div>
+                            </div>                            
+                    </section>
+                          
 
             <!-- Wishlist Section -->
             <section id="wishlist" class="section hidden">
                 <div class="bg-white rounded-lg shadow p-4">
                     <h2 class="text-xl font-bold mb-4">Wishlist</h2>
                     <div class="space-y-4">
-                     <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg shadow">
-                      <div class="flex items-center space-x-4">
-                       <img alt="Image of Product 1" class="w-16 h-16 rounded-lg" height="60" src="https://storage.googleapis.com/a1aa/image/iM1baf22qXXTSqGDCn0AVXsR8uInq4dieyXU5e7eh8gfziYcC.jpg" width="60"/>
-                       <div>
-                        <h3 class="font-bold">Product Name 1</h3>
-                        <p>$100.00</p>
-                       </div>
-                      </div>
-                      <button class="bg-black text-white px-4 py-2 rounded-lg">Add to Cart</button>
-                     </div>
-                     <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg shadow">
-                      <div class="flex items-center space-x-4">
-                       <img alt="Image of Product 2" class="w-16 h-16 rounded-lg" height="60" src="https://storage.googleapis.com/a1aa/image/zt2ofcbYvvV8WSO3JPWHtlEElvYbEA9DLkEoAQ02paDRLixJA.jpg" width="60"/>
-                       <div>
-                        <h3 class="font-bold">Product Name 2</h3>
-                        <p>$200.00</p>
-                       </div>
-                      </div>
-                      <button class="bg-black text-white px-4 py-2 rounded-lg">Add to Cart</button>
-                     </div>
-                     <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg shadow">
-                      <div class="flex items-center space-x-4">
-                       <img alt="Image of Product 3" class="w-16 h-16 rounded-lg" height="60" src="https://storage.googleapis.com/a1aa/image/42oHRzYpVvaEHFPjpW5Dcck1JfBwENQXdVYhfFLUwtchWEjTA.jpg" width="60"/>
-                       <div>
-                        <h3 class="font-bold">Product Name 3</h3>
-                        <p>$300.00</p>
-                       </div>
-                      </div>
-                      <button class="bg-black text-white px-4 py-2 rounded-lg">Add to Cart</button>
-                     </div>
+                        <div id="product1" class="flex items-center justify-between bg-gray-50 p-4 rounded-lg shadow">
+                            <div class="flex items-center space-x-4">
+                                <img alt="Image of Product 1" class="w-16 h-16 rounded-lg" height="60" src="https://storage.googleapis.com/a1aa/image/iM1baf22qXXTSqGDCn0AVXsR8uInq4dieyXU5e7eh8gfziYcC.jpg" width="60"/>
+                                <div>
+                                    <h3 class="font-bold">Product Name 1</h3>
+                                    <p>$100.00</p>
+                                </div>
+                            </div>
+                            <button class="bg-black text-white px-4 py-2 rounded-lg" onclick="addToCart('product1', 'cart-items')">Add to Cart</button>
+                            <button class="bg-red-500 text-white px-4 py-2 rounded-lg" onclick="removeFromWishlist('product1')">Remove from Wishlist</button>  
+                        </div>
+                        <div id="product2" class="flex items-center justify-between bg-gray-50 p-4 rounded-lg shadow">
+                            <div class="flex items-center space-x-4">
+                                <img alt="Image of Product 2" class="w-16 h-16 rounded-lg" height="60" src="https://storage.googleapis.com/a1aa/image/zt2ofcbYvvV8WSO3JPWHtlEElvYbEA9DLkEoAQ02paDRLixJA.jpg" width="60"/>
+                                <div>
+                                    <h3 class="font-bold">Product Name 2</h3>
+                                    <p>$200.00</p>
+                                </div>
+                            </div>
+                            <button class="bg-black text-white px-4 py-2 rounded-lg" onclick="addToCart('product2', 'cart-items')">Add to Cart</button>
+                            <button class="bg-red-500 text-white px-4 py-2 rounded-lg" onclick="removeFromWishlist('product2')">Remove from Wishlist</button>  
+                        </div>
+                        <div id="product3" class="flex items-center justify-between bg-gray-50 p-4 rounded-lg shadow">
+                            <div class="flex items-center space-x-4">
+                                <img alt="Image of Product 3" class="w-16 h-16 rounded-lg" height="60" src="https://storage.googleapis.com/a1aa/image/42oHRzYpVvaEHFPjpW5Dcck1JfBwENQXdVYhfFLUwtchWEjTA.jpg" width="60"/>
+                                <div>
+                                    <h3 class="font-bold">Product Name 3</h3>
+                                    <p>$300.00</p>
+                                </div>
+                            </div>
+                            <button class="bg-black text-white px-4 py-2 rounded-lg" onclick="addToCart('product3', 'cart-items')">Add to Cart</button>
+                            <button class="bg-red-500 text-white px-4 py-2 rounded-lg" onclick="removeFromWishlist('product3')">Remove from Wishlist</button>  
+                        </div>
                     </div>
-                   </div>
+                </div>
             </section>
-
+                        
+           
             <!-- Payment Methods Section -->
             <section id="payment" class="section hidden">
                 <div class="w-3/4 p-6">
@@ -256,7 +290,8 @@
                         <div class="w-1/2 bg-white p-6 rounded-lg shadow">
                             <h2 class="text-xl font-semibold mb-4">Your Payment Methods</h2>
                             <p class="text-gray-600 mb-6">Manage your saved payment methods</p>
-                            <div class="space-y-4">
+                            <div id="payment-methods" class="space-y-4">
+                                <!-- Example Payment Methods -->
                                 <div class="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
                                     <div class="flex items-center space-x-4">
                                         <i class="fas fa-credit-card text-xl"></i>
@@ -265,7 +300,7 @@
                                             <p class="text-gray-600">Expires 12/23</p>
                                         </div>
                                     </div>
-                                    <i class="fas fa-trash-alt text-xl cursor-pointer"></i>
+                                    <i class="fas fa-trash-alt text-xl cursor-pointer" onclick="deletePaymentMethod(this)"></i>
                                 </div>
                                 <div class="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
                                     <div class="flex items-center space-x-4">
@@ -274,51 +309,58 @@
                                             <p class="font-semibold">UPI: example@upi</p>
                                         </div>
                                     </div>
-                                    <i class="fas fa-trash-alt text-xl cursor-pointer"></i>
+                                    <i class="fas fa-trash-alt text-xl cursor-pointer" onclick="deletePaymentMethod(this)"></i>
                                 </div>
                             </div>
                         </div>
-        
+            
                         <!-- Add Payment Method Section -->
                         <div class="w-1/2 bg-white p-6 rounded-lg shadow">
                             <h2 class="text-xl font-semibold mb-4">Add Payment Method</h2>
                             <p class="text-gray-600 mb-6">Enter your card or UPI details</p>
+                            
+                            <!-- Buttons to toggle between forms -->
                             <div class="flex mb-4">
                                 <button id="card-button" class="w-1/2 py-2 bg-gray-200 rounded-l-lg" onclick="showForm('card')">Card</button>
                                 <button id="upi-button" class="w-1/2 py-2 bg-gray-100 rounded-r-lg" onclick="showForm('upi')">UPI</button>
                             </div>
+                            
+                            <!-- Card Form -->
                             <form id="card-form">
                                 <div class="mb-4">
                                     <label class="block text-gray-700">Card Number</label>
-                                    <input type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="1234 5678 9012 3456">
+                                    <input id="card-number" type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="1234 5678 9012 3456">
                                 </div>
                                 <div class="mb-4">
                                     <label class="block text-gray-700">Cardholder Name</label>
-                                    <input type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="John Doe">
+                                    <input id="card-name" type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="John Doe">
                                 </div>
                                 <div class="flex space-x-4 mb-4">
                                     <div class="w-1/2">
                                         <label class="block text-gray-700">Expiry Date</label>
-                                        <input type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="MM/YY">
+                                        <input id="expiry-date" type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="MM/YY">
                                     </div>
                                     <div class="w-1/2">
                                         <label class="block text-gray-700">CVV</label>
-                                        <input type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="123">
+                                        <input id="cvv" type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="123">
                                     </div>
                                 </div>
-                                <button class="w-full py-2 bg-black text-white rounded-lg">Add Card</button>
+                                <button type="button" class="w-full py-2 bg-black text-white rounded-lg" onclick="addCard()">Add Card</button>
                             </form>
+                            
+                            <!-- UPI Form -->
                             <form id="upi-form" style="display: none;">
                                 <div class="mb-4">
                                     <label class="block text-gray-700">UPI ID</label>
-                                    <input type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="example@upi">
+                                    <input id="upi-id" type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="example@upi">
                                 </div>
-                                <button class="w-full py-2 bg-black text-white rounded-lg">Add UPI</button>
+                                <button type="button" class="w-full py-2 bg-black text-white rounded-lg" onclick="addUPI()">Add UPI</button>
                             </form>
                         </div>
                     </div>
-            </div>
+                </div>
             </section>
+            
 
             <!-- Support Section -->
             <section id="support" class="section hidden">
@@ -328,21 +370,22 @@
                     <h2 class="text-xl mb-4">Contact Us</h2>
                     <form action="#" method="POST">
                         <div class="mb-4">
-                            <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                            <input type="email" id="email" name="email" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500">
+                            <label for="email" class="block text-sm font-medium text-black-700">Email Address</label>
+                            <input type="email" id="email" name="email" required class="mt-1 block w-full border border-black rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500">
                         </div>
                         <div class="mb-4">
-                            <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-                            <textarea id="message" name="message" rows="4" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"></textarea>
+                            <label for="message" class="block text-sm font-medium text-black-700">Message</label>
+                            <textarea id="message" name="message" rows="4" required class="mt-1 block w-full border border-black rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"></textarea>
                         </div>
                         <div class="mb-4">
-                            <label for="additional-info" class="block text-sm font-medium text-gray-700">Additional Information</label>
-                            <textarea id="additional-info" name="additional-info" rows="2" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"></textarea>
+                            <label for="additional-info" class="block text-sm font-medium text-black-700">Additional Information</label>
+                            <textarea id="additional-info" name="additional-info" rows="2" class="mt-1 block w-full border border-black rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"></textarea>
                         </div>
-                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Send Message</button>
+                        <button type="submit" class="bg-blue-500 text-black px-4 py-2 rounded-lg">Send Message</button>
                     </form>
-                </div> 
+                </div>
             </section>
+            
 
             <!-- Reviews Section -->
             <section id="reviews" class="section hidden">
@@ -376,7 +419,8 @@
                             <td class="border-b border-gray-300 px-4 py-2">September 20, 2024</td>
                         </tr>
                     </tbody>
-                </table>             </section>
+                </table> 
+            </section>
 
             <!-- Loyalty Program Section -->
             <section id="loyalty" class="section hidden">
@@ -403,7 +447,8 @@
                         <li>September 20, 2024: Redeemed 25 points for discount</li>
                         <li>September 25, 2024: Earned 25 points for product review</li>
                     </ul>
-                </div>            </section>
+                </div>
+            </section>
 
             <!-- Notifications Section -->
             <section id="notifications" class="section hidden">
@@ -474,20 +519,149 @@
                 </section>
         </main>
     </div>
-
+    <script src="../js//user-notification.js"></script>
     <script>
-        function showSection(section) {
-            // Hide all sections
-            document.querySelectorAll('.section').forEach((el) => el.classList.add('hidden'));
+        // Function to show the specified section and hide the others
+function showSection(section) {
+    document.querySelectorAll('.section').forEach((el) => el.classList.add('hidden'));
+    document.getElementById(section).classList.remove('hidden');
+}
 
-            // Show the selected section
-            document.getElementById(section).classList.remove('hidden');
-        }
+// Display the Profile section by default on page load
+document.getElementById('profile').classList.remove('hidden');
 
-        // Display the Profile section by default on page load
-        document.getElementById('profile').classList.remove('hidden');
+// Function to remove an item from the wishlist
+function removeFromWishlist(productId) {
+    var productElement = document.getElementById(productId);
+    if (productElement) {
+        productElement.remove(); // Remove the product from the wishlist
+    }
+    console.log(productId + " removed from wishlist.");
+}
+
+// Function to add an item to the cart and remove from wishlist
+function addToCart(productId, cartId) {
+    var productElement = document.getElementById(productId);
+    var cartElement = document.getElementById(cartId);
+
+    if (productElement && cartElement) {
+        var clonedProduct = productElement.cloneNode(true);
+        clonedProduct.querySelector('button.bg-black').remove(); // Remove "Add to Cart" button in cart
+        cartElement.appendChild(clonedProduct); // Append cloned product to the cart
+        console.log(productId + " added to cart.");
+        productElement.remove(); // Remove the item from the wishlist
+    }
+}
+
+// Function to toggle between payment forms
+function showForm(paymentMethod) {
+    var cardForm = document.getElementById('card-form');
+    var upiForm = document.getElementById('upi-form');
+    var cardButton = document.getElementById('card-button');
+    var upiButton = document.getElementById('upi-button');
+
+    if (paymentMethod === 'card') {
+        cardForm.style.display = 'block';
+        upiForm.style.display = 'none';
+        cardButton.classList.add('bg-gray-200');
+        cardButton.classList.remove('bg-gray-100');
+        upiButton.classList.add('bg-gray-100');
+        upiButton.classList.remove('bg-gray-200');
+    } else if (paymentMethod === 'upi') {
+        cardForm.style.display = 'none';
+        upiForm.style.display = 'block';
+        upiButton.classList.add('bg-gray-200');
+        upiButton.classList.remove('bg-gray-100');
+        cardButton.classList.add('bg-gray-100');
+        cardButton.classList.remove('bg-gray-200');
+    }
+}
+
+// Function to delete a payment method
+function deletePaymentMethod(element) {
+    element.parentElement.remove();
+}
+
+// Function to add a new card
+function addCard() {
+    var cardNumber = document.getElementById('card-number').value;
+    var cardName = document.getElementById('card-name').value;
+    var expiryDate = document.getElementById('expiry-date').value;
+    var cvv = document.getElementById('cvv').value;
+
+    if (cardNumber && cardName && expiryDate && cvv) {
+        var paymentMethods = document.getElementById('payment-methods');
+        var newCard = `
+            <div class="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
+                <div class="flex items-center space-x-4">
+                    <i class="fas fa-credit-card text-xl"></i>
+                    <div>
+                        <p class="font-semibold">Card ending in ${cardNumber.slice(-4)}</p>
+                        <p class="text-gray-600">Expires ${expiryDate}</p>
+                    </div>
+                </div>
+                <i class="fas fa-trash-alt text-xl cursor-pointer" onclick="deletePaymentMethod(this)"></i>
+            </div>
+        `;
+        paymentMethods.insertAdjacentHTML('beforeend', newCard);
+        alert('Card added successfully!');
+        document.getElementById('card-form').reset();
+    } else {
+        alert('Please fill all the card details.');
+    }
+}
+
+// Function to add a new UPI method
+function addUPI() {
+    var upiId = document.getElementById('upi-id').value;
+
+    if (upiId) {
+        var paymentMethods = document.getElementById('payment-methods');
+        var newUPI = `
+            <div class="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
+                <div class="flex items-center space-x-4">
+                    <i class="fas fa-university text-xl"></i>
+                    <div>
+                        <p class="font-semibold">UPI: ${upiId}</p>
+                    </div>
+                </div>
+                <i class="fas fa-trash-alt text-xl cursor-pointer" onclick="deletePaymentMethod(this)"></i>
+            </div>
+        `;
+        paymentMethods.insertAdjacentHTML('beforeend', newUPI);
+        alert('UPI added successfully!');
+        document.getElementById('upi-form').reset();
+    } else {
+        alert('Please enter a UPI ID.');
+    }
+}
+
+// Function to show the order details modal
+function showOrderDetails(orderNumber, orderDate, orderStatus) {
+    document.getElementById('modal-order-number').textContent = orderNumber;
+    document.getElementById('modal-order-date').textContent = orderDate;
+    document.getElementById('modal-order-status').textContent = orderStatus;
+    document.getElementById('order-modal').classList.remove('hidden');
+}
+
+// Function to close the order modal
+function closeModal() {
+    document.getElementById('order-modal').classList.add('hidden');
+}
+
+// Image preview functionality
+document.getElementById('profileImage').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('profileImagePreview').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
     </script>
-
 </body>
 
 </html>
