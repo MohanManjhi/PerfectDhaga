@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Sherwani Collection</title>
+      <link rel="stylesheet" href="../css/sherwani_detail.css">
+      <style>
+            button {
+  padding: 10px 20px;
+  background-color: #040604;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #526853;
+}
+
+      </style>
+
+</head>
+
+<body>
+      <main class="container">
+            <h1 class="title">Elegant Sherwani Collection</h1>
+
+            <div class="product">
+
+                  <div class="product-image">
+                        <img src="https://d1wqzb5bdbcre6.cloudfront.net/15f56e951e4b6cb89e83e020c6bb0f5cc36b83b0d8c1a99f9f81bc96c7f52e04/68747470733a2f2f66696c65732e7374726970652e636f6d2f6c696e6b732f4d44423859574e6a644638785548684657466f774d5570565256644a5358513166475a735833526c63335266535670714d47396953336777537a68514d314a6b626c4d79646c6c6f65444a613030556e424b55494235" alt="Elegant Sherwani" class="image">
+                  </div>
+                  <div class="product-details">
+                        <h2 class="product-title">Royal Sari</h2>
+                        <p class="product-description">
+                              This exquisite royal blue sherwani features intricate gold embroidery, perfect for
+                              weddings and special occasions. Crafted from premium silk fabric, it offers both
+                              comfort and elegance.
+                        </p>
+                        <ul class="product-features">
+                              <li>100% pure silk fabric</li>
+                              <li>Handcrafted gold embroidery</li>
+                           
+                              <li>Available in sizes S to XXL</li>
+                              <li>Dry clean only</li>
+                        </ul>
+                        
+                     
+                        <a href="https://buy.stripe.com/test_cN26qk2Cxanc0Vy4gg?locale=en&__embed_source=buy_btn_1PxErC01JUEWIIt5p9FbgOZ6"><button id="sherwaniBtn" onclick="window.location.href='sherwani_measurment.html'">View Sherwani</button></a>
+                      
+                  </div>
+            </div>
+<a href="/">Return</a>
+            <button class="chatbot-button" aria-label="Open Chatbot" id="chatbot-icon">
+                  💬
+            </button>
+
+            <div class="chatbot" id="chatbot">
+                  <div class="chatbot-header">
+                        <h3>Sherwani Assistant</h3>
+                        <button class="close-chatbot" id="close-chatbot">✖️</button>
+                  </div>
+                  <div class="chatbot-content" id="chatbot-messages">
+                        <!-- Messages will be inserted here dynamically -->
+                  </div>
+                  <div class="chatbot-footer">
+                        <input type="text" class="chat-input" placeholder="Type your message..." id="chatbot-input"
+                              aria-label="Chat message">
+                        <button class="send-button" id="send-message">Send</button>
+                  </div>
+            </div>
+      </main>
+
+      <script>
+            const chatbotIcon = document.getElementById('chatbot-icon');
+            const chatbot = document.getElementById('chatbot');
+            const closeChatbot = document.getElementById('close-chatbot');
+            const sendMessageButton = document.getElementById('send-message');
+            const chatbotMessages = document.getElementById('chatbot-messages');
+            const chatbotInput = document.getElementById('chatbot-input');
+
+            const getBotResponse = (message) => {
+                  const lowerMessage = message.toLowerCase();
+                  if (lowerMessage.includes("color")) {
+                        return "We have sherwanis in various colors including royal blue, deep maroon, and classic black. What's your preferred color?";
+                  } else if (lowerMessage.includes("size")) {
+                        return "Our sherwanis come in sizes ranging from S to XXL. We recommend getting measured by a professional tailor for the best fit.";
+                  } else if (lowerMessage.includes("price")) {
+                        return "Our sherwani prices start from $200 and go up to $1000 for premium designs. Do you have a specific budget in mind?";
+                  } else {
+                        return "I'd be happy to help you with information about our sherwanis. You can ask about colors, sizes, prices, or any other details you're interested in.";
+                  }
+            };
+
+            // Show the chatbot when the icon is clicked
+            chatbotIcon.addEventListener('click', () => {
+                  chatbot.style.display = 'flex';
+                  appendMessage("bot", "Hello! How can I assist you today?");
+            });
+
+            // Hide the chatbot when the close button is clicked
+            closeChatbot.addEventListener('click', () => {
+                  chatbot.style.display = 'none';
+            });
+
+            // Send a message when the send button is clicked
+            sendMessageButton.addEventListener('click', () => {
+                  const userMessage = chatbotInput.value.trim();
+                  if (userMessage !== "") {
+                        appendMessage("user", userMessage);
+                        chatbotInput.value = ""; // Clear the input field
+
+                        // Generate bot response
+                        const botResponse = getBotResponse(userMessage);
+                        setTimeout(() => appendMessage("bot", botResponse), 500);
+                  }
+            });
+
+            // Function to append messages to the chatbot
+            const appendMessage = (sender, message) => {
+                  const messageElement = document.createElement('div');
+                  messageElement.classList.add('message');
+                  if (sender === "user") {
+                        messageElement.classList.add('user-message');
+                  } else {
+                        messageElement.classList.add('bot-message');
+                  }
+                  messageElement.textContent = message;
+                  chatbotMessages.appendChild(messageElement);
+                  chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Auto-scroll to the latest message
+            };
+      </script>
+</body>
+
+</html>

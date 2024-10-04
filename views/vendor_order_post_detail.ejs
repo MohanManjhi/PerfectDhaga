@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Dashboard</title>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="../css/vendor_home1.css">
+      <link rel="stylesheet" href="../css/vendor_order_post_detail.css">
+
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+      <style>
+            #map {
+                  height: 400px;
+                  /* Set height for the map */
+            }
+      </style>
+</head>
+
+<body>
+      <div class="dashboard">
+            <aside class="sidebar">
+                  <div class="profile">
+                        <img src="../images/tailoricon.jpg" alt="Tailor" class="avatar">
+                        <div class="profile-info">
+                              <h2>Vendor Name</h2>
+                              <p>Master Craftsman</p>
+                        </div>
+                  </div>
+                  <nav class="nav">
+                        <ul>
+<li><a href="/vendor_home" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+<li><a href="/vendor_all_post" class="nav-link"><i class="fas fa-plus-circle"></i>
+            View Post</a></li>
+<li><a href="/vender_order_details" class="nav-link"><i class="fas fa-clipboard-list"></i>
+            Orders</a></li>
+
+<li><a href="/vendor_profile" class="nav-link"><i class="fas fa-user-circle"></i>
+            Profile</a></li>
+<li><a href="/vendor_payment" class="nav-link"><i class="fas fa-dollar-sign"></i>
+            Payments</a></li>
+<li><a href="/vendor_review" class="nav-link"><i class="fas fa-star"></i> Reviews</a></li>
+<li><a href="/vendor_contact" class="nav-link"><i class="fas fa-map-marker-alt"></i>
+            Location</a></li>
+<li><a href="/vendor_new_post" class="nav-link"><i class="fas fa-map-marker-alt"></i>
+            New Post</a></li>
+<li><a href="/vendor_logout" class="nav-link"><i class="fas fa-sign-out-alt"></i>
+            </i>
+            log_out</a></li>
+                        </ul>
+                  </nav>
+            </aside>
+            <main class="container">
+                  <h1 class="title">Elegant Sherwani Collection</h1>
+            
+                  <div class="product">
+            
+                        <div class="product-image">
+                              <img src="https://www.bing.com/th?id=OIP.Z_g7LEc8Y_qUc4Fnf1F9MgAAAA&w=176&h=185&c=8&rs=1&qlt=90&o=6&cb=13&dpr=1.3&pid=3.1&rm=2" alt="Elegant Sherwani" class="image">
+                        </div>
+                        <div class="product-details">
+                              <h2 class="product-title">Royal Blue Embroidered Sherwani</h2>
+                              <p class="product-description">
+                                    This exquisite royal blue sherwani features intricate gold embroidery, perfect for
+                                    weddings and special occasions. Crafted from premium silk fabric, it offers both
+                                    comfort and elegance.
+                              </p>
+                              <ul class="product-features">
+                                    <li>100% pure silk fabric</li>
+                                    <li>Handcrafted gold embroidery</li>
+            
+                                    <li>Available in sizes S to XXL</li>
+                                    <li>Dry clean only</li>
+                              </ul>
+            
+            
+                              <button id="sherwaniBtn" >View
+                                    Sherwani</button>
+            
+                        </div>
+                  </div>
+            
+                  <button class="chatbot-button" aria-label="Open Chatbot" id="chatbot-icon">
+                        💬
+                  </button>
+            
+                  <div class="chatbot" id="chatbot">
+                        <div class="chatbot-header">
+                              <h3>Sherwani Assistant</h3>
+                              <button class="close-chatbot" id="close-chatbot">✖️</button>
+                        </div>
+                        <div class="chatbot-content" id="chatbot-messages">
+                              <!-- Messages will be inserted here dynamically -->
+                        </div>
+                        <div class="chatbot-footer">
+                              <input type="text" class="chat-input" placeholder="Type your message..." id="chatbot-input"
+                                    aria-label="Chat message">
+                              <button class="send-button" id="send-message">Send</button>
+                        </div>
+                  </div>
+            </main>
+
+
+
+
+      </div>
+
+</body>
+
+</html>

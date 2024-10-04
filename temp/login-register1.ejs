@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        .blurred-bg {
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <%- include("partials/navbar") %>
+  <%- include("partials/login-modal") %>
+  <%- include("partials/mobile-menu") %>
+  <br>
+  <br>
+  <br>
+
+    <!-- Mobile Menu -->
+    <div class="hidden fixed inset-0 z-40 bg-black bg-opacity-50" id="mobileMenuOverlay"></div>
+    <div class="hidden fixed top-0 right-0 w-64 h-full bg-white shadow-lg z-50 p-4" id="mobileMenu">
+        <button class="text-gray-500 mb-4" id="closeMobileMenuBtn">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="relative mb-4">
+            <input type="search" placeholder="Search products..." class="pl-10 pr-4 py-2 w-full border rounded-full">
+            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        </div>
+        <a href="/become-seller" class="text-primary hover:text-primary-dark transition-colors mb-4 block">Become a Seller</a>
+        <button class="text-gray-500 flex items-center mb-4">
+            <i class="fas fa-map-marker-alt mr-2"></i>
+            Set Location
+        </button>
+        <button class="text-gray-500 flex items-center">
+            <i class="fas fa-user mr-2"></i>
+            Login / Signup
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg" id="registerPage">
+            <h2 class="text-2xl font-bold text-center mb-4">Register</h2>
+            <form id="registerForm" action="/register" method="POST" class="space-y-4">
+                <div class="space-y-2">
+                    <label for="role" class="block text-gray-700">Register as</label>
+                    <select id="role" name="role" class="w-full border rounded px-3 py-2" required>
+                        <option value="user">User </option>
+                        <option value="tailor">Tailor</option>
+                        <option value="vendor">Vendor</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label for="name" class="block text-gray-700">Full Name</label>
+                    <input id="name" name="name" type="text" placeholder="Enter your full name" class="w-full border rounded px-3 py-2" required>
+                </div>
+                <div id="userFields" class="space-y-2 hidden">
+                    <label for="user-address" class="block text-gray-700">Address</label>
+                    <textarea id="user-address" name="address" placeholder="Enter your address" class="w-full border rounded px-3 py-2"></textarea>
+                </div>
+                <div id="tailorFields" class="space-y-2 hidden">
+                    <label for="tailor-experience" class="block text-gray-700">Years of Experience</label>
+                    <input id="tailor-experience" name="experience" type="number" placeholder="Enter years of experience" class="w-full border rounded px-3 py-2">
+                    <label for="tailor-specialization" class="block text-gray-700">Specialization</label>
+                    <input id="tailor-specialization" name="specialization" type="text" placeholder="E.g., Wedding dresses, Suits, etc." class="w-full border rounded px-3 py-2">
+                    <label for="tail or-portfolio" class="block text-gray-700">Portfolio Link (Optional)</label>
+                    <input id="tailor-portfolio" name="portfolio" type="url" placeholder="Enter your portfolio website" class="w-full border rounded px-3 py-2">
+                </div>
+                <div id="vendorFields" class="space-y-2 hidden">
+                    <label for="vendor-company-name" class="block text-gray-700">Company Name</label>
+                    <input id="vendor-company-name" name="company_name" type="text" placeholder="Enter your company name" class="w-full border rounded px-3 py-2">
+                    
+                    <label for="vendor-business-type" class="block text-gray-700">Type of Business</label>
+                    <input id="vendor-business-type" name="business_type" type="text" placeholder="E.g., Fabric supplier, Button manufacturer, etc." class="w-full border rounded px-3 py-2">
+                    
+                    <label for="vendor-tax-id" class="block text-gray-700">Tax ID / Business Registration Number</label>
+                    <input id="vendor-tax-id" name="tax_id" type="text" placeholder="Enter your tax ID or business registration number" class="w-full border rounded px-3 py-2">
+                </div>
+                <div class="space-y-2">
+                    <label for="register-email" class="block text-gray-700">Email</label>
+                    <input id="register-email" name="email" type="email" placeholder="Enter your email" class="w-full border rounded px-3 py-2" required>
+                </div>
+                <div class="space-y-2">
+                    <label for="register-phone" class="block text-gray-700">Phone Number</label>
+                    <input id="register-phone" name="phone" type="tel" placeholder="Enter your phone number" class="w-full border rounded px-3 py-2" required>
+                </div>
+                <div class="space-y-2">
+                    <label for="register-password" class="block text-gray-700">Password</label>
+                    <input id="register-password" name="password" type="password" placeholder="Create a password" class="w-full border rounded px-3 py-2" required>
+                    <div id="password-hint" class="text-red-500 text-sm mt-2" style="display: none;">Password must be at least 8 characters long and contain at least one special character.</div>
+                </div>
+                <div class="space-y-2">
+                    <label for="register-confirm-password" class="block text-gray-700">Confirm Password</label>
+                    <input id="register-confirm-password" name="confirm_password" type="password" placeholder="Confirm your password" class="w-full border rounded px-3 py-2" required>
+                    <div id="confirm-password-hint" class="text-red-500 text-sm mt-2" style="display: none;">Passwords do not match.</div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <input id="register-terms" name="terms" type="checkbox" class="border rounded" required>
+                    <label for="register-terms" class="text-sm">I agree to the <a href="/terms" class="text-primary hover:underline">Terms and Conditions</a></label>
+                </div>
+                <button type="submit" class="w-full bg-black text-white py-2 rounded">Register</button>
+            </form>
+            <p class="text-center mt-4">Already have an account? <a href="/login" class="text-primary hover:underline">Login here</a></p>
+        </div>
+
+        <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg hidden" id="loginPage">
+            <h2 class="text-2xl font-bold text-center mb-4">Login</h2>
+            <form>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Email</label>
+                    <input type="email" placeholder="Enter your email" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700">Password</label>
+                    <input type="password" placeholder="Enter your password" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200">
+                </div>
+                <button type="submit" class="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800">Login</button>
+            </form>
+            <p class="mt-4 text-center text-gray-600">Don't have an account? <a href="#" id="registerLink" class="text-blue-500 hover:underline">Sign up</a></p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <%- include("partials/footer") %>
+<!-- Success Registration Popup -->
+<div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" id="successPopup">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+     <h2 class="text-2xl font-bold text-center mb-4">
+      Welcome!
+     </h2>
+     <p class="text-center mb-4">
+      You have successfully registered. Welcome to perfectDhaaga!
+     </p>
+     
+    </div>
+   </div>
+  <script src="/js/script.js"></script>
+
+</body>
+</html>
+
+
