@@ -17,15 +17,18 @@
                   <div class="profile">
                         <img src="../images/tailoricon.jpg" alt="Tailor" class="avatar">
                         <div class="profile-info">
-                              <h2>Tailor Name</h2>
+                              <h2>Vendor Name</h2>
                               <p>Master Craftsman</p>
                         </div>
                   </div>
                   <nav class="nav">
                         <ul>
                               <li><a href="/vendor_home" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
-                              <li><a href="/vendor_order_details" class="nav-link"><i class="fas fa-clipboard-list"></i>
+                              <li><a href="/vendor_all_post" class="nav-link"><i class="fas fa-plus-circle"></i>
+                                          View Post</a></li>
+                              <li><a href="/vender_order_details" class="nav-link"><i class="fas fa-clipboard-list"></i>
                                           Orders</a></li>
+                              
                               <li><a href="/vendor_profile" class="nav-link"><i class="fas fa-user-circle"></i>
                                           Profile</a></li>
                               <li><a href="/vendor_payment" class="nav-link"><i class="fas fa-dollar-sign"></i>
@@ -33,8 +36,11 @@
                               <li><a href="/vendor_review" class="nav-link"><i class="fas fa-star"></i> Reviews</a></li>
                               <li><a href="/vendor_contact" class="nav-link"><i class="fas fa-map-marker-alt"></i>
                                           Location</a></li>
-                              <li><a href="/vendor_new_post" class="nav-link"><i class="fas fa-map-marker-alt"></i> New
-                                          Post</a></li>
+                              <li><a href="/vendor_new_post" class="nav-link"><i class="fas fa-map-marker-alt"></i>
+                                          New Post</a></li>
+                              <li><a href="/vendor_logout" class="nav-link"><i class="fas fa-sign-out-alt"></i>
+                                          </i>
+                                          log_out</a></li>
                         </ul>
                   </nav>
             </aside>
@@ -73,7 +79,7 @@
                                           required minlength="2" maxlength="100">
                               </div>
                               <div class="form-group">
-                                    <label for="price"><i class="fas fa-dollar-sign"></i> Price ($)</label>
+                                    <label for="price"><i class="fas "></i> Price (Rs.)</label>
                                     <input type="number" id="price" name="price" placeholder="Enter price" required
                                           min="0" step="0.01">
                               </div>
@@ -83,10 +89,11 @@
                                           placeholder="Enter a detailed description of the cloth" required
                                           minlength="10" maxlength="500"></textarea>
                               </div>
-                        <div class="form-group">
-                              <label for="image"><i class="fas fa-image"></i> Image</label>
-                              <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/webp" required>
-                        </div>
+                              <div class="form-group">
+                                    <label for="image"><i class="fas fa-image"></i> Image</label>
+                                    <input type="file" id="image" name="image"
+                                          accept="image/png, image/jpeg, image/webp" required>
+                              </div>
 
                               <button type="submit" class="submit-button"><i class="fas fa-check-circle"></i>
                                     Submit</button>
@@ -95,7 +102,7 @@
             </main>
       </div>
       <script>
-           fetch('/api/clothes', {
+            fetch('/api/clothes', {
                   method: 'POST',
                   body: formData,
             })

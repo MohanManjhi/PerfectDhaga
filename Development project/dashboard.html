@@ -1,0 +1,501 @@
+<html>
+<head>
+    <title>Profile Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .sidebar {
+            transition: transform 0.3s ease;
+        }
+        .sidebar-hidden {
+            transform: translateX(-100%);
+        }
+        .content-hidden {
+            display: none;
+        }
+        .active-link {
+            color: black;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white shadow-md">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <div class="text-2xl font-bold">YourBrand</div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span class="absolute top-0 right-0 inline-block w-4 h-4 bg-red-500 text-white text-xs font-bold text-center rounded-full">3</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-user text-xl"></i>
+                        <span>John Doe</span>
+                    </div>
+                    <button id="menu-button" class="md:hidden">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="flex flex-1 flex-col md:flex-row">
+            <!-- Sidebar -->
+            <aside id="sidebar" class="fixed inset-y-0 left-0 top-16 w-64 bg-white shadow-md p-4 sidebar md:transform-none md:relative md:top-0 md:w-1/4 z-50">
+                <nav class="space-y-4">
+                    <a href="#" id="link-profile" class="flex items-center space-x-2 text-gray-600" onclick="showContent('profile', this)">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="#" id="link-orders" class="flex items-center space-x-2 text-gray-600" onclick="showContent('orders', this)">
+                        <i class="fas fa-box"></i>
+                        <span>Orders</span>
+                    </a>
+                    <a href="#" id="link-wishlist" class="flex items-center space-x-2 text-gray-600" onclick="showContent('wishlist', this)">
+                        <i class="fas fa-heart"></i>
+                        <span>Wishlist</span>
+                    </a>
+                    <a href="#" id="link-payment-methods" class="flex items-center space-x-2 text-gray-600" onclick="showContent('payment-methods', this)">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Payment Methods</span>
+                    </a>
+                    <a href="#" id="link-support" class="flex items-center space-x-2 text-gray-600" onclick="showContent('support', this)">
+                        <i class="fas fa-life-ring"></i>
+                        <span>Support</span>
+                    </a>
+                    <!-- <a href="#" id="link-reviews" class="flex items-center space-x-2 text-gray-600" onclick="showContent('reviews', this)">
+                        <i class="fas fa-star"></i>
+                        <span>Reviews</span>
+                    </a> -->
+                    <a href="#" id="link-loyalty-program" class="flex items-center space-x-2 text-gray-600" onclick="showContent('loyalty-program', this)">
+                        <i class="fas fa-list"></i>
+                        <span>Loyalty Program</span>
+                    </a>
+                    <a href="#" id="link-notifications" class="flex items-center space-x-2 text-gray-600" onclick="showContent('notifications', this)">
+                        <i class="fas fa-bell"></i>
+                        <span>Notifications</span>
+                    </a>
+                    <a href="#" id="link-account-settings" class="flex items-center space-x-2 text-gray-600" onclick="showContent('account-settings', this)">
+                        <i class="fas fa-cog"></i>
+                        <span>Account Settings</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Profile Content -->
+            <main id="content" class="flex-1 p-6">
+                <div id="profile" class="bg-white shadow-md rounded p-6 content-section">
+                    <h2 class="text-2xl font-bold mb-6">Profile</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-gray-700">Full Name</label>
+                            <input type="text" value="John Doe" class="w-full mt-2 p-2 border rounded">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700">Email</label>
+                            <input type="email" value="john@example.com" class="w-full mt-2 p-2 border rounded">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700">Phone</label>
+                            <input type="text" value="+1234567890" class="w-full mt-2 p-2 border rounded">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700">Address</label>
+                            <input type="text" value="123 Main St, City, Country" class="w-full mt-2 p-2 border rounded">
+                        </div>
+                    </div>
+                    <button class="mt-6 bg-black text-white px-4 py-2 rounded">Update Profile</button>
+                </div>
+
+                <div id="orders" class="bg-white shadow-md rounded p-6 content-section content-hidden">
+                    <h2 class="text-2xl font-bold mb-6">Orders</h2>
+                    <!-- Orders Section -->
+                            
+                            
+                                <!-- Order #1001 -->
+                                <div class="bg-white p-4 rounded shadow mb-4">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <div>
+                                            <p class="font-bold">Order #1001</p>
+                                            <p class="text-sm text-gray-600">Placed on: 2023-01-01</p>
+                                        </div>
+                                        <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="showOrderDetails(1001, '2023-01-01', 'Delivered')">View Details</button>
+                                    </div>
+                                    <p class="font-bold mb-2">Order Status: Delivered</p>
+                                    <div class="relative pt-1">
+                                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+                                            <div style="width:100%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between text-sm text-gray-600 mt-1">
+                                        <span>Order Placed</span>
+                                        <span>Shipped</span>
+                                        <span>Out for Delivery</span>
+                                        <span>Delivered</span>
+                                    </div>
+                                </div>
+                            
+                                <!-- Order #1002 -->
+                                <div class="bg-white p-4 rounded shadow mb-4">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <div>
+                                            <p class="font-bold">Order #1002</p>
+                                            <p class="text-sm text-gray-600">Placed on: 2023-02-15</p>
+                                        </div>
+                                        <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="showOrderDetails(1002, '2023-02-15', 'Shipped')">View Details</button>
+                                    </div>
+                                    <p class="font-bold mb-2">Order Status: Shipped</p>
+                                    <div class="relative pt-1">
+                                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+                                            <div style="width:75%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-yellow-500"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between text-sm text-gray-600 mt-1">
+                                        <span>Order Placed</span>
+                                        <span>Shipped</span>
+                                        <span>Out for Delivery</span>
+                                        <span>Delivered</span>
+                                    </div>
+                                </div>
+                            
+                                <!-- Order #1003 -->
+                                <div class="bg-white p-4 rounded shadow">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <div>
+                                            <p class="font-bold">Order #1003</p>
+                                            <p class="text-sm text-gray-600">Placed on: 2023-03-30</p>
+                                        </div>
+                                        <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="showOrderDetails(1003, '2023-03-30', 'Processing')">View Details</button>
+                                    </div>
+                                    <p class="font-bold mb-2">Order Status: Processing</p>
+                                    <div class="relative pt-1">
+                                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+                                            <div style="width:25%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between text-sm text-gray-600 mt-1">
+                                        <span>Order Placed</span>
+                                        <span>Shipped</span>
+                                        <span>Out for Delivery</span>
+                                        <span>Delivered</span>
+                                    </div>
+                                </div>
+                            
+                            <!-- Modal for Order Details -->
+                            <div id="order-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+                                <div class="bg-white rounded-lg p-6 w-1/3">
+                                    <h2 class="text-2xl font-bold mb-4" id="modal-order-title">Order Details</h2>
+                                    <p class="text-gray-700 mb-2">
+                                        <span class="font-semibold">Order Number:</span> <span id="modal-order-number"></span>
+                                    </p>
+                                    <p class="text-gray-700 mb-2">
+                                        <span class="font-semibold">Order Date:</span> <span id="modal-order-date"></span>
+                                    </p>
+                                    <p class="text-gray-700 mb-4">
+                                        <span class="font-semibold">Order Status:</span> <span id="modal-order-status"></span>
+                                    </p>
+                                    <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="closeModal()">Close</button>
+                                </div>
+                            </div>    
+                </div>
+
+                <div id="wishlist" class="bg-white shadow-md rounded p-4 md:p-6 content-section content-hidden">
+                    <h2 class="text-xl md:text-2xl font-bold mb-4 md:mb-6">Wishlist</h2>
+                
+                    <div class="space-y-4">
+                        <div id="product1" class="flex flex-col md:flex-row items-center justify-between bg-gray-50 p-4 rounded-lg shadow">
+                            <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                                <img alt="Image of Product 1" class="w-16 h-16 rounded-lg" src="https://storage.googleapis.com/a1aa/image/iM1baf22qXXTSqGDCn0AVXsR8uInq4dieyXU5e7eh8gfziYcC.jpg" />
+                                <div>
+                                    <h3 class="font-bold">Product Name 1</h3>
+                                    <p>$100.00</p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="bg-black text-white px-4 py-2 rounded-lg" onclick="addToCart('product1', 'cart-items')">Add to Cart</button>
+                                <button class="bg-red-500 text-white px-4 py-2 rounded-lg" onclick="removeFromWishlist('product1')">Remove</button>
+                            </div>
+                        </div>
+                        <div id="product2" class="flex flex-col md:flex-row items-center justify-between bg-gray-50 p-4 rounded-lg shadow">
+                            <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                                <img alt="Image of Product 2" class="w-16 h-16 rounded-lg" src="https://storage.googleapis.com/a1aa/image/zt2ofcbYvvV8WSO3JPWHtlEElvYbEA9DLkEoAQ02paDRLixJA.jpg" />
+                                <div>
+                                    <h3 class="font-bold">Product Name 2</h3>
+                                    <p>$200.00</p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="bg-black text-white px-4 py-2 rounded-lg" onclick="addToCart('product2', 'cart-items')">Add to Cart</button>
+                                <button class="bg-red-500 text-white px-4 py-2 rounded-lg" onclick="removeFromWishlist('product2')">Remove</button>
+                            </div>
+                        </div>
+                        <div id="product3" class="flex flex-col md:flex-row items-center justify-between bg-gray-50 p-4 rounded-lg shadow">
+                            <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                                <img alt="Image of Product 3" class="w-16 h-16 rounded-lg" src="https://storage.googleapis.com/a1aa/image/42oHRzYpVvaEHFPjpW5Dcck1JfBwENQXdVYhfFLUwtchWEjTA.jpg" />
+                                <div>
+                                    <h3 class="font-bold">Product Name 3</h3>
+                                    <p>$300.00</p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="bg-black text-white px-4 py-2 rounded-lg" onclick="addToCart('product3', 'cart-items')">Add to Cart</button>
+                                <button class="bg-red-500 text-white px-4 py-2 rounded-lg" onclick="removeFromWishlist('product3')">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="payment-methods" class="bg-white shadow-md rounded p-4 md:p-6 content-section content-hidden">
+                    <h2 class="text-xl md:text-2xl font-bold mb-4 md:mb-6">Payment Methods</h2>
+                    <div class="w-full p-4 md:p-6">
+                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
+                            <!-- Your Payment Methods Section -->
+                            <div class="w-full md:w-1/2 bg-white p-4 md:p-6 rounded-lg shadow">
+                                <h2 class="text-lg md:text-xl font-semibold mb-4">Your Payment Methods</h2>
+                                <p class="text-gray-600 mb-4 md:mb-6">Manage your saved payment methods</p>
+                                <div class="space-y-4">
+                                    <!-- Example Payment Methods -->
+                                    <div class="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
+                                        <div class="flex items-center space-x-4">
+                                            <i class="fas fa-credit-card text-lg md:text-xl"></i>
+                                            <div>
+                                                <p class="font-semibold">Card ending in 1234</p>
+                                                <p class="text-gray-600">Expires 12/23</p>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-trash-alt text-lg md:text-xl cursor-pointer" onclick="deletePaymentMethod(this)"></i>
+                                    </div>
+                                    <div class="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
+                                        <div class="flex items-center space-x-4">
+                                            <i class="fas fa-university text-lg md:text-xl"></i>
+                                            <div>
+                                                <p class="font-semibold">UPI: example@upi</p>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-trash-alt text-lg md:text-xl cursor-pointer" onclick="deletePaymentMethod(this)"></i>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <!-- Add Payment Method Section -->
+                            <div class="w-full md:w-1/2 bg-white p-4 md:p-6 rounded-lg shadow">
+                                <h2 class="text-lg md:text-xl font-semibold mb-4">Add Payment Method</h2>
+                                <p class="text-gray-600 mb-4 md:mb-6">Enter your card or UPI details</p>
+                                
+                                <!-- Buttons to toggle between forms -->
+                                <div class="flex mb-4">
+                                    <button id="card-button" class="w-1/2 py-2 bg-gray-200 rounded-l-lg" onclick="showForm('card')">Card</button>
+                                    <button id="upi-button" class="w-1/2 py-2 bg-gray-100 rounded-r-lg" onclick="showForm('upi')">UPI</button>
+                                </div>
+                                
+                                <!-- Card Form -->
+                                <form id="card-form">
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700">Card Number :</label>
+                                        <input type="text" id="card-number" class="w-full p-2 border rounded">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700">Card Name:</label>
+                                        <input type="text" id="card-name" class="w-full p-2 border rounded">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700">Expiry Date:</label>
+                                        <input type="text" id="expiry-date" class="w-full p-2 border rounded">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700">CVV:</label>
+                                        <input type="text" id="cvv" class="w-full p-2 border rounded">
+                                    </div>
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="addCard()">Add Card</button>
+                                </form>
+                                
+                                <!-- UPI Form -->
+                                <form id="upi-form" style="display: none;">
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700">UPI ID:</label>
+                                        <input type="text" id="upi-id" class="w-full p-2 border rounded">
+                                    </div>
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="addUPI()">Add UPI</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="support" class="bg-white shadow-md rounded p-6 content-section content-hidden">
+                    <h2 class="text-2xl font-bold mb-6">Support</h2>
+                    <div class="support-form">
+                        <h2 class="text-xl mb-4">Contact Us</h2>
+                        <form action="#" method="POST">
+                            <div class="mb-4">
+                                <label for="email" class="block text-sm font-medium text-black-700">Email Address</label>
+                                <input type="email" id="email" name="email" required class="mt-1 block w-full border border-black rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="block text-sm font-medium text-black-700">Message</label>
+                                <textarea id="message" name="message" rows="4" required class="mt-1 block w-full border border-black rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"></textarea>
+                            </div>
+                            <div class="mb-4">
+                                <label for="additional-info" class="block text-sm font-medium text-black-700">Additional Information</label>
+                                <textarea id="additional-info" name="additional-info" rows="2" class="mt-1 block w-full border border-black rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"></textarea>
+                            </div>
+                            <button type="submit" class="bg-blue-500 text-black px-4 py-2 rounded-lg">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- <div id="reviews" class="bg-white shadow-md rounded p-6 content-section content-hidden">
+                    <h2 class="text-2xl font-bold mb-6">Reviews</h2>
+                    <p>Reviews details go here...</p>
+                </div> -->
+
+                <div id="loyalty-program" class="bg-white shadow-md rounded p-6 content-section content-hidden">
+                    <h2 class="text-2xl font-bold mb-6">Loyalty Program</h2>
+                    
+                <div class="loyalty-info mb-6">
+                    <h2 class="text-xl mb-4">Your Bonus Points</h2>
+                    <p class="text-lg">You currently have <span class="font-bold">150 points</span>!</p>
+                    <p class="text-sm text-gray-500">Points can be redeemed for discounts on future purchases.</p>
+                </div>
+            
+                <div class="scratch-card">
+                    <h2 class="text-xl mb-4">Scratch Card</h2>
+                    <div class="bg-blue-100 border border-blue-300 rounded p-4">
+                        <p class="text-lg font-bold">You have a Scratch Card available!</p>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg">Reveal Scratch Card</button>
+                    </div>
+                </div>
+            
+                <div class="points-history mt-6">
+                    <h2 class="text-xl mb-4">Points History</h2>
+                    <ul class="list-disc pl-5">
+                        <li>September 15, 2024: Earned 50 points for purchase of Product A</li>
+                        <li>September 20, 2024: Redeemed 25 points for discount</li>
+                        <li>September 25, 2024: Earned 25 points for product review</li>
+                    </ul>
+                </div>
+                </div>
+
+                <div id="notifications" class="bg-white shadow-md rounded p-6 content-section content-hidden">
+                    <h2 class="text-2xl font-bold mb-6">Notifications</h2>
+                    <!-- Filter Section -->
+                <div class="filter-section mb-6">
+                    <button class="filter-btn active bg-blue-500 text-white px-4 py-2 rounded-lg" data-filter="all">All</button>
+                    <button class="filter-btn bg-gray-200 text-gray-800 px-4 py-2 rounded-lg ml-2" data-filter="order">Order Updates</button>
+                    <button class="filter-btn bg-gray-200 text-gray-800 px-4 py-2 rounded-lg ml-2" data-filter="promotions">Promotions</button>
+                    <button class="filter-btn bg-gray-200 text-gray-800 px-4 py-2 rounded-lg ml-2" data-filter="general">General Notifications</button>
+                </div>
+    
+                <!-- Notification List -->
+                <div class="notification-list space-y-4">
+                    <!-- Order Update Notification -->
+                    <div class="notification-item order bg-gray-50 p-4 rounded-lg shadow" data-type="order">
+                        <h3 class="font-bold">Order Completed</h3>
+                        <p>Your order #1234 has been completed and is ready for pickup.</p>
+                        <span class="timestamp text-gray-500 text-sm">October 1, 2024, 10:00 AM</span>
+                        <button class="delete-btn text-red-500 text-sm float-right">Delete</button>
+                    </div>
+    
+                    <!-- Promotion Notification -->
+                    <div class="notification-item promotions bg-gray-50 p-4 rounded-lg shadow" data-type="promotions">
+                        <h3 class="font-bold">Special Discount</h3>
+                        <p>Get 20% off on your next purchase. Use code: DISCOUNT20</p>
+                        <span class="timestamp text-gray-500 text-sm">September 29, 2024, 2:00 PM</span>
+                        <button class="delete-btn text-red-500 text-sm float-right">Delete</button>
+                    </div>
+    
+                    <!-- General Notification -->
+                    <div class="notification-item general bg-gray-50 p-4 rounded-lg shadow" data-type="general">
+                        <h3 class="font-bold">System Maintenance</h3>
+                        <p>We will have a scheduled system maintenance on October 5, 2024. Please expect some downtime.</p>
+                        <span class="timestamp text-gray-500 text-sm">September 28, 2024, 8:00 AM</span>
+                        <button class="delete-btn text-red-500 text-sm float-right">Delete</button>
+                    </div>
+                </div>
+    
+                <!-- Mark All as Read Button -->
+                <button id="mark-all-read" class="mt-6 bg-black text-white px-4 py-2 rounded-lg">Mark All as Read</button>
+                </div>
+
+                <div id="account-settings" class="bg-white shadow-md rounded p-6 content-section content-hidden">
+                    <h2 class="text-2xl font-bold mb-6">Account Settings</h2>
+                    <form id="passwordForm">
+                        <div class="mb-4">
+                            <label class="block text-gray-700">Current Password</label>
+                            <input type="password" id="currentPassword" class="w-full p-2 border rounded" required />
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700">New Password</label>
+                            <input type="password" id="newPassword" class="w-full p-2 border rounded" required />
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700">Confirm New Password</label>
+                            <input type="password" id="confirmPassword" class="w-full p-2 border rounded" required />
+                        </div>
+                        <button type="submit" class="bg-black text-white px-4 py-2 rounded">Change Password</button>
+                    </form>
+                    <div class="mt-8 p-4 bg-red-100 border border-red-400 rounded">
+                        <h3 class="text-xl font-bold text-red-600">Delete Account</h3>
+                        <p class="text-red-600">Warning: This action cannot be undone.</p>
+                        <button type="button" class="bg-red-600 text-white px-4 py-2 rounded mt-2" onclick="confirmDelete()">Delete My Account</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('menu-button').addEventListener('click', function() {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('sidebar-hidden');
+            this.innerHTML = sidebar.classList.contains('sidebar-hidden') ? '<i class="fas fa-bars text-xl"></i>' : '<i class="fas fa-times text-xl"></i>';
+        });
+
+        function showContent(sectionId, link) {
+            var sections = document.querySelectorAll('.content-section');
+            sections.forEach(function(section) {
+                section.classList.add('content-hidden');
+            });
+            document.getElementById(sectionId).classList.remove('content-hidden');
+
+            var links = document.querySelectorAll('nav a');
+            links.forEach(function(link) {
+                link.classList.remove('active-link');
+            });
+            link.classList.add('active-link');
+
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.add('sidebar-hidden');
+            document.getElementById('menu-button').innerHTML = '<i class="fas fa-bars text-xl"></i>';
+        }
+
+        // Function to toggle between payment forms
+function showForm(paymentMethod) {
+    const cardForm = document.getElementById('card-form');
+    const upiForm = document.getElementById('upi-form');
+    const cardButton = document.getElementById('card-button');
+    const upiButton = document.getElementById('upi-button');
+
+    if (paymentMethod === 'card') {
+        cardForm.style.display = 'block';
+        upiForm.style.display = 'none';
+        cardButton.classList.add('bg-gray-200');
+        cardButton.classList.remove('bg-gray-100');
+        upiButton.classList.add('bg-gray-100');
+        upiButton.classList.remove('bg-gray-200');
+    } else if (paymentMethod === 'upi') {
+        cardForm.style.display = 'none';
+        upiForm.style.display = 'block';
+        upiButton.classList.add('bg-gray-200');
+        upiButton.classList.remove('bg-gray-100');
+        cardButton.classList.add('bg-gray-100');
+        cardButton.classList.remove('bg-gray-200');
+    }
+}
+    </script>
+
+</body>
+</html>
