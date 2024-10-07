@@ -56,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('vendorFields').classList.toggle('hidden', role !== 'vendor');
   };
 
+
+
   // Validate password
   const validatePassword = (password) => {
       const minLength = 8;

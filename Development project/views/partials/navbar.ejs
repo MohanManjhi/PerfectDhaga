@@ -48,7 +48,13 @@
           <span><%= user.name.split(' ')[0] %></span> <!-- Display first name -->
         </button>
         <div class="dropdown-content">
-          <a href="/user-dashboard">Dashboard</a>
+          <% if (user.role === 'vendor') { %>
+            <a href="/vendor_home">Dashboard</a>
+          <% } else if (user.role === 'tailor') { %>
+            <a href="/tailor-dashboard">Dashboard</a>
+          <% } else { %>
+            <a href="/user-dashboard">Dashboard</a>
+          <% } %>
           <form action="/logout" method="POST" id="logout-form" style="margin: 0;">
             <button type="submit" style="width: 100%; text-align: left; padding: 12px 16px; border: none; background: none; cursor: pointer;">Logout</button>
           </form>
@@ -86,110 +92,4 @@
     .catch(error => console.error('Error:', error));
   });
 </script>
-
-
-<!-- profile name navabar -->
-
-<!-- <style>
-  .mr-2 {
-    margin-left: 30px;
-    height: 40px;
-    width: 90px;
-  }
-  .ml-4, .mx-4 {
-    margin-left: 2.5rem !important;
-  }
-</style> -->
-
-<!-- <div class="absolute top-0 left-0 w-full p-4 flex justify-between items-center bg-white shadow-md">
-  <div class="flex items-center space-x-4">
-    <a href="/"><img alt="YourBrand logo" class="mr-2" height="40" src="/images/pogo.png" width="40"/></a> -->
-
-    <!-- Search Bar -->
-    <!-- <div class="relative flex items-center w-full max-w-md ml-4">
-      <input class="border rounded-full px-20 py-2 text-gray-500 pl-10 w-full" placeholder="Search products..." type="text"/>
-      <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
-    </div>
-  </div> -->
-
-  <!-- <div class="hidden md:flex items-center space-x-4">
-    
-    <% if (user) { %>
-      <div class="flex items-center space-x-2">
-        <i class="fas fa-user text-xl"></i>
-        <span><%= user.name.split(' ')[0] %></span> 
-      </div>
-    <% } else { %>
-      <a class="text-gray-500" href="/register">Become a Seller</a>
-      <button class="text-gray-500 flex items-center" id="loginSignupBtn">
-        <i class="fas fa-user mr-1"></i>
-        Login
-      </button>
-    <% } %>
-    <a class="text-gray-500 flex items-center" href="#">
-      <i class="fas fa-shopping-cart mr-1"></i>
-      <span class="bg-gray-300 rounded-full px-2">3</span>
-    </a>
-  </div>
-
-  <button class="md:hidden text-gray-500" id="mobileMenuBtn">
-    <i class="fas fa-bars"></i>
-  </button>
-</div> -->
-
-
-
-<!-- code version old without name show user  -->
-
-
-
-
-<!-- views/partials/navbar.ejs
- <style>
-  .mr-2 {
-    margin-left: 30px;
-    height: 40px;
-    width: 90px;
-}
-.ml-4, .mx-4 {
-    margin-left: 2.5rem !important;
-} -->
-
-
-
- <!-- </style>
-<div class="absolute top-0 left-0 w-full p-4 flex justify-between items-center bg-white shadow-md">
-  <div class="flex items-center space-x-4">
-    <a href="/"><img alt="YourBrand logo" class="mr-2" height="40" src="/images/pogo.png" width="40"/></a> -->
-
-
-    <!-- <span class="text-gray-500 text-lg font-semibold">YourBrand</span> -->
-
-    <!-- Search Bar and Location -->
-    <!-- <div class="relative flex items-center w-full max-w-md ml-4">
-      <input class="border rounded-full px-20 py-2 text-gray-500 pl-10 w-full" placeholder="Search products..." type="text"/>
-      <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
-    </div> -->
-    <!-- <div class="flex items-center text-gray-500 ml-4">
-      <i class="fas fa-map-marker-alt mr-1"></i>
-      <span>Location</span>
-    </div> -->
-  <!-- </div>
-
-  <div class="hidden md:flex items-center space-x-4">
-    <a class="text-gray-500" href="/register">Become a Seller</a>
-    <button class="text-gray-500 flex items-center" id="loginSignupBtn">
-      <i class="fas fa-user mr-1"></i>
-      Login
-    </button>
-    <a class="text-gray-500 flex items-center" href="#">
-      <i class="fas fa-shopping-cart mr-1"></i>
-      <span class="bg-gray-300 rounded-full px-2">3</span>
-    </a>
-  </div>
-
-  <button class="md:hidden text-gray-500" id="mobileMenuBtn">
-    <i class="fas fa-bars"></i>
-  </button>
-</div> -->
 

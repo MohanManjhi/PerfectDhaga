@@ -11,9 +11,9 @@ const { getUserProfile, updateUserProfile } = require('../controllers/userContro
 const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'root', // Replace with your password
+    password: 'Rahul@123sql', // Replace with your password
     database: 'perfect_dhaaga' // Replace with your database name
-}).promise();
+})
 
 // Configure multer storage
 const storage = multer.diskStorage({
@@ -37,6 +37,9 @@ router.get('/about', (req, res) => {
 
 router.get('/register', (req, res) => {
     res.render('register', { title: 'Register' });
+});
+router.get('/tailorDesign', (req, res) => {
+    res.render('TailorDesign', { title: 'Register' });
 });
 
 router.get('/login', (req, res) => {
@@ -99,6 +102,61 @@ router.get('/vendor_profile', authMiddleware, (req, res) => {
 router.get('/vendor_new_post', authMiddleware, (req, res) => {
     res.render('vendor_new_post');
 });
+// Sample orders data (you might fetch this from a database in a real scenario)
+const orders = [
+  { id: 1, customer: 'John Doe', item: 'Wedding Suit', dueDate: '2024-10-10', status: 'in-progress' },
+  { id: 2, customer: 'Jane Smith', item: 'Evening Gown', dueDate: '2024-10-15', status: 'pending' },
+  { id: 3, customer: 'Bob Johnson', item: 'Business Shirt', dueDate: '2024-10-20', status: 'completed' },
+  { id: 4, customer: 'Alice Brown', item: 'Cocktail Dress', dueDate: '2024-10-25', status: 'in-progress' },
+  { id: 5, customer: 'Charlie Davis', item: 'Tuxedo', dueDate: '2024-10-30', status: 'pending' }
+];
+
+/// Middleware to add helper functions to res.locals
+router.use((req, res, next) => {
+    res.locals.getBadgeClass = (status) => {
+        switch (status) {
+            case 'pending': return '';
+            case 'in-progress': return 'secondary';
+            case 'completed': return 'default';
+        }
+    };
+
+    res.locals.capitalizeStatus = (status) => {
+        return status.charAt(0).toUpperCase() + status.slice(1).replace('-', ' ');
+    };
+
+    res.locals.getActionButtons = (status) => {
+        if (status === 'pending') {
+            return `
+              <button class="button accept">Accept</button>
+              <button class="button reject">Reject</button>
+            `;
+        } else if (status === 'in-progress') {
+            return `
+              <button class="button complete">Complete</button>
+              <button class="button reject">Reject</button>
+            `;
+        } else {
+            return `<button class="button reject">Reject</button>`;
+        }
+    };
+
+    next();
+});
+
+// Setting up the routes
+router.get('/orders/all', (req, res) => {
+    res.render('all_orders', { orders });
+});
+
+router.get('/orders/in-progress', (req, res) => {
+    res.render('in_progress_orders', { orders });
+});
+
+router.get('/orders/completed', (req, res) => {
+    res.render('completed_orders', { orders });
+});
+
 
 // Route to handle form submission
 // Route to handle clothes post with image upload
