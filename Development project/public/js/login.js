@@ -26,7 +26,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (result.role === 'user') {
                     window.location.href = '/';
                 } else if (result.role === 'tailor') {
+<<<<<<< HEAD
                     window.location.href = '/tailor-dashboard';
+=======
+                    window.location.href = '/tailor/dashboard';
+>>>>>>> main
                 } else if (result.role === 'vendor') {
                     window.location.href = '/vendor_home';
                 }

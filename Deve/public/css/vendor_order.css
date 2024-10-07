@@ -1,0 +1,138 @@
+/* Main Content Styles */
+.main-content {
+      flex: 1;
+            padding: 20px;
+     margin:20px;
+      /* Padding for main content */
+      background-color: #f9f9f9;
+      /* Light background color for contrast */
+      border-radius: 8px;
+      /* Rounded corners */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      /* Soft shadow for depth */
+      overflow-x: auto;
+      /* Enable horizontal scrolling if needed */
+      width: 82%;
+}
+
+.order-details h1 {
+      font-size: 2rem;
+      /* Main heading size */
+      font-weight: bold;
+      /* Bold font for heading */
+      color: #333;
+      /* Dark text for heading */
+      margin-bottom: 20px;
+      /* Spacing below heading */
+}
+
+/* Table Styles */
+table {
+      width: 100%;
+      /* Full width table */
+      border-collapse: collapse;
+      /* Merge borders */
+      margin-top: 20px;
+      /* Space above table */
+}
+
+th,
+td {
+      padding: 12px;
+      /* Padding for table cells */
+      text-align: left;
+      /* Left align text */
+      border-bottom: 1px solid #ddd;
+      /* Underline for rows */
+}
+
+th {
+      background-color: #f1f1f1;
+      /* Light grey background for header */
+      font-weight: bold;
+      /* Bold font for headers */
+      color: #666;
+      /* Dark grey text for headers */
+}
+
+tbody tr:hover {
+      background-color: #eaeaea;
+      /* Hover effect for rows */
+}
+
+/* Badge Styles */
+.badge {
+      display: inline-block;
+      /* Inline-block for badges */
+      padding: 6px 10px;
+      /* Padding for badges */
+      border-radius: 12px;
+      /* Rounded badges */
+      font-size: 14px;
+      /* Font size for badges */
+      color: #0d0d0d;
+      /* White text for badges */
+}
+
+.badge.secondary {
+      background-color: #ffc107;
+      /* Yellow for in progress */
+}
+
+.badge.default {
+      background-color: #28a745;
+      /* Green for completed */
+}
+
+.badge.pending {
+      background-color: #dc3545;
+      /* Red for pending */
+}
+
+/* Button Styles */
+.button {
+      display: inline-block;
+      /* Inline-block for buttons */
+      padding: 8px 12px;
+      /* Padding for buttons */
+      color: #fff;
+      /* White text */
+      background-color: #007bff;
+      /* Blue background */
+      text-decoration: none;
+      /* Remove underline */
+      border-radius: 5px;
+      /* Rounded corners */
+      transition: background-color 0.3s;
+      /* Smooth hover effect */
+}
+
+.button:hover {
+      background-color: #0056b3;
+      /* Darker blue on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+      .main-content {
+            padding: 10px;
+            /* Adjust padding for smaller screens */
+      }
+
+      th,
+      td {
+            padding: 8px;
+            /* Adjust cell padding */
+            font-size: 14px;
+            /* Adjust font size for smaller screens */
+      }
+
+      table {
+            display: block;
+            /* Allow table to scroll horizontally */
+            overflow-x: auto;
+            /* Enable horizontal scroll if needed */
+            white-space: nowrap;
+            /* Prevent wrapping of table cells */
+      }
+}

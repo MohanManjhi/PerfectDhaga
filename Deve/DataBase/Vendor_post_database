@@ -1,0 +1,13 @@
+-- create database Vendor_post_database;
+-- use Vendor_post_database;
+-- CREATE TABLE clothes (
+--    id INT AUTO_INCREMENT PRIMARY KEY,
+--    clothName VARCHAR(100),
+--    clothType VARCHAR(50),
+--    customClothType VARCHAR(100),
+--    material VARCHAR(100),
+--    price DECIMAL(10, 2),
+--    description TEXT,
+--    imagePath VARCHAR(255),
+--    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );

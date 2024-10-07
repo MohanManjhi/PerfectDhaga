@@ -41,6 +41,19 @@
             <main class="main-content">
                   <section class="order-details">
                         <h1 class="text-3xl font-bold mb-6">Orders</h1>
+<<<<<<< HEAD
+=======
+            
+                        <!-- Filter Buttons -->
+                        <div class="filter-buttons mb-4">
+                              <button class="button" onclick="showOrders('all')">All Orders</button>
+                              <button class="button" onclick="showOrders('pending')">Pending Orders</button>
+                              <button class="button" onclick="showOrders('in-progress')">In Progress Orders</button>
+                              <button class="button" onclick="showOrders('completed')">Completed Orders</button>
+                        </div>
+            
+                        <!-- Order Table -->
+>>>>>>> main
                         <table>
                               <thead>
                                     <tr>
@@ -52,6 +65,7 @@
                                           <th>Action</th>
                                     </tr>
                               </thead>
+<<<<<<< HEAD
                               <tbody>
                                     <tr>
                                           <td>1</td>
@@ -93,12 +107,128 @@
                                           <td><span class="badge">Pending</span></td>
                                           <td><a href="order_detail.html" class="button">View Details</a></td>
                                     </tr>
+=======
+                              <tbody id="orderTableBody">
+                                    <!-- Orders will be dynamically injected here -->
+>>>>>>> main
                               </tbody>
                         </table>
                   </section>
             </main>
+<<<<<<< HEAD
+=======
+            
+            <!-- JavaScript to Populate Orders and Manage Status Changes -->
+
+           
+
+            
+           
+
+>>>>>>> main
       </div>
 
 </body>
 
+<<<<<<< HEAD
+=======
+            <script>
+                  // Simulating order data from the backend
+                  const ordersFromBackend = [
+                        { id: 1, customer: 'John Doe', item: 'Wedding Suit', dueDate: '2024-10-10', status: 'in-progress' },
+                        { id: 2, customer: 'Jane Smith', item: 'Evening Gown', dueDate: '2024-10-15', status: 'pending' },
+                        { id: 3, customer: 'Bob Johnson', item: 'Business Shirt', dueDate: '2024-10-20', status: 'completed' },
+                        { id: 4, customer: 'Alice Brown', item: 'Cocktail Dress', dueDate: '2024-10-25', status: 'in-progress' },
+                        { id: 5, customer: 'Charlie Davis', item: 'Tuxedo', dueDate: '2024-10-30', status: 'pending' }
+                  ];
+
+                  // Function to populate orders in the table
+                  function populateOrders() {
+                        const tableBody = document.getElementById('orderTableBody');
+                        tableBody.innerHTML = ''; // Clear any existing rows
+
+                        ordersFromBackend.forEach(order => {
+                              const row = document.createElement('tr');
+                              row.setAttribute('data-status', order.status);
+
+                              row.innerHTML = `
+                                        <td>${order.id}</td>
+                                        <td>${order.customer}</td>
+                                        <td>${order.item}</td>
+                                        <td>${new Date(order.dueDate).toLocaleDateString()}</td>
+                                        <td><span class="badge ${getBadgeClass(order.status)}">${capitalizeStatus(order.status)}</span></td>
+                                        <td>${getActionButtons(order.status)}</td>
+                                    `;
+
+                              tableBody.appendChild(row);
+                        });
+                  }
+
+                  // Function to get action buttons based on status
+                  function getActionButtons(status) {
+                        if (status === 'pending') {
+                              return `
+                                        <button class="button accept" onclick="changeStatus(this, 'in-progress')">Accept</button>
+                                        <button class="button reject" onclick="rejectOrder(this)">Reject</button>
+                                    `;
+                        } else if (status === 'in-progress') {
+                              return `
+                                        <button class="button complete" onclick="changeStatus(this, 'completed')">Complete</button>
+                                        <button class="button reject" onclick="rejectOrder(this)">Reject</button>
+                                    `;
+                        } else {
+                              return `<button class="button reject" onclick="rejectOrder(this)">Reject</button>`;
+                        }
+                  }
+
+                  // Function to change the status of an order
+                  function changeStatus(button, newStatus) {
+                        const row = button.closest('tr');
+                        const statusBadge = row.querySelector('.badge');
+                        const actionCell = row.querySelector('td:last-child');
+
+                        row.setAttribute('data-status', newStatus);
+                        statusBadge.textContent = capitalizeStatus(newStatus);
+                        statusBadge.className = `badge ${getBadgeClass(newStatus)}`;
+                        actionCell.innerHTML = getActionButtons(newStatus);
+                  }
+
+                  // Function to reject an order (remove the row)
+                  function rejectOrder(button) {
+                        const row = button.closest('tr');
+                        row.remove(); // Remove the order from the table
+                  }
+
+                  // Helper functions
+                  function getBadgeClass(status) {
+                        switch (status) {
+                              case 'pending': return '';
+                              case 'in-progress': return 'secondary';
+                              case 'completed': return 'default';
+                        }
+                  }
+
+                  function capitalizeStatus(status) {
+                        return status.charAt(0).toUpperCase() + status.slice(1).replace('-', ' ');
+                  }
+
+                  // Function to filter orders based on status
+                  function showOrders(status) {
+                        const rows = document.querySelectorAll('#orderTableBody tr');
+
+                        rows.forEach(row => {
+                              const orderStatus = row.getAttribute('data-status');
+                              if (status === 'all') {
+                                    row.style.display = ''; // Show all rows
+                              } else {
+                                    row.style.display = (orderStatus === status) ? '' : 'none'; // Show matching status only
+                              }
+                        });
+                  }
+
+                  // Initialize the table with data from the backend
+                  populateOrders();
+            </script>
+
+>>>>>>> main
 </html>

@@ -14,6 +14,119 @@
     .blurred-bg {
       backdrop-filter: blur(5px);
     }
+    .deals{
+      margin-left: 20px;
+      height: 300px;
+      width: 200px;
+    }
+    .font-bold{
+      text-align: center;
+      margin-top: 20px;
+      /* justify-content: center; */
+    }
+    .font-semibold{
+      text-align: center;
+      margin-top: 20px;
+    }
+    .categories {
+    padding: 40px;
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+
+.categories h2 {
+  margin-top: -40px;
+    text-align: center;
+    font-size: large;
+    margin-bottom: 20px;
+}
+
+.categories .c1 {
+    height: 130px;
+    width: 130px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    overflow: hidden;  /* Ensures anything outside the circle is hidden */
+    display: flex;
+    background: linear-gradient(180deg, rgba(47, 18, 18, 0) 39.73%, rgba(47, 18, 18, 0.3) 87.78%), #CB9677;
+    box-shadow: 0 5px 8px rgba(6, 6, 6, 0.3);
+
+}
+
+
+.categories img{
+    height: 130px;
+    width: 130px;
+    object-fit:cover;
+}
+
+.categories .circle-layer {
+    /* background-color: whitesmoke; */
+  width: 140px;  /* Set the width of the circle */
+  height: 140px; /* Set the height of the circle */ /* Makes it a circle */
+  overflow: hidden;  /* Ensures anything outside the circle is hidden */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-list {
+    display: flex;
+    overflow-x: auto;
+    gap: 40px;
+    scroll-behavior: smooth;
+    padding: 5px 0;
+}
+
+/* Hide scrollbar */
+.category-list::-webkit-scrollbar {
+    display: none;
+}
+
+.category-list {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.category {
+    color: #000;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    width: 150px;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;            /* Use flexbox to center content */
+    flex-direction: column;
+    align-items: center;
+}
+.mr-2{
+  margin-left: 30px;
+  height: 40px;
+  width: 80px;
+}
+.btn-outline-dark{
+  margin-top: 40px;
+  margin-left: 530px;
+  justify-content: center;
+  align-items: center;
+}
+.btn-outline-dark a{
+  text-decoration: none;
+}
+.btn-outline-dark a:hover{
+  color: white;
+}
+#map {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #ccc;
+            display: none; /* Initially hidden */
+            margin-top: 20px;
+            position: absolute;  /* Ensure it is positioned */
+            z-index: 1000; 
+        }
+
   </style>
 </head>
 
@@ -22,8 +135,8 @@
   <!-- Navbar content is her -->
   <div class="absolute top-0 left-0 w-full p-4 flex justify-between items-center bg-white shadow-md">
     <div class="flex items-center">
-        <img alt="YourBrand logo" class="mr-2" height="40" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-RcpoXHkzChYnDbFAyeQ8tamr/user-ehrvabJ3DufsCu8YJ7PqY5gl/img-XTAKymtzls4nPsnvdxdSoNPy.png?st=2024-09-30T19%3A11%3A59Z&amp;se=2024-09-30T21%3A11%3A59Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-30T17%3A24%3A55Z&amp;ske=2024-10-01T17%3A24%3A55Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=vPQzKgxWPZVJ5%2B63TTzX27T%2BZGygOPm4Rw1u%2BFTI8m4%3D" width="40"/>
-        <span class="text-gray-500 text-lg font-semibold">YourBrand</span>
+        <img alt="YourBrand logo" class="mr-2" height="40" src="images/pogo.png" width="80"/>
+        <!-- <span class="text-gray-500 text-lg font-semibold span"> <img alt="YourBrand logo" class="mr-2" height="40" src="images/pogo.png" width="80"/></span> -->
     </div>
     <div class="hidden md:flex items-center space-x-4">
         <div class="relative">
@@ -32,7 +145,9 @@
         </div>
         <div class="flex items-center text-gray-500">
             <i class="fas fa-map-marker-alt mr-1"></i>
-            <span>Location</span>
+            <!-- <span>Location</span> -->
+            <button onclick="toggleMap('location')">Location</button>
+            <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.093213045054!2d75.8702731738552!3d22.72477652737847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fd14cce078f7%3A0x5c5373a9e276a9ee!2sSGSITS%20Front%20Gate!5e0!3m2!1sen!2sin!4v1727812779170!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <a class="text-gray-500" href="#">Become a Seller</a>
         <button class="text-gray-500 flex items-center" id="loginSignupBtn">
@@ -134,18 +249,19 @@
     </h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       <div class="bg-white p-4 rounded-lg shadow">
-        <img alt="Product 1 image" class="mb-2" height="100"
-src="/images/dress1.png"          width="100" />
+        <img class="deals" alt="Product 1 image" class="mb-8" height="100"
+         src="images/dress1.png"          width="200"/>
         <h2 class="font-bold">
           Product 1
         </h2>
         <p>
           $99.99
         </p>
+        <p>Pink satin women dress</p>
       </div>
       <div class="bg-white p-4 rounded-lg shadow">
-        <img alt="Product 2 image" class="mb-2" height="100"
-src="/images/dress1.png"          width="100" />
+        <img class="deals" alt="Product 2 image" class="mb-2" height="100"
+         src="images/dress1.png"          width="100" />
         <h2 class="font-bold">
           Product 2
         </h2>
@@ -154,7 +270,7 @@ src="/images/dress1.png"          width="100" />
         </p>
       </div>
       <div class="bg-white p-4 rounded-lg shadow">
-        <img alt="Product 3 image" class="mb-2" height="100"
+        <img class="deals" alt="Product 3 image" class="mb-2" height="100"
 src="images/dress1.png"          width="100" />
         <h2 class="font-bold">
           Product 3
@@ -164,7 +280,7 @@ src="images/dress1.png"          width="100" />
         </p>
       </div>
       <div class="bg-white p-4 rounded-lg shadow">
-        <img alt="Product 4 image" class="mb-2" height="100"
+        <img class="deals" alt="Product 4 image" class="mb-2" height="100"
 src="images/dress1.png"          width="100" />
         <h2 class="font-bold">
           Product 4
@@ -174,7 +290,7 @@ src="images/dress1.png"          width="100" />
         </p>
       </div>
       <div class="bg-white p-4 rounded-lg shadow">
-        <img alt="Product 5 image" class="mb-2" height="100"
+        <img class="deals" alt="Product 5 image" class="mb-2" height="100"
 src="images/dress1.png"          width="100" />
         <h2 class="font-bold">
           Product 5
@@ -184,7 +300,7 @@ src="images/dress1.png"          width="100" />
         </p>
       </div>
       <div class="bg-white p-4 rounded-lg shadow">
-        <img alt="Product 6 image" class="mb-2" height="100" src="images/dress1.png" width="100" />
+        <img class="deals" alt="Product 6 image" class="mb-2" height="100" src="images/dress1.png" width="100" />
         <h2 class="font-bold">
           Product 6
         </h2>
@@ -193,7 +309,7 @@ src="images/dress1.png"          width="100" />
         </p>
       </div>
       <div class="bg-white p-4 rounded-lg shadow">
-        <img alt="Product 7 image" class="mb-2" height="100"
+        <img class="deals" alt="Product 7 image" class="mb-2" height="100"
 src="images/dress1.png"          width="100" />
         <h2 class="font-bold">
           Product 7
@@ -203,7 +319,7 @@ src="images/dress1.png"          width="100" />
         </p>
       </div>
       <div class="bg-white p-4 rounded-lg shadow">
-        <img alt="Product 8 image" class="mb-2" height="100"
+        <img class="deals" alt="Product 8 image" class="mb-2" height="100"
 src="images/dress1.png"          width="100" />
         <h2 class="font-bold">
           Product 8
@@ -220,14 +336,31 @@ src="images/dress1.png"          width="100" />
 
     <!-- v3 html code is here  -->
 
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-7xl mx-auto container mx-auto p-4">
       <!-- Shop by Category Section -->
       <div class="mb-8">
         <h2 class="text-2xl font-bold mb-4">
           Shop by Category
         </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="bg-white p-4 rounded-lg shadow-md text-center">
+        <!-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"> -->
+          <section class="categories">
+            <h2>Top Categories</h2>
+            <div class="category-list">
+                <div class="category">
+                    <div class="circle-layer"><div class = "c1"><img src="images/dress1.png" alt="main"></div></div>
+                    Men's Formals</div>
+                <div class="category"><div class="circle-layer"><div class = "c1">  <img src="images/dress1.png" alt="main"></div></div>Women Formals</div>
+                <div class="category"><div class="circle-layer"><div class = "c1"> <img src="images/dress1.png" alt="main"></div></div>Traditional</div>
+                <div class="category"><div class="circle-layer"><div class = "c1"> <img src="images/dress1.png" alt="main"></div></div>Western</div>
+                <div class="category"><div class="circle-layer"><div class = "c1"> <img src="images/dress1.png" alt="main"></div></div>Women Formals</div>
+                <div class="category"><div class="circle-layer"><div class = "c1"> <img src="images/dress1.png" alt="main"></div></div>Traditional</div>
+                <div class="category"><div class="circle-layer"><div class = "c1"> <img src="images/dress1.png" alt="main"></div></div>Western</div>
+                <div class="category"><div class="circle-layer"><div class = "c1"> <img src="images/dress1.png" alt="main"></div></div>Women Formals</div>
+                <div class="category"><div class="circle-layer"><div class = "c1"> <img src="images/dress1.png" alt="main"></div></div>Traditional</div>
+                <div class="category"><div class="circle-layer"><div class = "c1"> <img src="images/dress1.png" alt="main"></div></div>Western</div>
+            <!-- </div> -->
+        </section>
+          <!-- <div class="bg-white p-4 rounded-lg shadow-md text-center">
             <img alt="Electronics icon" class="mx-auto mb-2" height="50"
 src="images/dress1.png"              width="50" />
             <p class="text-lg font-semibold">
@@ -255,17 +388,17 @@ src="images/dress1.png"              width="50" />
               Beauty
             </p>
           </div>
-        </div>
+        </div> -->
       </div>
 
       <!-- v4 code is here -->
-      <div class="container mx-auto p-4">
+      <div class="container mx-auto p-0">
         <h1 class="text-2xl font-bold mb-4">
           Tailor-Designed Products
         </h1>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           <div class="bg-white p-4 rounded-lg shadow">
-            <img alt="Tailor Product 1" class="mb-2" height="100"
+            <img class="deals" alt="Tailor Product 1" class="mb-2" height="100"
 src="images/dress.png"              width="100" />
             <h2 class="text-lg font-semibold">
               Custom Design 1
@@ -275,7 +408,7 @@ src="images/dress.png"              width="100" />
             </p>
           </div>
           <div class="bg-white p-4 rounded-lg shadow">
-            <img alt="Tailor Product 2" class="mb-2" height="100"
+            <img class="deals" alt="Tailor Product 2" class="mb-2" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="text-lg font-semibold">
               Custom Design 2
@@ -285,7 +418,7 @@ src="images/dress1.png"              width="100" />
             </p>
           </div>
           <div class="bg-white p-4 rounded-lg shadow">
-            <img alt="Tailor Product 3" class="mb-2" height="100"
+            <img class="deals" alt="Tailor Product 3" class="mb-2" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="text-lg font-semibold">
               Custom Design 3
@@ -295,7 +428,7 @@ src="images/dress1.png"              width="100" />
             </p>
           </div>
           <div class="bg-white p-4 rounded-lg shadow">
-            <img alt="Tailor Product 4" class="mb-2" height="100"
+            <img class="deals" alt="Tailor Product 4" class="mb-2" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="text-lg font-semibold">
               Custom Design 4
@@ -305,7 +438,7 @@ src="images/dress1.png"              width="100" />
             </p>
           </div>
           <div class="bg-white p-4 rounded-lg shadow">
-            <img alt="Tailor Product 5" class="mb-2" height="100"
+            <img class="deals" alt="Tailor Product 5" class="mb-2" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="text-lg font-semibold">
               Custom Design 5
@@ -315,7 +448,7 @@ src="images/dress1.png"              width="100" />
             </p>
           </div>
           <div class="bg-white p-4 rounded-lg shadow">
-            <img alt="Tailor Product 6" class="mb-2" height="100"
+            <img class="deals" alt="Tailor Product 6" class="mb-2" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="text-lg font-semibold">
               Custom Design 6
@@ -325,7 +458,7 @@ src="images/dress1.png"              width="100" />
             </p>
           </div>
           <div class="bg-white p-4 rounded-lg shadow">
-            <img alt="Tailor Product 7" class="mb-2" height="100"
+            <img class="deals" alt="Tailor Product 7" class="mb-2" height="100"
 src="images/dress.png"              width="100" />
             <h2 class="text-lg font-semibold">
               Custom Design 7
@@ -335,7 +468,7 @@ src="images/dress.png"              width="100" />
             </p>
           </div>
           <div class="bg-white p-4 rounded-lg shadow">
-            <img alt="Tailor Product 8" class="mb-2" height="100"
+            <img class="deals" alt="Tailor Product 8" class="mb-2" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="text-lg font-semibold">
               Custom Design 8
@@ -346,14 +479,109 @@ src="images/dress1.png"              width="100" />
           </div>
         </div>
       </div>
+
+      <!-- button -->
+      <button type="button" class="btn btn-outline-dark"><a href="">View more</a></button>
+
       <!-- v5 cide is here -->
       <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">
+          Material Provider
+        </h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div class="bg-white p-4 rounded-lg shadow">
+            <img class="deals" alt="Tailor Product 1" class="mb-2" height="100"
+src="images/dress.png"              width="100" />
+            <h2 class="text-lg font-semibold">
+              Custom Design 1
+            </h2>
+            <p class="text-gray-700">
+              $149.99
+            </p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <img class="deals" alt="Tailor Product 2" class="mb-2" height="100"
+src="images/dress1.png"              width="100" />
+            <h2 class="text-lg font-semibold">
+              Custom Design 2
+            </h2>
+            <p class="text-gray-700">
+              $149.99
+            </p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <img class="deals" alt="Tailor Product 3" class="mb-2" height="100"
+src="images/dress1.png"              width="100" />
+            <h2 class="text-lg font-semibold">
+              Custom Design 3
+            </h2>
+            <p class="text-gray-700">
+              $149.99
+            </p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <img class="deals" alt="Tailor Product 4" class="mb-2" height="100"
+src="images/dress1.png"              width="100" />
+            <h2 class="text-lg font-semibold">
+              Custom Design 4
+            </h2>
+            <p class="text-gray-700">
+              $149.99
+            </p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <img class="deals" alt="Tailor Product 5" class="mb-2" height="100"
+src="images/dress1.png"              width="100" />
+            <h2 class="text-lg font-semibold">
+              Custom Design 5
+            </h2>
+            <p class="text-gray-700">
+              $149.99
+            </p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <img class="deals" alt="Tailor Product 6" class="mb-2" height="100"
+src="images/dress1.png"              width="100" />
+            <h2 class="text-lg font-semibold">
+              Custom Design 6
+            </h2>
+            <p class="text-gray-700">
+              $149.99
+            </p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <img class="deals" alt="Tailor Product 7" class="mb-2" height="100"
+src="images/dress.png"              width="100" />
+            <h2 class="text-lg font-semibold">
+              Custom Design 7
+            </h2>
+            <p class="text-gray-700">
+              $149.99
+            </p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <img class="deals" alt="Tailor Product 8" class="mb-2" height="100"
+src="images/dress1.png"              width="100" />
+            <h2 class="text-lg font-semibold">
+              Custom Design 8
+            </h2>
+            <p class="text-gray-700">
+              $149.99
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- button -->
+      <button type="button" class="btn btn-outline-dark"><a href="">View more</a></button>
+
+      <!-- <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold mb-4">
           Raw Materials
         </h1>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           <div class="bg-white p-4 rounded-lg shadow h-48">
-            <img alt="Image of Material 1" class="mb-2" height="100"
+            <img class="deals" alt="Image of Material 1" class="mb-2" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="font-bold">
               Material 1
@@ -363,7 +591,7 @@ src="images/dress1.png"              width="100" />
             </p>
           </div>
           <div class="bg-white p-4 rounded-lg shadow h-48">
-            <img alt="Image of Material 2" class="mb-2" height="100"
+            <img class="deals" alt="Image of Material 2" class="mb-2" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="font-bold">
               Material 2
@@ -373,7 +601,7 @@ src="images/dress1.png"              width="100" />
             </p>
           </div>
           <div class="bg-white p-4 rounded-lg shadow h-48">
-            <img alt="Image of Material 3" class="mb-2" height="100"
+            <img class="deals" alt="Image of Material 3" class="mb-2" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="font-bold">
               Material 3
@@ -383,7 +611,7 @@ src="images/dress1.png"              width="100" />
             </p>
           </div>
           <div class="bg-white p-4 rounded-lg shadow h-48">
-            <img alt="Image of Material 4" class="mb-2" height="100"
+            <img class="deals" alt="Image of Material 4" class="mb-2" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="font-bold">
               Material 4
@@ -393,7 +621,7 @@ src="images/dress1.png"              width="100" />
             </p>
           </div>
           <div class="bg-white p-4 rounded-lg shadow h-48">
-            <img alt="Image of Material 5" class="mb-2" height="100"
+            <img class="deals" alt="Image of Material 5" class="mb-2" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="font-bold">
               Material 5
@@ -403,7 +631,7 @@ src="images/dress1.png"              width="100" />
             </p>
           </div>
           <div class="bg-white p-4 rounded-lg shadow h-48">
-            <img alt="Image of Material 6" class="mb-2" height="100"
+            <img class="deals" alt="Image of Material 6" class="mb-2" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="font-bold">
               Material 6
@@ -413,7 +641,7 @@ src="images/dress1.png"              width="100" />
             </p>
           </div>
           <div class="bg-white p-4 rounded-lg shadow h-48">
-            <img alt="Image of Material 7" class="mb-2" height="100"
+            <img class="deals" alt="Image of Material 7" class="mb-2" height="100"
 src="images/dress.png"              width="100" />
             <h2 class="font-bold">
               Material 7
@@ -423,7 +651,7 @@ src="images/dress.png"              width="100" />
             </p>
           </div>
           <div class="bg-white p-4 rounded-lg shadow h-48">
-            <img alt="Image of Material 8" class="mb-2" height="100"
+            <img class="deals" alt="Image of Material 8" class="mb-2" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="font-bold">
               Material 8
@@ -433,7 +661,7 @@ src="images/dress1.png"              width="100" />
             </p>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- v6 is code here -->
       <div class="container mx-auto p-4">
         <div>
@@ -497,7 +725,7 @@ src="images/dress1.png"              width="100" />
         <div class="grid grid-cols-4 gap-4">
           <!-- Product 1 -->
           <div class="bg-white p-4 rounded-lg shadow">
-            <img alt="Top Product 1" class="mb-4" height="100"
+            <img class="deals" alt="Top Product 1" class="mb-4" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="font-bold">
               Best Seller 1
@@ -523,7 +751,7 @@ src="images/dress1.png"              width="100" />
           </div>
           <!-- Product 2 -->
           <div class="bg-white p-4 rounded-lg shadow">
-            <img alt="Top Product 2" class="mb-4" height="100"
+            <img class="deals" alt="Top Product 2" class="mb-4" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="font-bold">
               Best Seller 2
@@ -549,7 +777,7 @@ src="images/dress1.png"              width="100" />
           </div>
           <!-- Product 3 -->
           <div class="bg-white p-4 rounded-lg shadow">
-            <img alt="Top Product 3" class="mb-4" height="100"
+            <img class="deals" alt="Top Product 3" class="mb-4" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="font-bold">
               Best Seller 3
@@ -575,7 +803,7 @@ src="images/dress1.png"              width="100" />
           </div>
           <!-- Product 4 -->
           <div class="bg-white p-4 rounded-lg shadow">
-            <img alt="Top Product 4" class="mb-4" height="100"
+            <img class="deals" alt="Top Product 4" class="mb-4" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="font-bold">
               Best Seller 4
@@ -601,7 +829,7 @@ src="images/dress1.png"              width="100" />
           </div>
           <!-- Product 5 -->
           <div class="bg-white p-4 rounded-lg shadow">
-            <img alt="Top Product 5" class="mb-4" height="100"
+            <img class="deals" alt="Top Product 5" class="mb-4" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="font-bold">
               Best Seller 5
@@ -627,7 +855,7 @@ src="images/dress1.png"              width="100" />
           </div>
           <!-- Product 6 -->
           <div class="bg-white p-4 rounded-lg shadow">
-            <img alt="Top Product 6" class="mb-4" height="100"
+            <img class="deals" alt="Top Product 6" class="mb-4" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="font-bold">
               Best Seller 6
@@ -653,7 +881,7 @@ src="images/dress1.png"              width="100" />
           </div>
           <!-- Product 7 -->
           <div class="bg-white p-4 rounded-lg shadow">
-            <img alt="Top Product 7" class="mb-4" height="100"
+            <img class="deals" alt="Top Product 7" class="mb-4" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="font-bold">
               Best Seller 7
@@ -679,7 +907,7 @@ src="images/dress1.png"              width="100" />
           </div>
           <!-- Product 8 -->
           <div class="bg-white p-4 rounded-lg shadow">
-            <img alt="Top Product 8" class="mb-4" height="100"
+            <img class="deals" alt="Top Product 8" class="mb-4" height="100"
 src="images/dress1.png"              width="100" />
             <h2 class="font-bold">
               Best Seller 8
@@ -746,6 +974,31 @@ src="images/dress1.png"              width="100" />
         </div>
       </footer>
   </main>
+  <script>
+    let currentLocation = ''; // Track the currently displayed location
+
+    // Function to toggle the map visibility and load a location
+    function toggleMap(location) {
+        const iframe = document.getElementById('map');
+        if (iframe.style.display === 'block' && currentLocation === location) {
+            iframe.style.display = 'none';  // Hide the map if it's visible and the same location is clicked
+        } else {
+            iframe.src = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.093213045054!2d75.8702731738552!3d22.72477652737847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fd14cce078f7%3A0x5c5373a9e276a9ee!2sSGSITS%20Front%20Gate!5e0!3m2!1sen!2sin!4v1727812891613!5m2!1sen!2sin`;
+            iframe.style.display = 'block';  // Show the map with the new location
+            currentLocation = location;      // Update the current location
+        }
+    }
+
+    document.addEventListener('click', function(event) {
+            const iframe = document.getElementById('map');
+            // Check if the click is outside the iframe and buttons
+            if (!iframe.contains(event.target) && !event.target.matches('button')) {
+                iframe.style.display = 'none'; // Hide the map
+                currentLocation = ''; // Reset current location
+                iframe.src = ""; // Reset the iframe src
+            }
+        });
+</script>
 
   <script>
     const loginSignupBtn = document.getElementById('loginSignupBtn');

@@ -1,0 +1,217 @@
+<html lang="en">
+<head>
+    <title>Orders - YourBrand</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .dropdown-content {
+            display: none;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+    <script>
+        function toggleDropdown() {
+            document.getElementById("userDropdown").classList.toggle("hidden");
+        }
+
+        function showOrderDetails(orderId) {
+            const orderDetails = {
+                1001: {
+                    orderId: 1001,
+                    tailorName: "Tailor A",
+                    productName: "Product A",
+                    paymentMethod: "Card",
+                    orderDate: "2023-01-01",
+                    status: "Delivered"
+                },
+                1002: {
+                    orderId: 1002,
+                    tailorName: "Tailor B",
+                    productName: "Product B",
+                    paymentMethod: "On Delivery",
+                    orderDate: "2023-02-15",
+                    status: "Shipped"
+                },
+                1003: {
+                    orderId: 1003,
+                    tailorName: "Tailor C",
+                    productName: "Product C",
+                    paymentMethod: "Card",
+                    orderDate: "2023-03-30",
+                    status: "Processing"
+                }
+            };
+
+            const order = orderDetails[orderId];
+            document.getElementById("orderDetails").innerHTML = `
+                <h3 class="text-xl font-bold mb-4">Order Details</h3>
+                <p><strong>Order ID:</strong> ${order.orderId}</p>
+                <p><strong>Tailor Name:</strong> ${order.tailorName}</p>
+                <p><strong>Product Name:</strong> ${order.productName}</p>
+                <p><strong>Payment Method:</strong> ${order.paymentMethod}</p>
+                <p><strong>Order Date:</strong> ${order.orderDate}</p>
+                <p><strong>Status:</strong> ${order.status}</p>
+            `;
+            document.getElementById("orderDetailsModal").classList.remove("hidden");
+        }
+
+        function closeOrderDetails() {
+            document.getElementById("orderDetailsModal").classList.add("hidden");
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold">YourBrand</div>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span class="absolute top-0 right-0 inline-block w-4 h-4 bg-red-600 text-white text-xs font-bold text-center rounded-full">3</span>
+                </div>
+                <div class="relative dropdown">
+                    <button class="flex items-center space-x-2">
+                        <i class="fas fa-user text-xl"></i>
+                        <span>John Doe</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-content absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg">
+                        <a href="user-home.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"><i class="fas fa-user mr-2"></i> Profile</a>
+                        <a href="./index.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"><i class="fas fa-sign-out-alt mr-2"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container mx-auto p-8 flex">
+        <!-- Sidebar -->
+        <aside class="w-1/4 bg-white p-4 rounded shadow">
+            <h1 class="text-2xl font-bold mb-6">YourBrand</h1>
+            <ul class="space-y-4">
+                <li class="flex items-center">
+                    <i class="fas fa-user mr-2"></i>
+                    <a href="user-profile.html" class="text-black hover:text-blue-500">Profile</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-box mr-2"></i>
+                    <a href="user-order.html" class="text-blue-600 font-bold">Orders</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-heart mr-2"></i>
+                    <a href="user-wishlist.html" class="text-black hover:text-blue-500">Wishlist</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-credit-card mr-2"></i>
+                    <a href="user-payment.html" class="text-black hover:text-blue-500">Payment Methods</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-life-ring mr-2"></i>
+                    <a href="user-support.html" class="text-black hover:text-blue-500">Support</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-star mr-2"></i>
+                    <a href="user-reviews.html" class="text-black hover:text-blue-500">Reviews</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-gift mr-2"></i>
+                    <a href="user-loyalty.html" class="text-black hover:text-blue-500">Loyalty Program</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-bell mr-2"></i>
+                    <a href="user-notifications.html" class="text-black hover:text-blue-500">Notifications</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-cog mr-2"></i>
+                    <a href="user-setting.html" class="text-black hover:text-blue-500">Account Settings</a>
+                </li>
+            </ul>
+        </aside>
+            <!-- Orders Section -->
+            <div class="w-3/4 bg-white p-8 rounded-lg shadow-md ml-6">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Your Orders</h2>
+
+                <!-- Order #1001 -->
+                <div class="bg-white p-4 rounded shadow mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <div>
+                            <p class="font-bold">Order #1001</p>
+                            <p class="text-sm text-gray-600">Placed on: 2023-01-01</p>
+                        </div>
+                        <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="showOrderDetails(1001)">View Details</button>
+                    </div>
+                    <p class="font-bold mb-2">Order Status: Delivered</p>
+                    <div class="relative pt-1">
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+                            <div style="width:100%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between text-sm text-gray-600 mt-1">
+                        <span>Order Placed</span>
+                        <span>Shipped</span>
+                        <span>Out for Delivery</span>
+                        <span>Delivered</span>
+                    </div>
+                </div>
+
+                <!-- Order #1002 -->
+                <div class="bg-white p-4 rounded shadow mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <div>
+                            <p class="font-bold">Order #1002</p>
+                            <p class="text-sm text-gray-600">Placed on: 2023-02-15</p>
+                        </div>
+                        <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="showOrderDetails(1002)">View Details</button>
+                    </div>
+                    <p class="font-bold mb-2">Order Status: Shipped</p>
+                    <div class="relative pt-1">
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+                            <div style="width:75%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-yellow-500"></div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between text-sm text-gray-600 mt-1">
+                        <span>Order Placed</span>
+                        <span>Shipped</span>
+                        <span>Out for Delivery</span>
+                        <span>Delivered</span>
+                    </div>
+                </div>
+
+                <!-- Order #1003 -->
+                <div class="bg-white p-4 rounded shadow">
+                    <div class="flex justify-between items-center mb-2">
+                        <div>
+                            <p class="font-bold">Order #1003</p>
+                            <p class="text-sm text-gray-600">Placed on: 2023-03-30</p>
+                        </div>
+                        <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded" onclick="showOrderDetails(1003)">View Details</button>
+                    </div>
+                    <p class="font-bold mb-2">Order Status: Processing</p>
+                    <div class="relative pt-1">
+                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
+                            <div style="width:25%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between text-sm text-gray-600 mt-1">
+                        <span>Order Placed</span>
+                        <span>Shipped</span>
+                        <span>Out for Delivery</span>
+                        <span>Delivered</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div id="orderDetailsModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white p-6 rounded shadow-lg w-1/3 relative">
+            <button class="absolute top-2 right-2 text-gray-600" onclick="closeOrderDetails()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="orderDetails"></div>
+        </div>
+    </div>
+</body>
+</html>

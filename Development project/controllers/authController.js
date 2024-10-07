@@ -43,6 +43,46 @@ const registerUser  = async (req, res) => {
     }
 };
 
+<<<<<<< HEAD
+=======
+// const loginUser  = async (req, res) => {
+//     const { emailOrPhone, password } = req.body;
+
+//     try {
+//         // Check for user in all tables
+//         const user = await findUserByEmailOrPhone(emailOrPhone, emailOrPhone);
+//         const tailor = await findTailorByEmailOrPhone(emailOrPhone, emailOrPhone);
+//         const vendor = await findVendorByEmailOrPhone(emailOrPhone, emailOrPhone);
+
+//         let foundUser  = user || tailor || vendor;
+//         let role;
+
+//         if (user) {
+//             role = 'user';
+//         } else if (tailor) {
+//             role = 'tailor';
+//         } else if (vendor) {
+//             role = 'vendor';
+//         }
+
+//         if (!foundUser ) {
+//             return res.status(400).json({ error: 'Invalid email or phone' });
+//         }
+
+//         const isMatch = await bcrypt.compare(password, foundUser .password);
+
+//         if (!isMatch) {
+//             return res.status(400).json({ error: 'Invalid password' });
+//         }
+
+//         // Return role for client-side redirection
+//         res.json({ role });
+//     } catch (error) {
+//         console.error('Error logging in:', error);
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// };
+>>>>>>> main
 
 const loginUser  = async (req, res) => {
     const { emailOrPhone, password } = req.body;
@@ -83,11 +123,14 @@ const loginUser  = async (req, res) => {
             phone: foundUser .phone
         };
 
+<<<<<<< HEAD
         // Additionally, if the role is tailor, store the tailor_id for further use
         if (role === 'tailor') {
             req.session.tailor_id = foundUser.id;  // Store tailor's ID in session
         }
 
+=======
+>>>>>>> main
         // Return role for client-side redirection
         res.json({ role });
     } catch (error) {

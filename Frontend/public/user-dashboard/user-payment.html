@@ -1,0 +1,197 @@
+<html lang="en">
+<head>
+    <title>Payment Methods</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+     <style>
+        .dropdown-content {
+            display: none;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+    <script>
+        function showForm(formType) {
+            const cardForm = document.getElementById('card-form');
+            const upiForm = document.getElementById('upi-form');
+            const cardButton = document.getElementById('card-button');
+            const upiButton = document.getElementById('upi-button');
+
+            if (formType === 'card') {
+                cardForm.style.display = 'block';
+                upiForm.style.display = 'none';
+                cardButton.classList.add('bg-gray-200');
+                cardButton.classList.remove('bg-gray-100');
+                upiButton.classList.add('bg-gray-100');
+                upiButton.classList.remove('bg-gray-200');
+            } else {
+                cardForm.style.display = 'none';
+                upiForm.style.display = 'block';
+                cardButton.classList.add('bg-gray-100');
+                cardButton.classList.remove('bg-gray-200');
+                upiButton.classList.add('bg-gray-200');
+                upiButton.classList.remove('bg-gray-100');
+            }
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById("userDropdown");
+            dropdown.classList.toggle("hidden");
+        }
+
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+
+        function logout() {
+            window.location.href = 'user-home.html';
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.flex.items-center.cursor-pointer') && !event.target.closest('#userDropdown')) {
+                const dropdown = document.getElementById("userDropdown");
+                if (!dropdown.classList.contains('hidden')) {
+                    dropdown.classList.add('hidden');
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold">YourBrand</div>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span class="absolute top-0 right-0 inline-block w-4 h-4 bg-red-600 text-white text-xs font-bold text-center rounded-full">3</span>
+                </div>
+                <div class="relative dropdown">
+                    <button class="flex items-center space-x-2">
+                        <i class="fas fa-user text-xl"></i>
+                        <span>John Doe</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-content absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg">
+                        <a href="user-home.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"><i class="fas fa-user mr-2"></i> Profile</a>
+                        <a href="./index.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"><i class="fas fa-sign-out-alt mr-2"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container mx-auto p-8 flex">
+        <!-- Sidebar -->
+        <aside class="w-1/4 bg-white p-4 rounded shadow">
+            <h1 class="text-2xl font-bold mb-6">YourBrand</h1>
+            <ul class="space-y-4">
+                <li class="flex items-center">
+                    <i class="fas fa-user mr-2"></i>
+                    <a href="user-profile.html" class="text-black hover:text-blue-500">Profile</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-box mr-2"></i>
+                    <a href="user-order.html" class="text-black hover:text-blue-500">Orders</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-heart mr-2"></i>
+                    <a href="user-wishlist.html" class="text-black hover:text-blue-500">Wishlist</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-credit-card mr-2"></i>
+                    <a href="user-payment.html" class="text-blue-600 font-bold">Payment Methods</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-life-ring mr-2"></i>
+                    <a href="user-support.html" class="text-black hover:text-blue-500">Support</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-star mr-2"></i>
+                    <a href="user-reviews.html" class="text-black hover:text-blue-500">Reviews</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-gift mr-2"></i>
+                    <a href="user-loyalty.html" class="text-black hover:text-blue-500">Loyalty Program</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-bell mr-2"></i>
+                    <a href="user-notifications.html" class="text-black hover:text-blue-500">Notifications</a>
+                </li>
+                <li class="flex items-center">
+                    <i class="fas fa-cog mr-2"></i>
+                    <a href="user-setting.html" class="text-black hover:text-blue-500">Account Settings</a>
+                </li>
+            </ul>
+        </aside>
+        <!-- Main Content -->
+        <div class="w-3/4 p-6">
+            <div class="flex space-x-6">
+                <!-- Your Payment Methods Section -->
+                <div class="w-1/2 bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-semibold mb-4">Your Payment Methods</h2>
+                    <p class="text-gray-600 mb-6">Manage your saved payment methods</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-credit-card text-xl"></i>
+                                <div>
+                                    <p class="font-semibold">Card ending in 1234</p>
+                                    <p class="text-gray-600">Expires 12/23</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-trash-alt text-xl cursor-pointer"></i>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
+                            <div class="flex items-center space-x-4">
+                                <i class="fas fa-university text-xl"></i>
+                                <div>
+                                    <p class="font-semibold">UPI: example@upi</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-trash-alt text-xl cursor-pointer"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Payment Method Section -->
+                <div class="w-1/2 bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-semibold mb-4">Add Payment Method</h2>
+                    <p class="text-gray-600 mb-6">Enter your card or UPI details</p>
+                    <div class="flex mb-4">
+                        <button id="card-button" class="w-1/2 py-2 bg-gray-200 rounded-l-lg" onclick="showForm('card')">Card</button>
+                        <button id="upi-button" class="w-1/2 py-2 bg-gray-100 rounded-r-lg" onclick="showForm('upi')">UPI</button>
+                    </div>
+                    <form id="card-form">
+                        <div class="mb-4">
+                            <label class="block text-gray-700">Card Number</label>
+                            <input type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="1234 5678 9012 3456">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700">Cardholder Name</label>
+                            <input type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="John Doe">
+                        </div>
+                        <div class="flex space-x-4 mb-4">
+                            <div class="w-1/2">
+                                <label class="block text-gray-700">Expiry Date</label>
+                                <input type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="MM/YY">
+                            </div>
+                            <div class="w-1/2">
+                                <label class="block text-gray-700">CVV</label>
+                                <input type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="123">
+                            </div>
+                        </div>
+                        <button class="w-full py-2 bg-black text-white rounded-lg">Add Card</button>
+                    </form>
+                    <form id="upi-form" style="display: none;">
+                        <div class="mb-4">
+                            <label class="block text-gray-700">UPI ID</label>
+                            <input type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="example@upi">
+                        </div>
+                        <button class="w-full py-2 bg-black text-white rounded-lg">Add UPI</button>
+                    </form>
+                </div>
+            </div>
+    </div>
+</body>
+</html>
