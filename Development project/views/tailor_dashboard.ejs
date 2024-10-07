@@ -1,0 +1,296 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Tailor Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        .hidden {
+            display: none;
+        }
+        .main-content {
+            margin-left: 20%;
+        }
+    </style>
+    <script>
+    function toggleDesignFields() {
+        const designType = document.getElementById('designType').value;
+        const blouseFields = document.getElementById('blouseFields');
+        const fullClothFields = document.getElementById('fullClothFields');
+        const halfClothFields = document.getElementById('halfClothFields');
+    
+        // Hide all fields initially
+        blouseFields.classList.add('hidden');
+        fullClothFields.classList.add('hidden');
+        halfClothFields.classList.add('hidden');
+    
+        // Show fields based on selected design type
+        if (designType === 'blouse') {
+            blouseFields.classList.remove('hidden');
+        } else if (designType === 'full_cloth') {
+            fullClothFields.classList.remove('hidden');
+        } else if (designType === 'half_cloth') {
+            halfClothFields.classList.remove('hidden');
+        }
+    }
+
+    
+    document.getElementById('addDesignForm').addEventListener('submit', async function(e) {
+        e.preventDefault(); // Prevent default form submission
+
+        const formData = new FormData(this);
+
+        try {
+            const response = await fetch('/add-design', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Show the success popup
+                const successPopup = document.getElementById('successPopup');
+                successPopup.classList.remove('hidden');
+
+                // Optionally, update the popup text dynamically if needed
+                successPopup.querySelector('p').textContent = result.message;
+
+                // Wait for 3 seconds, then redirect to the tailor dashboard
+                setTimeout(() => {
+                    window.location.href = '/tailor-dashboard';
+                }, 3000); // 3000ms = 3 seconds
+            } else {
+                alert('Error: Unable to add design');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        }
+    });
+
+
+</script>
+</head>
+<body class="bg-white-100 font-sans leading-normal tracking-normal">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-1/5 bg-white h-screen shadow-md fixed">
+            <div class="p-4 flex flex-col items-center">
+                <img alt="Tailor profile picture" class="rounded-full mb-3" height="50" src="https://storage.googleapis.com/a1aa/image/bAOJsDwD1jquJBHfLvxPIAkD80gX8TlxnENZhkgSjvD2eqjTA.jpg" width="50"/>
+                <div class="text-center">
+                    <h2 class="text-lg font-semibold">Tailor Name</h2>
+                    <p class="text-sm text-gray-600">Master Craftsman</p>
+                </div>
+            </div>
+            <nav class="mt-6">
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection('dashboard')">
+                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                </button>
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection('designs')">
+                    <i class="fas fa-tshirt mr-3"></i> Designs
+                </button>
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection('orders')">
+                    <i class="fas fa-shopping-cart mr-3"></i> Orders
+                </button>
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection ('profile')">
+                    <i class="fas fa-user mr-3"></i> Profile
+                </button>
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection('payments')">
+                    <i class="fas fa-dollar-sign mr-3"></i> Payments
+                </button>
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection('reviews')">
+                    <i class="fas fa-star mr-3"></i> Reviews
+                </button>
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection('location')">
+                    <i class="fas fa-map-marker-alt mr-3"></i> Location
+                </button>
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection('newPost')">
+                    <i class="fas fa-plus-circle mr-3"></i> Add Designs
+                </button>
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection('logout')">
+                    <i class="fas fa-sign-out-alt mr-3"></i> log_out
+                </button>
+            </nav>
+        </div>
+        <!-- Main Content -->
+        <div class="main-content w-4/5 p-6 overflow-y-auto">
+            <div class="relative bg-cover bg-center h-48 rounded-lg shadow-md mb-6" style="background-image: url('https://storage.googleapis.com/a1aa/image/gs7sUlcLxj4TBV7hJxOJGJ63Y6IW7hXDIEYtWSP4fOvNO1xJA.jpg');">
+                <div class="absolute bottom-0 left-0 bg-black bg-opacity-50 w-full p-4 rounded-b-lg">
+                    <h1 class="text-2xl font-bold text-white">Welcome, Master Tailor</h1>
+                    <p class="text-gray-300">Crafting Excellence, One Stitch at a Time</p>
+                </div>
+            </div>
+            <div id="dashboard" class="section">
+                <h2 class="text-xl font-bold mb-4">Dashboard</h2>
+                <p>Dashboard content goes here...</p>
+            </div>
+            <div id="designs" class="section hidden">
+                <h2 class="text-xl font-bold mb-4">Designs</h2>
+                <p>Designs content goes here...</p>
+            </div>
+            <div id="orders" class="section hidden">
+                <h2 class="text-xl font-bold mb-4">Orders</h2>
+                <p>Orders content goes here...</p>
+            </div>
+            <div id="profile" class="section hidden">
+                <h2 class="text-xl font-bold mb-4">Profile</h2>
+                <form class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="shopName">Shop Name</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="shopName" type="text" placeholder="Shop Name">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="shopAddress">Shop Address</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="shopAddress" type="text" placeholder="Shop Address">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="experience">Experience</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="experience" type="number" placeholder="Experience">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="specialization">Specialization</label>
+<input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="specialization" type="text" placeholder="Specialization">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="portfolio">Portfolio</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="portfolio" type="text" placeholder="Portfolio">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Phone</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text" placeholder="Phone">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="location">Location</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="location" type="text" placeholder="Location">
+                    </div>
+                    <button class="bg-blue-500 text-white py-2 px-4 rounded w-full">Update Profile</button>
+                </form>
+            </div>
+            <div id="payments" class="section hidden">
+                <h2 class="text-xl font-bold mb-4">Payments</h2>
+                <p>Payments content goes here...</p>
+            </div>
+            <div id="reviews" class="section hidden">
+                <h2 class="text-xl font-bold mb-4">Reviews</h2>
+                <p>Reviews content goes here...</p>
+            </div>
+            <div id="location" class="section hidden">
+                <h2 class="text-xl font-bold mb-4">Location</h2>
+                <p>Location content goes here...</p>
+            </div>
+
+
+
+            <div id="newPost" class="section hidden">
+                <h2 class="text-2xl font-bold mb-6">Add New Design</h2>
+                <form action="/add-design" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded-lg shadow-md">
+                    <!-- Design Photos -->
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Design Photos</label>
+                        <input type="file" name="designPhotos" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
+                    </div>
+                    
+                    <!-- Design Title -->
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Design Title</label>
+                        <input type="text" name="title" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Enter design title" required>
+                    </div>
+                    
+                    <!-- Design Type -->
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Design Type</label>
+                        <select id="designType" name="designType" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" onchange="toggleDesignFields()" required>
+                            <option value="blouse">Blouse Design</option>
+                            <option value="full_cloth">Full Cloth Design</option>
+                            <option value="half_cloth">Half Cloth Design</option>
+                        </select>
+                    </div>
+                
+                    <!-- Blouse Design Fields -->
+                    <div id="blouseFields" class="design-section hidden space-y-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Blouse Design Details</h3>
+                        <input type="text" name="blouseName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Blouse Design Name">
+                        <input type="text" name="blousePrice" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Price">
+                        <input type="text" name="blouseMaterial" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Required Material">
+                    </div>
+                
+                    <!-- Full Cloth Design Fields -->
+                    <div id="fullClothFields" class="design-section hidden space-y-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Full Cloth Design Details</h3>
+                        <input type="text" name="upperDesignName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Upper Design Name">
+                        <input type="text" name="upperSize" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Upper Size">
+                        <input type="text" name="upperPrice" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Upper Price">
+                        <input type="text" name="upperMaterial" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Upper Material">
+                        
+                        <input type="text" name="lowerDesignName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Lower Design Name">
+                        <input type="text" name="lowerSize" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Lower Size">
+                        <input type="text" name="lowerPrice" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Lower Price">
+                        <input type="text" name="lowerMaterial" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Lower Material">
+                    </div>
+                
+                    <!-- Half Cloth Design Fields -->
+                    <div id="halfClothFields" class="design-section hidden space-y-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Half Cloth Design Details</h3>
+                        <input type="text" name="halfDesignName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Design Name">
+                        <input type="text" name="halfSize" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Size">
+                        <input type="text" name="halfPrice" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Price">
+                        <input type="text" name="halfMaterial" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Required Material">
+                    </div>
+                
+                    <!-- Delivery Time -->
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Delivery Time</label>
+                        <input type="text" name="deliveryTime" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Enter delivery time" required>
+                    </div>
+                
+                    <!-- Design Description -->
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Design Description</label>
+                        <textarea name="description" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Enter design description"></textarea>
+                    </div>
+                
+                    <!-- Submit Button -->
+                    <div>
+                        <button type="submit" class="w-full bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Add Design</button>
+                    </div>
+                </form>
+                
+            </div>
+
+
+
+            <div id="logout" class="section hidden">
+                <h2 class="text-xl font-bold mb-4">Logout</h2>
+                <p>Logout content goes here...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" id="successPopup">
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+            <h2 class="text-2xl font-bold text-center mb-4">
+                Welcome!
+            </h2>
+            <p class="text-center mb-4">
+                You have successfully registered. Welcome to PerfectDhaaga!
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

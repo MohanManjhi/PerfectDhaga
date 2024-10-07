@@ -1,26 +1,72 @@
-<!-- views/partials/navbar.ejs -->
+<style>
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {background-color: #f1f1f1}
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+ 
+</style>
+
 <div class="absolute top-0 left-0 w-full p-4 flex justify-between items-center bg-white shadow-md">
   <div class="flex items-center space-x-4">
-    <img alt="YourBrand logo" class="mr-2" height="40" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-RcpoXHkzChYnDbFAyeQ8tamr/user-ehrvabJ3DufsCu8YJ7PqY5gl/img-XTAKymtzls4nPsnvdxdSoNPy.png?st=2024-09-30T19%3A11%3A59Z&amp;se=2024-09-30T21%3A11%3A59Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-30T17%3A24%3A55Z&amp;ske=2024-10-01T17%3A24%3A55Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=vPQzKgxWPZVJ5%2B63TTzX27T%2BZGygOPm4Rw1u%2BFTI8m4%3D" width="40"/>
-    <span class="text-gray-500 text-lg font-semibold">YourBrand</span>
+    <a href="/"><img alt="YourBrand logo" class="mr-2" height="40" src="/images/pogo.png" width="40"/></a>
 
-    <!-- Search Bar and Location -->
+    <!-- Search Bar -->
     <div class="relative flex items-center w-full max-w-md ml-4">
-      <input class="border rounded-full px-80 py-2 text-gray-500 pl-10 w-full" placeholder="Search products..." type="text"/>
+      <input class="border rounded-full px-20 py-2 text-gray-500 pl-10 w-full" placeholder="Search products..." type="text"/>
       <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
-    </div>
-    <div class="flex items-center text-gray-500 ml-4">
-      <i class="fas fa-map-marker-alt mr-1"></i>
-      <span>Location</span>
     </div>
   </div>
 
   <div class="hidden md:flex items-center space-x-4">
-    <a class="text-gray-500" href="#">Become a Seller</a>
-    <button class="text-gray-500 flex items-center" id="loginSignupBtn">
-      <i class="fas fa-user mr-1"></i>
-      Login
-    </button>
+    <% if (user) { %>
+      <div class="dropdown">
+        <button class="dropbtn flex items-center space-x-2">
+          <i class="fas fa-user text-xl"></i>
+          <span><%= user.name.split(' ')[0] %></span> <!-- Display first name -->
+        </button>
+        <div class="dropdown-content">
+          <% if (user.role === 'vendor') { %>
+            <a href="/vendor_home">Dashboard</a>
+          <% } else if (user.role === 'tailor') { %>
+            <a href="/tailor-dashboard">Dashboard</a>
+          <% } else { %>
+            <a href="/user-dashboard">Dashboard</a>
+          <% } %>
+          <form action="/logout" method="POST" id="logout-form" style="margin: 0;">
+            <button type="submit" style="width: 100%; text-align: left; padding: 12px 16px; border: none; background: none; cursor: pointer;">Logout</button>
+          </form>
+        </div>
+      </div>
+    <% } else { %>
+      <a class="text-gray-500" href="/register">Become a Seller</a>
+      <button class="text-gray-500 flex items-center" id="loginSignupBtn">
+        <i class="fas fa-user mr-1"></i>
+        Login
+      </button>
+    <% } %>
     <a class="text-gray-500 flex items-center" href="#">
       <i class="fas fa-shopping-cart mr-1"></i>
       <span class="bg-gray-300 rounded-full px-2">3</span>
@@ -31,3 +77,19 @@
     <i class="fas fa-bars"></i>
   </button>
 </div>
+
+<script>
+  document.getElementById('logout-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    fetch('/logout', {
+      method: 'POST',
+      credentials: 'same-origin'
+    })
+    .then(response => response.json())
+    .then(data => {
+      window.location.href = '/';
+    })
+    .catch(error => console.error('Error:', error));
+  });
+</script>
+

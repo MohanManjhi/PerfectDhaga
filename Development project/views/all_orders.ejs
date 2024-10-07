@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Order Details</title>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="../css/vendor_home1.css">
+      <link rel="stylesheet" href="../css/vendor_order.css">
+
+</head>
+
+<body>
+
+      <div class="dashboard">
+            <aside class="sidebar">
+                  <div class="profile">
+                        <img src="/images/tailoricon.jpg" alt="Tailor" class="avatar">
+                        <div class="profile-info">
+                              <h2>Vendor Name</h2>
+                              <p>Master Craftsman</p>
+                        </div>
+                  </div>
+                  <nav class="nav">
+                        <ul>
+                              <li><a href="/vendor_home" class="nav-link active"><i class="fas fa-home"></i>
+                                          Dashboard</a></li>
+                              <li><a href="/vendor_all_post" class="nav-link"><i class="fas fa-plus-circle"></i> View
+                                          Post</a></li>
+                              <li><a href="/vender_order_details" class="nav-link"><i class="fas fa-clipboard-list"></i>
+                                          Orders</a></li>
+                              <li><a href="/vendor_profile" class="nav-link"><i class="fas fa-user-circle"></i>
+                                          Profile</a></li>
+                              <li><a href="/vendor_payment" class="nav-link"><i class="fas fa-dollar-sign"></i>
+                                          Payments</a></li>
+                              <li><a href="/vendor_review" class="nav-link"><i class="fas fa-star"></i> Reviews</a></li>
+                              <li><a href="/vendor_contact" class="nav-link"><i class="fas fa-map-marker-alt"></i>
+                                          Location</a></li>
+                              <li><a href="/vendor_new_post" class="nav-link"><i class="fas fa-map-marker-alt"></i> New
+                                          Post</a></li>
+                              <li><a href="/vendor_logout" class="nav-link"><i class="fas fa-sign-out-alt"></i>
+                                          Logout</a></li>
+
+                        </ul>
+                  </nav>
+            </aside>
+
+
+
+            <!-- JavaScript to Populate Orders and Manage Status Changes -->
+
+
+
+            <main class="main-content">
+                  <section class="order-details">
+                        <h1 class="text-3xl font-bold mb-6">All Orders</h1>
+                        <div class="filter-buttons mb-4">
+                              <button class="button" onclick="showOrders('all')">All Orders</button>
+                              <button class="button" onclick="showOrders('pending')">Pending Orders</button>
+                              <button class="button" onclick="showOrders('in-progress')">In Progress Orders</button>
+                              <button class="button" onclick="showOrders('completed')">Completed Orders</button>
+                        </div>
+
+                        <!-- Order Table -->
+                        <table>
+                              <thead>
+                                    <tr>
+                                          <th>Order ID</th>
+                                          <th>Customer</th>
+                                          <th>Item</th>
+                                          <th>Due Date</th>
+                                          <th>Status</th>
+                                          <th>Action</th>
+                                    </tr>
+                              </thead>
+                              <tbody id="orderTableBody">
+                                    <% orders.forEach(order=> { %>
+                                          <tr data-status="<%= order.status %>">
+                                                <td>
+                                                      <%= order.id %>
+                                                </td>
+                                                <td>
+                                                      <%= order.customer %>
+                                                </td>
+                                                <td>
+                                                      <%= order.item %>
+                                                </td>
+                                                <td>
+                                                      <%= new Date(order.dueDate).toLocaleDateString() %>
+                                                </td>
+                                                <td><span class="badge <%= getBadgeClass(order.status) %>">
+                                                            <%= capitalizeStatus(order.status) %>
+                                                      </span></td>
+                                                <td>
+                                                      <%= getActionButtons(order.status) %>
+                                                </td>
+                                          </tr>
+                                          <% }) %>
+                              </tbody>
+                        </table>
+                  </section>
+            </main>
+
+
+      </div>
+
+</body>
+
+<script>
+      function showOrders(status) {
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                  if (status === 'all' || row.dataset.status === status) {
+                        row.style.display = '';
+                  } else {
+                        row.style.display = 'none';
+                  }
+            });
+      }
+
+</script>
+
+
+
+
+</html>
