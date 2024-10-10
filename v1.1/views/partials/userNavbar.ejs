@@ -1,0 +1,93 @@
+<style>
+    .mr-2 {
+      margin-left: 30px ;
+      height: 40px;
+      width: 90px;
+    }
+    .ml-4, .mx-4 {
+      margin-left: 2.5rem !important;
+    }
+  </style>
+  
+  <header class="bg-white shadow-md">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-4">
+        <a href="/"><img alt="YourBrand logo" class="mr-2" height="40" src="/images/pogo.png" width="40"/></a>
+  
+        <!-- Search Bar -->
+        <div class="relative flex items-center w-full max-w-md ml-4">
+          <input class="border rounded-full px-20 py-2 text-gray-500 pl-10 w-full" placeholder="Search products..." type="text"/>
+          <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+        </div>
+      </div>
+  
+      <div class="flex items-center space-x-4">
+        <div class="relative">
+          <i class="fas fa-shopping-cart text-xl"></i>
+          <span class="absolute top-0 right-0 inline-block w-4 h-4 bg-red-500 text-white text-xs font-bold text-center rounded-full">3</span>
+        </div>
+        <% if (user) { %>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-user text-xl"></i>
+            <span><%= user.name.split(' ')[0] %></span> <!-- Display first name -->
+          </div>
+        <% } else { %>
+          <button class="text-gray-500 flex items-center" id="loginSignupBtn">
+            <i class="fas fa-user mr-1"></i>
+            Login
+          </button>
+        <% } %>
+        <button id="menu-button" class="md:hidden">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+ 
+ 
+ 
+ 
+ 
+ <!-- Header -->
+ <!-- <style>
+    .mr-2 {
+      margin-left: 30px;
+      height: 40px;
+      width: 90px;
+  }
+  .ml-4, .mx-4 {
+      margin-left: 2.5rem !important;
+  }
+   </style> -->
+ <!-- <header class="bg-white shadow-md">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-4">
+            <a href="/"><img alt="YourBrand logo" class="mr-2" height="40" src="/images/pogo.png" width="40"/></a> -->
+            <!-- <span class="text-gray-500 text-lg font-semibold">YourBrand</span> -->
+        
+            <!-- Search Bar and Location -->
+            <!-- <div class="relative flex items-center w-full max-w-md ml-4">
+              <input class="border rounded-full px-20 py-2 text-gray-500 pl-10 w-full" placeholder="Search products..." type="text"/>
+              <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+            </div> -->
+            <!-- <div class="flex items-center text-gray-500 ml-4">
+              <i class="fas fa-map-marker-alt mr-1"></i>
+              <span>Location</span>
+            </div> -->
+        <!-- </div>
+        
+        <div class="flex items-center space-x-4">
+            <div class="relative">
+                <i class="fas fa-shopping-cart text-xl"></i>
+                <span class="absolute top-0 right-0 inline-block w-4 h-4 bg-red-500 text-white text-xs font-bold text-center rounded-full">3</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-user text-xl"></i>
+                <span>John Doe</span>
+            </div>
+            <button id="menu-button" class="md:hidden">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </div>
+</header> -->
