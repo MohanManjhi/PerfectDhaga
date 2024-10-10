@@ -31,6 +31,7 @@ CREATE TABLE vendors (
     email VARCHAR(255),
     phone VARCHAR(20),
     password VARCHAR(255)
+<<<<<<< HEAD
 );
 CREATE TABLE orders (
     id INT AUTO_INCREMENT PRIMARY KEY,       -- Unique ID for each order
@@ -45,3 +46,6 @@ CREATE TABLE orders (
     imagePath VARCHAR(255),                  -- Stores the path to the uploaded image file
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- Timestamp for when the order was created
 );
+=======
+);
+>>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c

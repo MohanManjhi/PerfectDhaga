@@ -6,6 +6,11 @@ const authMiddleware = require('../middleware/authMiddleware');
 const mysql = require('mysql2/promise');
 const { registerUser , loginUser , logoutUser  } = require('../controllers/authController');
 const { getUserProfile, updateUserProfile } = require('../controllers/userController');
+<<<<<<< HEAD
+=======
+const designController = require('../controllers/designController');
+const upload = require('../middleware/uploadMiddleware');
+>>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c
 
 // Configure MySQL connection pool
 const pool = mysql.createPool({
@@ -13,6 +18,7 @@ const pool = mysql.createPool({
     user: 'root',
     password: 'root', // Replace with your password
     database: 'perfect_dhaaga' // Replace with your database name
+<<<<<<< HEAD
 })
 
 // Configure multer storage
@@ -25,6 +31,20 @@ const storage = multer.diskStorage({
 
 // Create multer instance for file uploads
 const upload = multer({ storage: storage });
+=======
+});
+
+// Configure multer storage
+// const storage = multer.diskStorage({
+//     destination: './uploads/', // Define upload destination folder
+//     filename: function (req, file, cb) {
+//         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)); // Create a unique file name
+//     }
+// });
+
+// // Create multer instance for file uploads
+// const upload = multer({ storage: storage });
+>>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c
 
 // Public routes
 router.get('/', (req, res) => {
@@ -38,9 +58,12 @@ router.get('/about', (req, res) => {
 router.get('/register', (req, res) => {
     res.render('register', { title: 'Register' });
 });
+<<<<<<< HEAD
 router.get('/tailorDesign', (req, res) => {
     res.render('TailorDesign', { title: 'Register' });
 });
+=======
+>>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c
 
 router.get('/login', (req, res) => {
     res.render('login', { title: 'Login' });
@@ -66,8 +89,13 @@ router.get('/user-dashboard', authMiddleware, (req, res) => {
     res.render('user_dashboard', { title: 'User  Dashboard' });
 });
 
+<<<<<<< HEAD
 router.get('/tailor/dashboard', authMiddleware, (req, res) => {
     res.render('tailorDashboard', { title: 'Tailor Dashboard' });
+=======
+router.get('/tailor-dashboard', authMiddleware, (req, res) => {
+    res.render('tailor_dashboard', { title: 'Tailor Dashboard' });
+>>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c
 });
 
 router.get('/vendor_home', authMiddleware, (req, res) => {
@@ -102,6 +130,7 @@ router.get('/vendor_profile', authMiddleware, (req, res) => {
 router.get('/vendor_new_post', authMiddleware, (req, res) => {
     res.render('vendor_new_post');
 });
+<<<<<<< HEAD
 // Sample orders data (you might fetch this from a database in a real scenario)
 const orders = [
   { id: 1, customer: 'John Doe', item: 'Wedding Suit', dueDate: '2024-10-10', status: 'in-progress' },
@@ -178,6 +207,29 @@ router.post('/api/clothes', authMiddleware, upload.single('image'), async (req, 
         res.status(500).json({ success: false, message: 'Error storing data' });
     }
 });
+=======
+
+// Route to handle form submission
+// Route to handle clothes post with image upload
+// router.post('/api/clothes', authMiddleware, upload.single('image'), async (req, res) => {
+//     const { clothName, clothType, customClothType, material, price, description } = req.body;
+//     const imagePath = req.file ? req.file.path : null;
+
+//     const sql = `INSERT INTO clothes (clothName, clothType, customClothType, material, price, description, imagePath)
+//                  VALUES (?, ?, ?, ?, ?, ?, ?)`;
+
+//     const values = [clothName, clothType, customClothType, material, price, description, imagePath];
+
+//     try {
+//         const [results] = await pool.query(sql, values);
+//         console.log('Data inserted successfully:', results);
+//         res.redirect("/vendor_all_post");
+//     } catch (err) {
+//         console.error('Error inserting data into database:', err.message);
+//         res.status(500).json({ success: false, message: 'Error storing data' });
+//     }
+// });
+>>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c
 
 // DELETE route for deleting a specific product post by ID
 router.delete('/vendor/delete_post/:id', authMiddleware, async (req, res) => {
@@ -194,7 +246,11 @@ router.delete('/vendor/delete_post/:id', authMiddleware, async (req, res) => {
         }
     } catch (err) {
         console.error('Error deleting post:', err);
+<<<<<<< HEAD
          return res.redirect('/vendor_all_post');
+=======
+        return res.status(500).send('Error deleting post.');
+>>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c
     }
 });
 
@@ -206,7 +262,11 @@ router.get("/vendor_all_post", authMiddleware, async (req, res) => {
         res.render('vendor_all_post', { products: results }); // Ensure this matches your EJS file name
     } catch (err) {
         console.log(err)
+<<<<<<< HEAD
         res.render("vendor_zero_post")
+=======
+        res.redirect("/vendor_zero_post")
+>>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c
     }
 })
 
@@ -223,6 +283,7 @@ router.get("/vendor_logout", authMiddleware, (req, res) => {
         }
     });
 })
+<<<<<<< HEAD
                   
 router.get("/order_form_vendor",(req,res)=>{
     res.render("order_form_vendor")
@@ -247,11 +308,18 @@ console.log(imagePath)
     //     res.status(500).json({ success: false, message: 'Error storing data' });
     // }
 });
+=======
+
+>>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c
 // Route to display user profile
 router.get('/user-dashboard', authMiddleware, getUserProfile);
 
 // Route to update user profile
 router.post('/update-profile', authMiddleware, updateUserProfile);
+<<<<<<< HEAD
+=======
+router.post('/add-design', upload, designController.addDesign);
+>>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c
 
 module.exports = router;
 

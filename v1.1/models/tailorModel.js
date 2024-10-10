@@ -25,4 +25,35 @@ const findTailorByEmailOrPhone = (email, phone) => {
     });
 };
 
+<<<<<<< HEAD
 module.exports = { createTailor, findTailorByEmailOrPhone };
+=======
+
+const addDesign = async (design) => {
+    const { tailor_id, title, description, delivery_time } = design;
+    const query = `
+        INSERT INTO designs (tailor_id, title, description, delivery_time)
+        VALUES (?, ?, ?, ?)
+    `;
+    await db.execute(query, [tailor_id, title, description, delivery_time]);
+};
+
+// Fetch all designs for the homepage
+const getDesigns = async () => {
+    const [rows] = await db.execute(`SELECT * FROM designs ORDER BY created_at DESC`);
+    return rows;
+};
+
+// Fetch a specific tailor's designs
+const getTailorDesigns = async (tailorId) => {
+    const [rows] = await db.execute(`SELECT * FROM designs WHERE tailor_id = ?`, [tailorId]);
+    return rows;
+};
+
+module.exports = {
+    createTailor, findTailorByEmailOrPhone ,
+    addDesign,
+    getDesigns,
+    getTailorDesigns
+};
+>>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c

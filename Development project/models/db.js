@@ -4,11 +4,7 @@ const mysql = require('mysql2/promise');
 const dbConfig = {
   host: 'localhost',
   user: 'root',
-<<<<<<< HEAD
   password: 'root', // Replace with your password
-=======
-  password: 'Rahul@123sql', // Replace with your password
->>>>>>> main
   database: 'perfect_dhaaga' // Replace with your database name
 };
 
