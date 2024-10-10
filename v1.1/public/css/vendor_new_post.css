@@ -1,0 +1,121 @@
+/* Main Content Styles */
+.main-content {
+      flex-grow: 1;
+      padding: 20px;
+      
+      /* Space for the fixed sidebar */
+      background-color: #ecf0f1;
+      /* Light grey background */
+}
+
+h2 {
+      color: #34495e;
+      /* Darker text for the title */
+      font-size: 24px;
+      /* Increase font size */
+      margin-bottom: 20px;
+      /* Space below the title */
+}
+
+.form-container {
+      background: #ffffff;
+      /* White background for the form */
+      padding: 30px;
+      /* Increased padding */
+      border-radius: 10px;
+      /* Slightly more rounded corners */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      /* Stronger shadow effect */
+}
+
+/* Form Group Styles */
+.form-group {
+      margin-bottom: 20px;
+      /* Increased margin for better spacing */
+}
+
+.form-group label {
+      display: block;
+      margin-bottom: 8px;
+      /* Increased space below labels */
+      color: #2c3e50;
+      /* Dark grey for labels */
+      font-weight: bold;
+      /* Bold text for labels */
+      font-size: 16px;
+      /* Increased font size for better readability */
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+      width: 100%;
+      padding: 12px;
+      /* Increased padding for inputs */
+      border: 2px solid #bdc3c7;
+      /* Thicker border */
+      border-radius: 5px;
+      /* More rounded corners */
+      box-sizing: border-box;
+      transition: border-color 0.3s;
+      /* Smooth transition for border color */
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+      border-color: #8e44ad;
+      /* Change border color on focus */
+      outline: none;
+      /* Remove default outline */
+}
+
+/* Button Styles */
+.submit-button {
+      background-color: #8e44ad;
+      /* Purple background for submit button */
+      color: white;
+      padding: 12px 20px;
+      /* Increased padding for the button */
+      border: none;
+      border-radius: 5px;
+      /* More rounded corners */
+      cursor: pointer;
+      font-size: 16px;
+      /* Larger font size for button */
+      transition: background-color 0.3s, transform 0.2s;
+      /* Smooth transitions */
+}
+
+.submit-button:hover {
+      background-color: #732d91;
+      /* Darker purple on hover */
+      transform: translateY(-2px);
+      /* Lift effect on hover */
+}
+
+.submit-button:active {
+      transform: translateY(0);
+      /* Reset lift effect on click */
+}
+
+/* Additional styles for textarea */
+textarea {
+      height: 100px;
+      /* Fixed height for textarea */
+      resize: none;
+      /* Disable resizing */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+      .main-content {
+            margin-left: 0;
+            /* No margin on small screens */
+      }
+
+      .form-container {
+            padding: 20px;
+            /* Reduce padding on smaller screens */
+      }
+}
