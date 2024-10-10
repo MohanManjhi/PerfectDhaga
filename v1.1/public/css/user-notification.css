@@ -1,0 +1,126 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #8f3232;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.nav ul li {
+    margin: 20px 0;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: #000303;
+    display: flex;
+    align-items: center;
+}
+
+.nav ul li a.active {
+    font-weight: bold;
+}
+
+.nav ul li a i {
+    margin-right: 10px;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #111010;
+}
+
+/* Filter Buttons */
+.filter-section {
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    background-color: #3498db;
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.filter-btn.active {
+    background-color: #2980b9;
+}
+
+/* Notification Styles */
+.notification-list {
+    border: 1px solid #ddd;
+    padding: 20px;
+    background-color: white;
+}
+
+.notification-item {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+.notification-item h3 {
+    margin: 0 0 10px 0;
+}
+
+.notification-item p {
+    margin: 0;
+    color: #666;
+}
+
+.notification-item .timestamp {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #999;
+}
+
+/* Delete Button */
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Mark All as Read Button */
+#mark-all-read {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#mark-all-read:hover {
+    background-color: #27ae60;
+}

@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #e9d7ff, #fff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .header h1 {
+    font-size: 2.5rem;
+    color: #6c5ce7;
+  }
+  
+  .header p {
+    color: #636e72;
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    background: #fff;
+    border: 1px solid #dfe6e9;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header h2 {
+    color: #6c5ce7;
+  }
+  
+  .card-header p {
+    color: #636e72;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    color: #2d3436;
+    font-size: 0.9rem;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #b2bec3;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: #6c5ce7;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    margin-top: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    background-color: #b2bec3;
+  }
+  
+  .google-signin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    color: #6c5ce7;
+    border: 1px solid #6c5ce7;
+    margin-top: 10px;
+  }
+  
+  .google-signin i {
+    margin-right: 8px;
+  }
+  
+  .divider {
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  .divider span {
+    background: #fff;
+    color: #636e72;
+    padding: 0 10px;
+  }
+  
+  .card-footer {
+    margin-top: 15px;
+  }
+  
+  .card-footer p,
+  .card-footer a {
+    color: #6c5ce7;
+  }
+  
+  .features {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .feature-item {
+    text-align: center;
+  }
+  
+  .feature-item i {
+    font-size: 2rem;
+    color: #6c5ce7;
+  }
+  
+  .feature-item p {
+    color: #636e72;
+  }
+  
