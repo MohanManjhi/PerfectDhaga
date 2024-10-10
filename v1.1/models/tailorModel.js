@@ -25,9 +25,6 @@ const findTailorByEmailOrPhone = (email, phone) => {
     });
 };
 
-<<<<<<< HEAD
-module.exports = { createTailor, findTailorByEmailOrPhone };
-=======
 
 const addDesign = async (design) => {
     const { tailor_id, title, description, delivery_time } = design;
@@ -56,4 +53,3 @@ module.exports = {
     getDesigns,
     getTailorDesigns
 };
->>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c
