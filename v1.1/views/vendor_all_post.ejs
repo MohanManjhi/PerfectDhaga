@@ -48,10 +48,6 @@
             </aside>
 <main class="main-content">
       <h3>Our Latest Collection</h3>
-<<<<<<< HEAD
-      <a href="/vendor_new_post"><button style="background-color:black;color:white;margin-bottom: 15px;padding: 5px;border-radius: 5px; ">Add new post</button></a>
-=======
->>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c
       <div class="all_post">
             <% products.forEach(product=> { %>
                   <div class="card">
@@ -82,6 +78,7 @@
 
 </body>
 <script>
+ 
       document.querySelectorAll('.delete-post').forEach(button => {
             button.addEventListener('click', function () {
                   const productId = this.getAttribute('data-id');

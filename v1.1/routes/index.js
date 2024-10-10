@@ -6,6 +6,8 @@ const authMiddleware = require('../middleware/authMiddleware');
 const mysql = require('mysql2/promise');
 const { registerUser , loginUser , logoutUser  } = require('../controllers/authController');
 const { getUserProfile, updateUserProfile } = require('../controllers/userController');
+const designController = require('../controllers/designController');
+const upload = require('../middleware/uploadMiddleware');
 
 // Configure MySQL connection pool
 const pool = mysql.createPool({
@@ -13,18 +15,18 @@ const pool = mysql.createPool({
     user: 'root',
     password: 'root', // Replace with your password
     database: 'perfect_dhaaga' // Replace with your database name
-})
-
-// Configure multer storage
-const storage = multer.diskStorage({
-    destination: './uploads/', // Define upload destination folder
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)); // Create a unique file name
-    }
 });
 
-// Create multer instance for file uploads
-const upload = multer({ storage: storage });
+// // Configure multer storage
+// const storage = multer.diskStorage({
+//     destination: './uploads/', // Define upload destination folder
+//     filename: function (req, file, cb) {
+//         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)); // Create a unique file name
+//     }
+// });
+
+// // Create multer instance for file uploads
+// const upload = multer({ storage: storage });
 
 // Public routes
 router.get('/', (req, res) => {
@@ -37,9 +39,6 @@ router.get('/about', (req, res) => {
 
 router.get('/register', (req, res) => {
     res.render('register', { title: 'Register' });
-});
-router.get('/tailorDesign', (req, res) => {
-    res.render('TailorDesign', { title: 'Register' });
 });
 
 router.get('/login', (req, res) => {
@@ -60,14 +59,11 @@ router.post('/logout', (req, res) => {
     });
 });
 
-
 // Protected routes
-router.get('/user-dashboard', authMiddleware, (req, res) => {
-    res.render('user_dashboard', { title: 'User  Dashboard' });
-});
+router.get('/user-dashboard', authMiddleware, getUserProfile);
 
-router.get('/tailor/dashboard', authMiddleware, (req, res) => {
-    res.render('tailorDashboard', { title: 'Tailor Dashboard' });
+router.get('/tailor-dashboard', authMiddleware, (req, res) => {
+    res.render('tailor_dashboard', { title: 'Tailor Dashboard' });
 });
 
 router.get('/vendor_home', authMiddleware, (req, res) => {
@@ -102,16 +98,17 @@ router.get('/vendor_profile', authMiddleware, (req, res) => {
 router.get('/vendor_new_post', authMiddleware, (req, res) => {
     res.render('vendor_new_post');
 });
+
 // Sample orders data (you might fetch this from a database in a real scenario)
 const orders = [
-  { id: 1, customer: 'John Doe', item: 'Wedding Suit', dueDate: '2024-10-10', status: 'in-progress' },
-  { id: 2, customer: 'Jane Smith', item: 'Evening Gown', dueDate: '2024-10-15', status: 'pending' },
-  { id: 3, customer: 'Bob Johnson', item: 'Business Shirt', dueDate: '2024-10-20', status: 'completed' },
-  { id: 4, customer: 'Alice Brown', item: 'Cocktail Dress', dueDate: '2024-10-25', status: 'in-progress' },
-  { id: 5, customer: 'Charlie Davis', item: 'Tuxedo', dueDate: '2024-10-30', status: 'pending' }
+    { id: 1, customer: 'John Doe', item: 'Wedding Suit', dueDate: '2024-10-10', status: 'in-progress' },
+    { id: 2, customer: 'Jane Smith', item: 'Evening Gown', dueDate: '2024-10-15', status: 'pending' },
+    { id: 3, customer: 'Bob Johnson', item: 'Business Shirt', dueDate: '2024-10-20', status: 'completed' },
+    { id: 4, customer: 'Alice Brown', item: 'Cocktail Dress', dueDate: '2024-10-25', status: 'in-progress' },
+    { id: 5, customer: 'Charlie Davis', item: 'Tuxedo', dueDate: '2024-10-30', status: 'pending' }
 ];
 
-/// Middleware to add helper functions to res.locals
+// Middleware to add helper functions to res.locals
 router.use((req, res, next) => {
     res.locals.getBadgeClass = (status) => {
         switch (status) {
@@ -157,10 +154,8 @@ router.get('/orders/completed', (req, res) => {
     res.render('completed_orders', { orders });
 });
 
-
 // Route to handle form submission
-// Route to handle clothes post with image upload
-router.post('/api/clothes', authMiddleware, upload.single('image'), async (req, res) => {
+router.post('/api/clothes', authMiddleware, upload, async (req, res) => {
     const { clothName, clothType, customClothType, material, price, description } = req.body;
     const imagePath = req.file ? req.file.path : null;
 
@@ -194,7 +189,7 @@ router.delete('/vendor/delete_post/:id', authMiddleware, async (req, res) => {
         }
     } catch (err) {
         console.error('Error deleting post:', err);
-         return res.redirect('/vendor_all_post');
+        return res.redirect('/vendor_all_post');
     }
 });
 
@@ -223,35 +218,20 @@ router.get("/vendor_logout", authMiddleware, (req, res) => {
         }
     });
 })
-                  
+
 router.get("/order_form_vendor",(req,res)=>{
     res.render("order_form_vendor")
 })
+
 // POST route to handle clothing order form submission
-router.post('/submit-form', upload.single('clothImage'), async (req, res) => {
+router.post('/submit-form', upload, async (req, res) => {
     const { customerID, customerName, vendorID, vendorName, clothName, clothSize, deliveryDate, description } = req.body;
     const imagePath = req.file ? req.file.path : null; // Get the image path from multer's file handling
-console.log(req.body)
-console.log(imagePath)
-    // const sql = `INSERT INTO orders (customerID, customerName, vendorID, vendorName, clothName, clothSize, deliveryDate, description, imagePath)
-    //              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-
-    // const values = [customerID, customerName, vendorID, vendorName, clothName, clothSize, deliveryDate, description, imagePath];
-
-    // try {
-    //     const [results] = await pool.query(sql, values); // Save the data to the database
-    //     console.log('Data inserted successfully:', results);
-    //     res.redirect("/order-confirmation"); // Redirect after successful submission
-    // } catch (err) {
-    //     console.error('Error inserting data into database:', err.message);
-    //     res.status(500).json({ success: false, message: 'Error storing data' });
-    // }
+    console.log(req.body)
+    console.log(imagePath)
 });
-// Route to display user profile
-router.get('/user-dashboard', authMiddleware, getUserProfile);
 
-// Route to update user profile
-router.post('/update-profile', authMiddleware, updateUserProfile);
+// router.post('/add-design', upload, designController.addDesign);
+router.post('/add-design', upload, authMiddleware, designController.addDesign);
 
 module.exports = router;
-

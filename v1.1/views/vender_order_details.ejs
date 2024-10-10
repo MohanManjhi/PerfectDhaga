@@ -8,31 +8,11 @@
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
       <link rel="stylesheet" href="../css/vendor_home1.css">
       <link rel="stylesheet" href="../css/vendor_order.css">
-<<<<<<< HEAD
-      <style>
-            .button.complete {
-    background-color: #28a745; /* Green for complete */
-}
-
-.button.reject {
-    background-color: #dc3545; /* Red for reject */
-}
-
-.button.update {
-    background-color: #ffc107; /* Yellow for update */
-}
-
-      </style>
-</head>
-
-<body>
-=======
     
 </head>
 
 <body>
 
->>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c
       <div class="dashboard">
             <aside class="sidebar">
                   <div class="profile">
@@ -44,25 +24,6 @@
                   </div>
                   <nav class="nav">
                         <ul>
-<<<<<<< HEAD
-                              <li><a href="/vendor_home" class="nav-link active"><i class="fas fa-home"></i>
-                                          Dashboard</a></li>
-                              <li><a href="/vendor_all_post" class="nav-link"><i class="fas fa-plus-circle"></i> View
-                                          Post</a></li>
-                              <li><a href="/vender_order_details" class="nav-link"><i class="fas fa-clipboard-list"></i>
-                                          Orders</a></li>
-                              <li><a href="/vendor_profile" class="nav-link"><i class="fas fa-user-circle"></i>
-                                          Profile</a></li>
-                              <li><a href="/vendor_payment" class="nav-link"><i class="fas fa-dollar-sign"></i>
-                                          Payments</a></li>
-                              <li><a href="/vendor_review" class="nav-link"><i class="fas fa-star"></i> Reviews</a></li>
-                              <li><a href="/vendor_contact" class="nav-link"><i class="fas fa-map-marker-alt"></i>
-                                          Location</a></li>
-                              <li><a href="/vendor_new_post" class="nav-link"><i class="fas fa-map-marker-alt"></i> New
-                                          Post</a></li>
-                              <li><a href="/vendor_logout" class="nav-link"><i class="fas fa-sign-out-alt"></i>
-                                          Logout</a></li>
-=======
       <li><a href="/vendor_home" class="nav-link active"><i class="fas fa-home"></i> Dashboard</a></li>
       <li><a href="/vendor_all_post" class="nav-link"><i class="fas fa-plus-circle"></i> View Post</a></li>
       <li><a href="/vender_order_details" class="nav-link"><i class="fas fa-clipboard-list"></i> Orders</a></li>
@@ -73,7 +34,6 @@
       <li><a href="/vendor_new_post" class="nav-link"><i class="fas fa-map-marker-alt"></i> New Post</a></li>
       <li><a href="/vendor_logout" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
            
->>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c
                         </ul>
                   </nav>
             </aside>
@@ -81,20 +41,6 @@
             <main class="main-content">
                   <section class="order-details">
                         <h1 class="text-3xl font-bold mb-6">Orders</h1>
-<<<<<<< HEAD
-
-                        <!-- Filter Buttons -->
-                        <div class="filter-buttons mb-4">
-                              <a href="/vender_order_details"><button class="button">All Orders</button></a>
-                             
-                              <a href="/orders/in-progress"><button class="button">In Progress Orders</button></a>
-                              <a href="/orders/completed"><button class="button">Completed Orders</button></a>
-            
-                        </div>
-
-                        <!-- Order Table -->
-=======
->>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c
                         <table>
                               <thead>
                                     <tr>
@@ -106,37 +52,6 @@
                                           <th>Action</th>
                                     </tr>
                               </thead>
-<<<<<<< HEAD
-                              <tbody id="orderTableBody">
-                              <tr data-status="in-progress">
-                                    <td>1</td>
-                                    <td>John Doe</td>
-                                    <td>Wedding Suit</td>
-                                    <td>2024-10-10</td>
-                                    <td><span class="badge secondary">In Progress</span></td>
-                                    <td>
-                                          <!-- Complete Button -->
-                                          <form method="POST" action="/complete_order">
-                                                <input type="hidden" name="order_id" value="1">
-                                                <button class="button complete" type="submit">Complete</button>
-                                          </form>
-                              
-                                          <!-- Reject Button -->
-                                          <form method="POST" action="/reject_order">
-                                                <input type="hidden" name="order_id" value="1">
-                                                <button class="button reject" type="submit">Reject</button>
-                                          </form>
-                              
-                                          <!-- Update Order Button -->
-                                          <form method="POST" action="/update_order">
-                                                <input type="hidden" name="order_id" value="1">
-                                                <button class="button update" type="submit">Update</button>
-                                          </form>
-                                    </td>
-                              </tr>
-
-                                    <!-- Repeat rows for more orders -->
-=======
                               <tbody>
                                     <tr>
                                           <td>1</td>
@@ -178,7 +93,6 @@
                                           <td><span class="badge">Pending</span></td>
                                           <td><a href="order_detail.html" class="button">View Details</a></td>
                                     </tr>
->>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c
                               </tbody>
                         </table>
                   </section>

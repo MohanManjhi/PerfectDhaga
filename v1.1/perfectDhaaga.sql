@@ -32,16 +32,3 @@ CREATE TABLE vendors (
     phone VARCHAR(20),
     password VARCHAR(255)
 );
-CREATE TABLE orders (
-    id INT AUTO_INCREMENT PRIMARY KEY,       -- Unique ID for each order
-    customerID VARCHAR(255) NOT NULL,        -- Stores the Customer ID
-    customerName VARCHAR(255) NOT NULL,      -- Stores the Customer Name
-    vendorID VARCHAR(255) NOT NULL,          -- Stores the Vendor ID
-    vendorName VARCHAR(255) NOT NULL,        -- Stores the Vendor Name
-    clothName VARCHAR(255) NOT NULL,         -- Stores the name of the cloth
-    clothSize VARCHAR(10) NOT NULL,          -- Stores the selected cloth size
-    deliveryDate DATE NOT NULL,              -- Stores the expected delivery date
-    description TEXT,                        -- Stores any additional description
-    imagePath VARCHAR(255),                  -- Stores the path to the uploaded image file
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- Timestamp for when the order was created
-);

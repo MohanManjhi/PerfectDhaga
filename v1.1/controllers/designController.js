@@ -1,7 +1,7 @@
 const db = require('../models/db').pool;  // Import the pool from db.js
 
 // Add Design
-exports.addDesign = async (req, res) => {
+module.exports.addDesign = async (req, res) => {
     const tailor_id = req.session.tailor_id;  // Get the tailor_id from session
     const { title, deliveryTime, description, designType } = req.body;
     const filePath = req.file ? req.file.path : null; // Ensure the file was uploaded

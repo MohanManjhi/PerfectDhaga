@@ -26,11 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (result.role === 'user') {
                     window.location.href = '/';
                 } else if (result.role === 'tailor') {
-<<<<<<< HEAD
-                    window.location.href = '/tailor/dashboard';
-=======
                     window.location.href = '/tailor-dashboard';
->>>>>>> cc5c6c55c54b976c650c711083dff5cfa83c7d3c
                 } else if (result.role === 'vendor') {
                     window.location.href = '/vendor_home';
                 }
