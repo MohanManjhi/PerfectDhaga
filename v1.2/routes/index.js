@@ -231,7 +231,26 @@ router.post('/submit-form', upload, async (req, res) => {
     console.log(imagePath)
 });
 
+
+// Tailor Section Started from Here
+
 // router.post('/add-design', upload, designController.addDesign);
 router.post('/add-design', upload, authMiddleware, designController.addDesign);
+
+router.get('/tailor/designs', designController.getTailorDesigns);
+router.get('/homepage/designs', designController.getTailorDesigns);
+
+
+// Tailor Section End Here
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;
