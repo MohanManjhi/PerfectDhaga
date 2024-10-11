@@ -1,0 +1,147 @@
+/* Main Content */
+.main-content {
+      display: flex;
+      flex-wrap: wrap;
+      /* Allows wrapping of child elements */
+      align-items: center;
+      padding: 20px;
+      margin: 0 auto;
+      /* Center the container */
+      max-width: 800px;
+      /* Limit the max width of the container */
+}
+
+/* Reviews Section */
+.reviews {
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      width: 100%;
+      max-width: 800px;
+      margin: 20px 0;
+}
+
+.reviews h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+}
+
+/* Card Styles */
+.cardd {
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 250px;
+      /* Set a fixed height for uniformity */
+      width: 200px;
+      /* Set a fixed width for the cards */
+      transition: transform 0.3s ease-in-out;
+      flex: 0 0 calc(28.33% - 20px);
+      /* 3 cards per row with gap */
+      margin: 10px;
+      /* Margin to separate cards */
+}
+
+.cardd:hover {
+      transform: scale(1.05);
+}
+
+/* Card Header */
+.cardd-header {
+      border-bottom: 2px solid #3498db;
+      margin-bottom: 15px;
+}
+
+.cardd-header h2 {
+      margin: 0;
+      font-size: 1.5em;
+      color: #3498db;
+      text-align: center;
+}
+
+/* Card Content */
+.cardd-content {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      width: 100%;
+      max-width: 800px;
+      /* Ensure a maximum width */
+}
+
+/* Review Styles */
+.review {
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+      margin: 0 auto;
+      transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+      text-align: center;
+}
+
+.review:hover {
+      background-color: #e9ecef;
+      transform: scale(1.02);
+}
+
+.rating {
+      font-size: 1.5em;
+      color: #f39c12;
+      margin-bottom: 10px;
+}
+
+/* Star Styles for Ratings */
+.rating i {
+      color: #f39c12;
+}
+
+/* Review Text */
+.review p {
+      margin: 0;
+      font-size: 1.1em;
+      color: #555;
+      line-height: 1.5;
+}
+
+/* Flex Layout for Review Cards */
+.cards-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+      .reviews h1 {
+            font-size: 2em;
+      }
+
+      .cardd {
+            flex: 0 0 calc(50% - 20px);
+            /* 2 cards per row on smaller screens */
+            height: auto;
+            max-width: 100%;
+      }
+
+      .rating {
+            font-size: 1.2em;
+      }
+}
+
+@media (max-width: 480px) {
+      .cardd {
+            flex: 0 0 100%;
+            /* 1 card per row on very small screens */
+      }
+}

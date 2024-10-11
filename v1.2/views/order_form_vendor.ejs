@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+      <style>
+            body {
+                  font-family: Arial, sans-serif;
+                  margin: 20px;
+                  padding: 20px;
+            }
+
+            .form-container {
+                  max-width: 600px;
+                  margin: 0 auto;
+                  padding: 20px;
+                  border: 1px solid #ccc;
+                  border-radius: 8px;
+                  box-shadow: 0px 0px 10px #aaa;
+            }
+
+            .form-container h2 {
+                  text-align: center;
+            }
+
+            .form-group {
+                  margin-bottom: 15px;
+            }
+
+            label {
+                  display: block;
+                  font-weight: bold;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            textarea,
+            select,
+            input[type="file"] {
+                  width: 100%;
+                  padding: 10px;
+                  margin-top: 5px;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+            }
+
+            .submit-btn {
+                  display: block;
+                  width: 100%;
+                  padding: 10px;
+                  background-color: #28a745;
+                  color: white;
+                  border: none;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  font-size: 16px;
+            }
+
+            .submit-btn:hover {
+                  background-color: #218838;
+            }
+      </style>
+</head>
+
+<body>
+
+      <div class="form-container">
+            <h2>Contact Form</h2>
+            <!-- Add enctype="multipart/form-data" for file uploads -->
+            <form action="/submit-form" method="POST" enctype="multipart/form-data">
+                  <div class="form-group">
+                        <label for="customerID">Customer ID</label>
+                        <input type="text" id="customerID" name="customerID" required>
+                  </div>
+
+                  <div class="form-group">
+                        <label for="customerName">Customer Name</label>
+                        <input type="text" id="customerName" name="customerName" required>
+                  </div>
+
+                  <div class="form-group">
+                        <label for="vendorID">Vendor ID</label>
+                        <input type="text" id="vendorID" name="vendorID" required>
+                  </div>
+
+                  <div class="form-group">
+                        <label for="vendorName">Vendor Name</label>
+                        <input type="text" id="vendorName" name="vendorName" required>
+                  </div>
+
+                  <div class="form-group">
+                        <label for="clothName">Cloth Name</label>
+                        <input type="text" id="clothName" name="clothName" required>
+                  </div>
+
+                  <div class="form-group">
+                        <label for="clothSize">Cloth Size</label>
+                        <select id="clothSize" name="clothSize" required>
+                              <option value="" disabled selected>Select size</option>
+                              <option value="XS">XS</option>
+                              <option value="S">S</option>
+                              <option value="M">M</option>
+                              <option value="L">L</option>
+                              <option value="XL">XL</option>
+                              <option value="XXL">XXL</option>
+                        </select>
+                  </div>
+
+                  <div class="form-group">
+                        <label for="deliveryDate">Delivery Date</label>
+                        <input type="date" id="deliveryDate" name="deliveryDate" required>
+                  </div>
+
+                  <div class="form-group">
+                        <label for="description">Additional Description</label>
+                        <textarea id="description" name="description" rows="4"></textarea>
+                  </div>
+
+                  <!-- Image upload input -->
+                  <div class="form-group">
+                        <label for="clothImage">Upload Cloth Image</label>
+                        <input type="file" id="clothImage" name="clothImage" accept="image/*" required>
+                  </div>
+
+                  <button type="submit" class="submit-btn">Submit</button>
+            </form>
+      </div>
+
+</body>
+
+</html>

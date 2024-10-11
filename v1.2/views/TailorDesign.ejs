@@ -1,0 +1,204 @@
+<html></html>
+<head>
+    <title>Pagedone Products</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="/css/HomePage.css">
+    <script>
+        function toggleDropdown(id) {
+            const element = document.getElementById(id);
+            element.classList.toggle('hidden');
+        }
+
+        function toggleIcon(button, iconClass1, iconClass2) {
+            const icon = button.querySelector('i');
+            if (icon.classList.contains(iconClass1)) {
+                icon.classList.remove(iconClass1);
+                icon.classList.add(iconClass2);
+            } else {
+                icon.classList.remove(iconClass2);
+                icon.classList.add(iconClass1);
+            }
+        }
+
+        function handleSort(button) {
+            const buttons = document.querySelectorAll('.sort-button');
+            buttons.forEach(btn => btn.classList.remove('bg-blue-600', 'text-white'));
+            button.classList.add('bg-blue-600', 'text-white');
+        }
+    </script>
+</head>
+
+<body class="bg-gray-100">
+    <div>
+        <%- include("partials/navbar") %>
+        <%- include("partials/login-modal") %>
+        <%- include("partials/mobile-menu") %> 
+    </div>
+
+    <div class="container mx-auto p-4" style="margin-top: 60px;">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-4">
+                <h1 class="text-2xl font-bold mb-4 md:mb-0"></h1>
+                <div class="flex items-center space-x-2">
+                    <button class="flex items-center space-x-1 text-gray-600" onclick="toggleIcon(this, 'fa-sort', 'fa-sort-up')">
+                        <i class="fas fa-sort"></i>
+                        <span>Quick Sort</span>
+                    </button>
+                    <button class="px-4 py-2 bg-blue-600 text-white rounded-lg sort-button" onclick="handleSort(this)">All</button>
+                    <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg sort-button" onclick="handleSort(this)">Popular</button>
+                    <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg sort-button" onclick="handleSort(this)">Most New</button>
+                    <div class="relative">
+                        <button onclick="toggleDropdown('priceDropdown'); toggleIcon(this, 'fa-chevron-down', 'fa-chevron-up')" class="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg flex items-center space-x-1">
+                            <span>Price</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="priceDropdown" class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg hidden">
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Low to High</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">High to Low</a>
+                        </div>
+                    </div>
+                     <div class="relative">
+                        <button onclick="toggleDropdown('locationDropdown'); toggleIcon(this, 'fa-chevron-down', 'fa-chevron-up')" class="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg flex items-center space-x-1">
+                            <span>Location</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="locationDropdown" class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg hidden">
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Nearby</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">City</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">State</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row">
+                <div class="w-full md:w-1/4 bg-white p-4 rounded-lg shadow-md mb-4 md:mb-0">
+                    <h2 class="text-lg font-bold mb-4 text-left">Filter</h2>
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2">Category</h3>
+                        <div class="mb-2">
+                            <button onclick="toggleDropdown('availabilityDropdown'); toggleIcon(this, 'fa-chevron-down', 'fa-chevron-up')" class="flex justify-between w-full text-left">
+                                <span>Availability</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div id="availabilityDropdown" class="mt-2 hidden">
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" class="form-checkbox">
+                                    <span>In Stock</span>
+                                </label>
+                                <label class="flex items-center space-x-2 mt-2">
+                                    <input type="checkbox" class="form-checkbox">
+                                    <span>Out of Stock</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <button onclick="toggleDropdown('occasionDropdown'); toggleIcon(this, 'fa-chevron-down', 'fa-chevron-up')" class="flex justify-between w-full text-left">
+                                <span>Occasion</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div id="occasionDropdown" class="mt-2 hidden">
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" class="form-checkbox">
+                                    <span>Casual</span>
+                                </label>
+                                <label class="flex items-center space-x-2 mt-2">
+                                    <input type="checkbox" class="form-checkbox">
+                                    <span>Formal</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <button onclick="toggleDropdown('discountDropdown'); toggleIcon(this, 'fa-chevron-down', 'fa-chevron-up')" class="flex justify-between w-full text-left">
+                                <span>Discount</span>
+                                <i class="fas fa-chevron-up"></i>
+                            </button>
+                            <div id="discountDropdown" class="mt-2">
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" class="form-checkbox">
+                                    <span>20% or more</span>
+                                </label>
+                                <label class="flex items-center space-x-2 mt-2">
+                                    <input type="checkbox" class="form-checkbox text-blue-600">
+                                    <span>30% or more</span>
+                                </label>
+                                <label class="flex items-center space-x-2 mt-2">
+                                    <input type="checkbox" class="form-checkbox">
+                                    <span>50% or more</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2">Size</h3>
+                        <div class="flex space-x-2">
+                            <select class="form-select w-full">
+                                <option>Select Size</option>
+                            </select>
+                            <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg">Max</button>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2">Prize</h3>
+                        <div class="flex space-x-2">
+                            <input type="text" placeholder="Min" class="form-input w-full">
+                            <span>to</span>
+                            <input type="text" placeholder="Max" class="form-input w-full">
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2">Offer</h3>
+                        <div class="mb-2">
+                            <button onclick="toggleDropdown('regularOfferDropdown'); toggleIcon(this, 'fa-chevron-down', 'fa-chevron-up')" class="flex justify-between w-full text-left">
+                                <span>Regular Offer</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div id="regularOfferDropdown" class="mt-2 hidden">
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" class="form-checkbox">
+                                    <span>10% off</span>
+                                </label>
+                                <label class="flex items-center space-x-2 mt-2">
+                                    <input type="checkbox" class="form-checkbox">
+                                    <span>20% off</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <button onclick="toggleDropdown('specialOfferDropdown'); toggleIcon(this, 'fa-chevron-down', 'fa-chevron-up')" class="flex justify-between w-full text-left">
+                                <span>Special Offer</span>
+                                <i class="fas fa-chevron-up"></i>
+                            </button>
+                            <div id="specialOfferDropdown" class="mt-2">
+                                <label class="flex items-center space-x-2">
+                                    <input type="radio" name="special-offer" class="form-radio">
+                                    <span>20% or more</span>
+                                </label>
+                                <label class="flex items-center space-x-2 mt-2">
+                                    <input type="radio" name="special-offer" class="form-radio text-blue-600">
+                                    <span>30% or more</span>
+                                </label>
+                                <label class="flex items-center space-x-2 mt-2">
+                                    <input type="radio" name="special-offer" class="form-radio">
+                                    <span>50% or more</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-3/4 bg-white p-4 rounded-lg shadow-md ml-0 md:ml-4">
+                    <!-- Product grid will go here -->
+                    <%- include("partials/categoryHome") %>
+                    <%- include("partials/hots") %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <%- include("partials/HomeFooter") %>
+    </div>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Tailor Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        function toggleSection(sectionId, checkbox) {
+            const section = document.getElementById(sectionId);
+            section.style.display = checkbox.checked ? 'block' : 'none';
+        }
+
+        function addSize(sectionId) {
+            const container = document.getElementById(sectionId);
+            const newSize = document.createElement('div');
+            newSize.className = 'flex space-x-2 mb-2';
+            newSize.innerHTML = `
+                <input type="text" placeholder="Size" class="w-1/4 px-3 py-2 border rounded-lg">
+                <input type="text" placeholder="Price" class="w-1/4 px-3 py-2 border rounded-lg">
+                <input type="text" placeholder="Required Material" class="w-1/2 px-3 py-2 border rounded-lg">
+            `;
+            container.appendChild(newSize);
+        }
+
+        function addBlouseDesign() {
+            const container = document.getElementById('blouseDesignsContainer');
+            const newDesign = document.createElement('div');
+            newDesign.className = 'flex space-x-2 mb-2 items-center';
+            newDesign.innerHTML = `
+                <input type="text" placeholder="Design Name" class="w-1/3 px-3 py-2 border rounded-lg">
+                <input type="text" placeholder="Price" class="w-1/3 px-3 py-2 border rounded-lg">
+                <input type="text" placeholder="Required Material" class="w-1/3 px-3 py-2 border rounded-lg">
+                <button type="button" onclick="removeBlouseDesign(this)" class="text-red-500">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            `;
+            container.appendChild(newDesign);
+        }
+
+        function removeBlouseDesign(button) {
+            const design = button.parentElement;
+            design.remove();
+        }
+    </script>
+</head>
+<body class="bg-white-100 font-sans leading-normal tracking-normal">
+    <div class="flex flex-col md:flex-row">
+        <!-- Sidebar -->
+        <div class="w-full md:w-1/5 bg-white h-screen shadow-md fixed md:relative">
+            <div class="p-4 flex flex-col items-center">
+                <img alt="Tailor profile picture" class="rounded-full mb-3" height="50" src="https://storage.googleapis.com/a1aa/image/bAOJsDwD1jquJBHfLvxPIAkD80gX8TlxnENZhkgSjvD2eqjTA.jpg" width="50"/>
+                <div class="text-center">
+                    <h2 class="text-lg font-semibold">Tailor Name</h2>
+                    <p class="text-sm text-gray-600">Master Craftsman</p>
+                </div>
+            </div>
+            <nav class="mt-6">
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection('dashboard')">
+                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                </button>
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection('designs')">
+                    <i class="fas fa-tshirt mr-3"></i> Designs
+                </button>
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection('orders')">
+                    <i class="fas fa-shopping-cart mr-3"></i> Orders
+                </button>
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection('profile')">
+                    <i class="fas fa-user mr-3"></i> Profile
+                </button>
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection('payments')">
+                    <i class="fas fa-dollar-sign mr-3"></i> Payments
+                </button>
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection('reviews')">
+                    <i class="fas fa-star mr-3"></i> Reviews
+                </button>
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection('location')">
+                    <i class="fas fa-map-marker-alt mr-3"></i> Location
+                </button>
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection('newPost')">
+                    <i class="fas fa-plus-circle mr-3"></i> Add Designs
+                </button>
+                <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200 w-full text-left" onclick="showSection('logout')">
+                    <i class="fas fa-sign-out-alt mr-3"></i> log_out
+                </button>
+            </nav>
+        </div>
+        <!-- Main Content -->
+        <div class="w-full md:w-4/5 p-6">
+            <div class="relative bg-cover bg-center h-48 rounded-lg shadow-md mb-6" style="background-image: url('https://storage.googleapis.com/a1aa/image/gs7sUlcLxj4TBV7hJxOJGJ63Y6IW7hXDIEYtWSP4fOvNO1xJA.jpg');">
+                <div class="absolute bottom-0 left-0 bg-black bg-opacity-50 w-full p-4 rounded-b-lg">
+                    <h1 class="text-2xl font-bold text-white">Welcome, Master Tailor</h1>
+                    <p class="text-gray-300">Crafting Excellence, One Stitch at a Time</p>
+                </div>
+            </div>
+            <%- include("partials/tailorDashboardSection") %>
+            <div id="designs" class="section hidden">
+                <h2 class="text-xl font-bold mb-4">Designs</h2>
+                <p>Designs content goes here...</p>
+            </div>
+            <div id="orders" class="section hidden">
+                <h2 class="text-xl font-bold mb-4">Orders</h2>
+                <p>Orders content goes here...</p>
+            </div>
+            <div id="profile" class="section hidden">
+                <h2 class="text-xl font-bold mb-4">Profile</h2>
+                <form class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="shopName">Shop Name</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="shopName" type="text" placeholder="Shop Name">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="shopAddress">Shop Address</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="shopAddress" type="text" placeholder="Shop Address">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="experience">Experience</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="experience" type="number" placeholder="Experience">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="specialization">Specialization</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="specialization" type="text" placeholder="Specialization">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="portfolio">Portfolio</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="portfolio" type="text" placeholder="Portfolio">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Phone</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text" placeholder="Phone">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="location">Location</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="location" type="text" placeholder="Location">
+                    </div>
+                    <button class="bg-blue-500 text-white py-2 px-4 rounded w-full">Update Profile</button>
+                </form>
+            </div>
+            <div id="payments" class="section hidden">
+                <h2 class="text-xl font-bold mb-4">Payments</h2>
+                <p>Payments content goes here...</p>
+            </div>
+            <div id="reviews" class="section hidden">
+                <h2 class="text-xl font-bold mb-4">Reviews</h2>
+                <p>Reviews content goes here...</p>
+            </div>
+            <div id="location" class="section hidden">
+                <h2 class="text-xl font-bold mb-4">Location</h2>
+                <p>Location content goes here...</p>
+            </div>
+            <div id="newPost" class="section hidden">
+                <h2 class="text-2xl font-bold mb-6">Add New Design</h2>
+                <!-- <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl mx-auto"> -->
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-2">Design Photos</label>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg h-32 flex items-center justify-center cursor-pointer hover:border-gray-400">
+                            <i class="fas fa-plus text-gray-400 text-3xl"></i>
+                        </div>
+                    </div>
+            
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-2">Design Title</label>
+                        <input type="text" placeholder="Enter design title" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+            
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-2">Time to Deliver</label>
+                        <input type="text" placeholder="e.g., 5-7 days" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+            
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-2">Design Components</label>
+                        <div class="flex items-center space-x-4">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" onclick="toggleSection('upperSideSection', this)"> Upper Side
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" onclick="toggleSection('lowerSideSection', this)"> Lower Side
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" onclick="toggleSection('blouseSection', this)"> Blouse
+                            </label>
+                        </div>
+                    </div>
+            
+                    <div id="upperSideSection" class="mb-6" style="display: none;">
+                        <label class="block text-gray-700 font-semibold mb-2">Upper Side Pricing and Materials</label>
+                        <div id="upperSideContainer" class="space-y-2">
+                            <div class="flex space-x-2">
+                                <input type="text" placeholder="S" class="w-1/4 px-4 py-3 border rounded-lg focus:outline-none" readonly>
+                                <input type="text" placeholder="Price" class="w-1/4 px-4 py-3 border rounded-lg focus:outline-none">
+                                <input type="text" placeholder="Required Material" class="w-1/2 px-4 py-3 border rounded-lg focus:outline-none">
+                            </div>
+                            <!-- Add more sizes similarly -->
+                        </div>
+                        <button type="button" onclick="addSize('upperSideContainer')" class="flex items-center px-4 py-2 border rounded-lg text-gray-700 mt-2 hover:bg-gray-100">
+                            <i class="fas fa-plus mr-2"></i> Add More Size
+                        </button>
+                    </div>
+            
+                    <div id="lowerSideSection" class="mb-6" style="display: none;">
+                        <label class="block text-gray-700 font-semibold mb-2">Lower Side Pricing and Materials</label>
+                        <div id="lowerSideContainer" class="space-y-2">
+                            <div class="flex space-x-2">
+                                <input type="text" placeholder="24" class="w-1/4 px-4 py-3 border rounded-lg focus:outline-none" readonly>
+                                <input type="text" placeholder="Price" class="w-1/4 px-4 py-3 border rounded-lg focus:outline-none">
+                                <input type="text" placeholder="Required Material" class="w-1/2 px-4 py-3 border rounded-lg focus:outline-none">
+                            </div>
+                            <!-- Add more sizes similarly -->
+                        </div>
+                        <button type="button" onclick="addSize('lowerSideContainer')" class="flex items-center px-4 py-2 border rounded-lg text-gray-700 mt-2 hover:bg-gray-100">
+                            <i class="fas fa-plus mr-2"></i> Add More Size
+                        </button>
+                    </div>
+            
+                    <div id="blouseSection" class="mb-6" style="display: none;">
+                        <label class="block text-gray-700 font-semibold mb-2"> Blouse Designs</label>
+                        <div id="blouseDesignsContainer" class="space-y-2"></div>
+                        <button type="button" onclick="addBlouseDesign()" class="flex items-center px-4 py-2 border rounded-lg text-gray-700 mt-2 hover:bg-gray-100">
+                            <i class="fas fa-plus mr-2"></i> Add Blouse Design
+                        </button>
+                    </div>
+            
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-2">Design Description</label>
+                        <textarea placeholder="Enter design description" class="w-full px-4 py-3 border rounded-lg focus:outline-none"></textarea>
+                    </div>
+            
+                    <button class="w-full bg-black text-white px-4 py-3 rounded-lg hover:bg-gray-900">Add Design</button>
+                
+            </div>
+            <div id="logout" class="section hidden">
+                <h2 class="text-xl font-bold mb-4">Logout</h2>
+                <p>Logout content goes here...</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
