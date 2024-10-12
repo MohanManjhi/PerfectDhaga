@@ -4,6 +4,7 @@ const session = require('express-session');
 const { testConnection } = require('./models/db'); // Import the testConnection function
 const routes = require('./routes/index'); // Import the main routes
 const fabricRoutes = require('./routes/fabricRoutes'); // Import the fabric routes
+const cartRoutes = require('./routes/cartRoutes');
 
 const app = express();
 const port = 3000;
@@ -42,6 +43,8 @@ app.use((req, res, next) => {
 
 // Use main routes
 app.use('/', routes);
+// Mount the cart routes
+app.use('/cart', cartRoutes);
 
 // Start the server
 app.listen(port, async () => {
