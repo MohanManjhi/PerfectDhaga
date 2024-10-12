@@ -1,73 +1,73 @@
 <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-6">
-        Select Fabrics for Your Design
-    </h1>
-    <div id="fabric-selection-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <!-- Fabrics will be injected here dynamically -->
-    </div>
+  <h1 class="text-2xl font-bold mb-6">
+      Select Fabrics for Your Design
+  </h1>
+  <div id="fabric-selection-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <!-- Fabrics will be injected here dynamically -->
+  </div>
 
-    <div class="text-center mt-6">
-        <button type="button" class="btn btn-outline-dark">
-            <a href="/cart">Proceed to Cart</a>
-        </button>
-    </div>
+  <div class="text-center mt-6">
+      <button type="button" class="btn btn-outline-dark">
+          <a href="/cart">Proceed to Cart</a>
+      </button>
+  </div>
 </div>
 
 <!-- JS Script for Fabric Selection -->
 <script>
-  // Fetch fabrics data related to the design from backend
-  fetch('/fabrics/related-to-design')  // Adjust endpoint based on your backend logic
-  .then(response => response.json())
-  .then(data => {
-    const fabricSelectionContainer = document.getElementById('fabric-selection-container');
-    
-    // Clear any previous fabrics
-    fabricSelectionContainer.innerHTML = '';
+// Fetch fabrics data related to the design from backend
+fetch('/fabrics/related-to-design')  // Adjust endpoint based on your backend logic
+.then(response => response.json())
+.then(data => {
+  const fabricSelectionContainer = document.getElementById('fabric-selection-container');
+  
+  // Clear any previous fabrics
+  fabricSelectionContainer.innerHTML = '';
 
-    // Loop through the fabrics and display them
-    data.forEach(fabric => {
-      const fabricElement = document.createElement('div');
-      fabricElement.classList.add('bg-white', 'p-4', 'rounded-lg', 'shadow', 'flex', 'flex-col', 'justify-between');
+  // Loop through the fabrics and display them
+  data.forEach(fabric => {
+    const fabricElement = document.createElement('div');
+    fabricElement.classList.add('bg-white', 'p-4', 'rounded-lg', 'shadow', 'flex', 'flex-col', 'justify-between');
 
-      // Set the fabric HTML structure dynamically based on the schema
-      fabricElement.innerHTML = `
-        <img class="mb-4 object-cover w-full h-48" src="/uploads/${fabric.imagePath}" alt="${fabric.clothName}" />
-        <h2 class="text-lg font-semibold text-left">${fabric.clothName}</h2>
-        <p class="text-gray-900 font-bold text-left">Price per meter: Rs. ${fabric.price}</p>
-        <p class="text-gray-700 text-left">${fabric.description}</p>
-        <p class="text-gray-600 text-left">Material: ${fabric.material}</p>
-        <label for="fabric-quantity-${fabric.id}" class="text-gray-600 text-left">Enter quantity (in meters):</label>
-        <input type="number" id="fabric-quantity-${fabric.id}" name="fabric-quantity" min="1" value="1" class="w-full p-2 border rounded-md mt-2">
-        <button class="bg-blue-500 text-white py-2 px-4 rounded-md mt-4 add-to-cart" data-fabric-id="${fabric.id}" data-fabric-name="${fabric.clothName}" data-fabric-price="${fabric.price}">
-          Add to Cart
-        </button>
-      `;
+    // Set the fabric HTML structure dynamically based on the schema
+    fabricElement.innerHTML = `
+      <img class="mb-4 object-cover w-full h-48" src="/uploads/${fabric.imagePath}" alt="${fabric.clothName}" />
+      <h2 class="text-lg font-semibold text-left">${fabric.clothName}</h2>
+      <p class="text-gray-900 font-bold text-left">Price per meter: Rs. ${fabric.price}</p>
+      <p class="text-gray-700 text-left">${fabric.description}</p>
+      <p class="text-gray-600 text-left">Material: ${fabric.material}</p>
+      <label for="fabric-quantity-${fabric.id}" class="text-gray-600 text-left">Enter quantity (in meters):</label>
+      <input type="number" id="fabric-quantity-${fabric.id}" name="fabric-quantity" min="1" value="1" class="w-full p-2 border rounded-md mt-2">
+      <button class="bg-blue-500 text-white py-2 px-4 rounded-md mt-4 add-to-cart" data-fabric-id="${fabric.id}" data-fabric-name="${fabric.clothName}" data-fabric-price="${fabric.price}">
+        Add to Cart
+      </button>
+    `;
 
-      // Append the fabric card to the container
-      fabricSelectionContainer.appendChild(fabricElement);
+    // Append the fabric card to the container
+    fabricSelectionContainer.appendChild(fabricElement);
+  });
+
+  // Add event listener to "Add to Cart" buttons
+  document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', function() {
+      const fabricId = this.getAttribute('data-fabric-id');
+      const fabricName = this.getAttribute('data-fabric-name');
+      const fabricPrice = this.getAttribute('data-fabric-price');
+      const quantity = document.getElementById(`fabric-quantity-${fabricId}`).value;
+
+      // Add the fabric and quantity to the cart
+      addToCart(fabricId, fabricName, fabricPrice, quantity);
     });
+  });
+})
+.catch(error => console.error('Error loading fabrics:', error));
 
-    // Add event listener to "Add to Cart" buttons
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-      button.addEventListener('click', function() {
-        const fabricId = this.getAttribute('data-fabric-id');
-        const fabricName = this.getAttribute('data-fabric-name');
-        const fabricPrice = this.getAttribute('data-fabric-price');
-        const quantity = document.getElementById(`fabric-quantity-${fabricId}`).value;
+// Function to handle adding fabrics to the cart
+function addToCart(fabricId, fabricName, fabricPrice, quantity) {
+  // Here, you would normally send the data to the backend to update the cart
+  console.log(`Added to cart: Fabric - ${fabricName}, Price: Rs. ${fabricPrice}, Quantity: ${quantity} meters`);
 
-        // Add the fabric and quantity to the cart
-        addToCart(fabricId, fabricName, fabricPrice, quantity);
-      });
-    });
-  })
-  .catch(error => console.error('Error loading fabrics:', error));
-
-  // Function to handle adding fabrics to the cart
-  function addToCart(fabricId, fabricName, fabricPrice, quantity) {
-    // Here, you would normally send the data to the backend to update the cart
-    console.log(`Added to cart: Fabric - ${fabricName}, Price: Rs. ${fabricPrice}, Quantity: ${quantity} meters`);
-
-    // For now, just show a simple message to confirm the selection
-    alert(`${fabricName} added to cart!`);
-  }
+  // For now, just show a simple message to confirm the selection
+  alert(`${fabricName} added to cart!`);
+}
 </script>
