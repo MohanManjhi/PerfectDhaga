@@ -1,12 +1,11 @@
 const authMiddleware = (req, res, next) => {
-    if (req.session.user) {
-      res.locals.user = req.session.user; // Set user information in res.locals
-      next();
-    } else {
-      res.locals.user = null; // Set user information to null if not logged in
-      // res.redirect('/login');
-      return res.redirect('/login?error=Please%20log%20in%20to%20access%20this%20page');
-    }
-  };
-  
-  module.exports = authMiddleware;
+  if (req.session.user) {
+    res.locals.user = req.session.user; // Set user information in res.locals
+    next();
+  } else {
+    res.locals.user = null; // Set user information to null if not logged in
+    res.redirect('/login');
+  }
+};
+
+module.exports = authMiddleware;

@@ -2,7 +2,8 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 const { testConnection } = require('./models/db'); // Import the testConnection function
-const routes = require('./routes/index'); // Import the routes
+const routes = require('./routes/index'); // Import the main routes
+const fabricRoutes = require('./routes/fabricRoutes'); // Import the fabric routes
 
 const app = express();
 const port = 3000;
@@ -14,9 +15,8 @@ app.set('views', path.join(__dirname, 'views'));
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use('/images/uploads', express.static('uploads'));
-
-
+app.use('/images/uploads', express.static('uploads')); // Ensure this path is correct
+app.use('/fabrics', fabricRoutes); // Use fabric routes
 
 // Middleware to parse JSON and URL-encoded data
 app.use(express.json());
@@ -40,7 +40,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// Use routes
+// Use main routes
 app.use('/', routes);
 
 // Start the server

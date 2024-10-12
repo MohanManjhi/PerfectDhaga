@@ -4,8 +4,8 @@ const mysql = require('mysql2/promise');
 const dbConfig = {
   host: 'localhost',
   user: 'root',
-  password: 'root', // Replace with your password
-  database: 'perfect_dhaaga' // Replace with your database name
+  password: 'root', // Replace with your actual password
+  database: 'perfect_dhaaga' // Replace with your actual database name
 };
 
 // Create a connection pool
@@ -16,13 +16,12 @@ const testConnection = async () => {
   try {
     const connection = await pool.getConnection();
     console.log('Database connected successfully!');
-    connection.release();
+    connection.release(); // Release the connection back to the pool
   } catch (error) {
     console.error('Database connection failed:', error.message);
     process.exit(1); // Exit the process if connection fails
   }
 };
 
-// Export the pool for use in other parts of your application
-module.exports = {pool,testConnection};
-
+// Export the pool and testConnection function for use in other parts of your application
+module.exports = { pool, testConnection };

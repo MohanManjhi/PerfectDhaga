@@ -8,6 +8,7 @@ const { registerUser , loginUser , logoutUser  } = require('../controllers/authC
 const { getUserProfile, updateUserProfile } = require('../controllers/userController');
 const designController = require('../controllers/designController');
 const upload = require('../middleware/uploadMiddleware');
+const fabricRoutes = require('./fabricRoutes');
 
 // Configure MySQL connection pool
 const pool = mysql.createPool({
@@ -16,17 +17,6 @@ const pool = mysql.createPool({
     password: 'root', // Replace with your password
     database: 'perfect_dhaaga' // Replace with your database name
 });
-
-// // Configure multer storage
-// const storage = multer.diskStorage({
-//     destination: './uploads/', // Define upload destination folder
-//     filename: function (req, file, cb) {
-//         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)); // Create a unique file name
-//     }
-// });
-
-// // Create multer instance for file uploads
-// const upload = multer({ storage: storage });
 
 // Public routes
 router.get('/', (req, res) => {
@@ -60,7 +50,12 @@ router.post('/logout', (req, res) => {
 });
 
 // Protected routes
-router.get('/user-dashboard', authMiddleware, getUserProfile);
+router.get('/user-dashboard', authMiddleware, (req, res) => {
+    // Render the user dashboard
+    res.render('user_dashboard', { user: req.session.user });
+  });
+// router.get('/user-dashboard', authMiddleware, getUserProfile);
+router.post('/update-profile', authMiddleware, updateUserProfile);
 
 router.get('/tailor-dashboard', authMiddleware, (req, res) => {
     res.render('tailor_dashboard', { title: 'Tailor Dashboard' });
@@ -99,7 +94,11 @@ router.get('/vendor_new_post', authMiddleware, (req, res) => {
     res.render('vendor_new_post');
 });
 
-// Sample orders data (you might fetch this from a database in a real scenario)
+router.get('/fabrics', (req, res) => {
+    res.render('VendorPage');
+});
+
+// Sample orders data
 const orders = [
     { id: 1, customer: 'John Doe', item: 'Wedding Suit', dueDate: '2024-10-10', status: 'in-progress' },
     { id: 2, customer: 'Jane Smith', item: 'Evening Gown', dueDate: '2024-10-15', status: 'pending' },
@@ -231,26 +230,10 @@ router.post('/submit-form', upload, async (req, res) => {
     console.log(imagePath)
 });
 
-
-// Tailor Section Started from Here
-
-// router.post('/add-design', upload, designController.addDesign);
+// Tailor Section
 router.post('/add-design', upload, authMiddleware, designController.addDesign);
 
 router.get('/tailor/designs', designController.getTailorDesigns);
 router.get('/homepage/designs', designController.getTailorDesigns);
-
-
-// Tailor Section End Here
-
-
-
-
-
-
-
-
-
-
 
 module.exports = router;
