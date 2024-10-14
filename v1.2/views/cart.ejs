@@ -1,0 +1,181 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script defer src="https://unpkg.com/alpinejs@3.2.2/dist/cdn.min.js"></script>
+</head>
+
+<body class="bg-gray-100">
+  <%- include("partials/navbar") %>
+  <%- include("partials/login-modal") %>
+  <%- include("partials/mobile-menu") %>
+
+  <div class="min-h-screen bg-gray-100 p-8" x-data="cartPage()">
+    <div class="max-w-7xl mx-auto">
+      <h1 class="text-3xl font-bold mb-8">Your Cart</h1>
+      <div class="flex flex-col lg:flex-row gap-8">
+        <div class="lg:w-2/3 space-y-6">
+          <!-- Cart Items -->
+          <template x-for="group in cartGroups" :key="group.design.id">
+            <div class="flex flex-col p-4 bg-white shadow-lg rounded-lg overflow-hidden">
+              <div class="flex items-center">
+                <!-- Design Image -->
+                <img :src="group.design.image" :alt="group.design.name" class="w-40 h-40 object-cover rounded-lg">
+                <div class="ml-4 flex-grow">
+                  <h3 class="text-xl font-semibold" x-text="group.design.name"></h3>
+                  <p class="text-lg font-bold">
+                    Design Cost: ₹<span x-text="group.design.price.toLocaleString('en-IN')"></span>
+                  </p>
+
+                  <!-- Selected Fabrics Section (without images) -->
+                  <h4 class="font-semibold mt-4">Selected Fabrics:</h4>
+                  <ul class="list-disc list-inside">
+                    <template x-for="fabric in group.fabrics" :key="fabric.id">
+                      <li>
+                        <span x-text="fabric.name"></span> - ₹<span x-text="fabric.price.toLocaleString('en-IN')"></span>
+                      </li>
+                    </template>
+                  </ul>
+
+                  <!-- Total Cost Calculation -->
+                  <div class="flex justify-between mt-4 font-bold text-lg">
+                    <span>Total Cost: </span>
+                    <span x-text="'₹' + (group.design.price + group.fabrics.reduce((sum, fabric) => sum + fabric.price, 0)).toLocaleString('en-IN')"></span>
+                  </div>
+
+                  <div class="flex space-x-4 mt-4">
+                    <button class="flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-lg"
+                      @click="moveToSavedForLater(group)">
+                      <i class="far fa-heart mr-2"></i> Save for Later
+                    </button>
+                    <button class="flex items-center px-4 py-2 bg-red-500 text-white rounded-lg"
+                      @click="removeFromCart(group.design.id)">
+                      <i class="fas fa-trash-alt mr-2"></i> Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+
+          <!-- Saved for Later -->
+          <div x-show="savedGroups.length > 0" class="mt-12">
+            <h2 class="text-2xl font-bold mb-4">Saved for Later</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <template x-for="group in savedGroups" :key="group.design.id">
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                  <img :src="group.design.image" :alt="group.design.name" class="w-full h-48 object-cover">
+                  <div class="p-4">
+                    <h3 class="text-lg font-semibold mb-2" x-text="group.design.name"></h3>
+                    <p class="text-xl font-bold">
+                      Total Cost: ₹<span
+                        x-text="(group.design.price + group.fabrics.reduce((sum, fabric) => sum + fabric.price, 0)).toLocaleString('en-IN')"></span>
+                    </p>
+                    <h4 class="font-semibold mt-2">Fabrics:</h4>
+                    <ul class="list-disc list-inside">
+                      <template x-for="fabric in group.fabrics" :key="fabric.id">
+                        <li x-text="fabric.name"></li>
+                      </template>
+                    </ul>
+                  </div>
+                  <div class="bg-gray-50 p-4">
+                    <button class="w-full flex items-center justify-center px-4 py-2 bg-gray-200 text-gray-700 rounded-lg"
+                      @click="moveToCart(group)">
+                      <i class="fas fa-shopping-cart mr-2"></i> Move to Cart
+                    </button>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+        </div>
+
+        <!-- Price Details -->
+        <div class="lg:w-1/3">
+          <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="bg-primary text-primary-foreground p-4">
+              <h2 class="text-xl font-bold">Price Details</h2>
+            </div>
+            <div class="p-6">
+              <div class="space-y-4">
+                <div class="flex justify-between">
+                  <span>Price (<span x-text="cartGroups.length"></span> designs)</span>
+                  <span x-text="'₹' + totalPrice.toLocaleString('en-IN')"></span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Discount</span>
+                  <span x-text="'− ₹' + discount.toLocaleString('en-IN')"></span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Delivery Charges</span>
+                  <span class="text-green-600">Free</span>
+                </div>
+                <div class="flex justify-between font-bold text-lg">
+                  <span>Total Amount</span>
+                  <span x-text="'₹' + totalAmount.toLocaleString('en-IN')"></span>
+                </div>
+                <div class="text-green-600 font-semibold">
+                  You will save ₹<span x-text="discount.toLocaleString('en-IN')"></span> on this order
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-50 p-6">
+              <button class="w-full bg-black text-white py-2 rounded-lg text-lg">
+                Place Order
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include("partials/HomeFooter") %>
+  <script>
+    function cartPage() {
+      return {
+        cartGroups: [
+          {
+            design: { id: 1, name: "Blouse Design", price: 5000, image: "https://placehold.co/200x200" },
+            fabrics: [
+              { id: 1, name: "Cotton", price: 500 },
+              { id: 2, name: "Silk", price: 1500 }
+            ]
+          },
+          {
+            design: { id: 2, name: "Full Cloth Design", price: 8000, image: "https://placehold.co/200x200" },
+            fabrics: [{ id: 3, name: "Linen", price: 1000 }]
+          }
+        ],
+        savedGroups: [],
+        moveToSavedForLater(group) {
+          this.cartGroups = this.cartGroups.filter(g => g.design.id !== group.design.id);
+          this.savedGroups.push(group);
+        },
+        moveToCart(group) {
+          this.savedGroups = this.savedGroups.filter(g => g.design.id !== group.design.id);
+          this.cartGroups.push(group);
+        },
+        removeFromCart(designId) {
+          this.cartGroups = this.cartGroups.filter(g => g.design.id !== designId);
+        },
+        get totalPrice() {
+          return this.cartGroups.reduce((sum, group) => {
+            const fabricTotal = group.fabrics.reduce((fabricSum, fabric) => fabricSum + fabric.price, 0);
+            return sum + group.design.price + fabricTotal;
+          }, 0);
+        },
+        discount: 0,
+        get totalAmount() {
+          return this.totalPrice - this.discount;
+        }
+      };
+    }
+  </script>
+</body>
+
+</html>

@@ -9,6 +9,13 @@ const { getUserProfile, updateUserProfile } = require('../controllers/userContro
 const designController = require('../controllers/designController');
 const upload = require('../middleware/uploadMiddleware');
 const fabricRoutes = require('./fabricRoutes');
+const Cart = require('../models/cartModel');
+const cartController = require('../controllers/cartController'); 
+
+
+
+
+
 
 // Configure MySQL connection pool
 const pool = mysql.createPool({
@@ -96,6 +103,9 @@ router.get('/vendor_new_post', authMiddleware, (req, res) => {
 
 router.get('/fabrics', (req, res) => {
     res.render('VendorPage');
+});
+router.get('/cart', (req, res) => {
+    res.render('cart');
 });
 
 // Sample orders data
@@ -235,5 +245,8 @@ router.post('/add-design', upload, authMiddleware, designController.addDesign);
 
 router.get('/tailor/designs', designController.getTailorDesigns);
 router.get('/homepage/designs', designController.getTailorDesigns);
+
+
+
 
 module.exports = router;

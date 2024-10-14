@@ -5,6 +5,8 @@ const { testConnection } = require('./models/db'); // Import the testConnection 
 const routes = require('./routes/index'); // Import the main routes
 const fabricRoutes = require('./routes/fabricRoutes'); // Import the fabric routes
 const cartRoutes = require('./routes/cartRoutes');
+const authRoutes = require('./routes/authRoutes');
+const cors = require('cors');
 
 const app = express();
 const port = 3000;
@@ -23,13 +25,16 @@ app.use('/fabrics', fabricRoutes); // Use fabric routes
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 // Session configuration
 app.use(session({
     secret: 'your_secret_key',
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } // Set to true if using HTTPS
+    saveUninitialized: false,
+    cookie: { secure: false }, // Set to true if using HTTPS
 }));
+
+
 
 // Middleware to set user information in res.locals
 app.use((req, res, next) => {
@@ -43,8 +48,17 @@ app.use((req, res, next) => {
 
 // Use main routes
 app.use('/', routes);
-// Mount the cart routes
 app.use('/cart', cartRoutes);
+
+// Use the auth routes
+app.use('/auth', authRoutes);
+
+
+app.use(cors({
+    origin: 'http://localhost:3000', 
+    credentials: true // Allow credentials to be sent with the request
+}));
+
 
 // Start the server
 app.listen(port, async () => {

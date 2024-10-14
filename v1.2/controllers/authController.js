@@ -44,6 +44,7 @@ const registerUser  = async (req, res) => {
 };
 
 
+
 const loginUser  = async (req, res) => {
     const { emailOrPhone, password } = req.body;
 
@@ -76,12 +77,15 @@ const loginUser  = async (req, res) => {
 
         // Set session user
         req.session.user = {
-            id: foundUser .id,
+            id: foundUser.id,
             role: role,
-            name: foundUser .name,
-            email: foundUser .email,
-            phone: foundUser .phone
+            name: foundUser.name,
+            email: foundUser.email,
+            phone: foundUser.phone
         };
+
+        // Set the session userId
+        req.session.userId = foundUser.id;
 
         // Additionally, if the role is tailor, store the tailor_id for further use
         if (role === 'tailor') {
@@ -96,6 +100,7 @@ const loginUser  = async (req, res) => {
     }
 };
 
+
 const logoutUser = async (req, res) => {
     req.session.destroy((err) => {
         if (err) {
@@ -104,5 +109,15 @@ const logoutUser = async (req, res) => {
         res.json({ message: 'Logged out successfully' });
     });
 };
-module.exports = { registerUser , loginUser , logoutUser };
+
+const checkSession = (req, res) => {
+    if (req.session.user) {
+        res.json({ loggedIn: true, role: req.session.user.role });
+    } else {
+        res.json({ loggedIn: false });
+    }
+};
+
+
+module.exports = { registerUser , loginUser , logoutUser, checkSession };
 

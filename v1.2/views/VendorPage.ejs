@@ -1,133 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Select Fabrics</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-    <style>
-      /* Static Add to Cart button */
-      .sticky-cart {
-          position: fixed;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          background-color: white;
-          padding: 0.5rem 1rem;
-          border-top: 1px solid #e5e7eb;
-          z-index: 10;
-          display: flex;
-          justify-content: center;
-      }
-  
-      .sticky-cart .cart-button {
-          background-color: #38a169;
-          color: white;
-          font-size: 1rem;
-          font-weight: bold;
-          padding: 0.75rem 1.5rem;
-          border-radius: 5px;
-          box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-      }
-  
-      .sticky-cart .cart-button:hover {
-          background-color: #2f855a;
-      }
-  
-      /* Card size and styling */
-      .fabric-card {
-          max-width: 240px; /* Adjust width to accommodate the content */
-          padding: 1rem;
-          border-radius: 0.75rem;
-          box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      }
-  
-      .fabric-card img {
-          height: 160px;
-          object-fit: cover;
-      }
-  
-      .fabric-card h2 {
-          font-size: 1rem; /* Increase title size for better readability */
-          line-height: 1.4; /* Add line height for better spacing */
-          margin-bottom: 0.5rem; /* Increase bottom margin to space out from description */
-      }
-  
-      .fabric-card p {
-          font-size: 0.9rem; /* Adjust description font size */
-          line-height: 1.6; /* Increase line height for description */
-          margin-bottom: 0.5rem; /* Add bottom margin for better spacing */
-      }
-  
-      /* Truncate text to 2 lines */
-      .truncate-2-lines {
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          /* max-height: 2.6em; */
-      }
-  </style>
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Fabrics</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <link rel="stylesheet" href="../css/fabrics.css">
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <script src="https://cdn.tailwindcss.com"> </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/HomePage.css">
 </head>
+
 <body class="bg-gray-100">
-  <%- include("partials/navbar") %>
-    <%- include("partials/login-modal") %>
-      <%- include("partials/mobile-menu") %>
-      <br>
-    <div class="container mx-auto p-4 pb-20"> <!-- Add padding bottom to avoid overlap with sticky button -->
-        <h1 class="text-xl font-semibold mb-4">Select Fabrics for Your Design</h1>
 
-        <form id="fabric-selection-form">
-            <div id="fabrics-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6">
-                <!-- Fabrics will be injected here dynamically -->
-            </div>
-        </form>
+  <br>
+  <div class="container mx-auto p-4 pb-20">
+    <h1 class="text-xl font-semibold mb-4">Select Fabrics for Your Design</h1>
+
+    <form id="fabric-selection-form">
+      <div id="fabrics-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6">
+        <!-- Fabrics will be dynamically injected here -->
+      </div>
+    </form>
+  </div>
+
+  <!-- Add to Cart button -->
+  <div class="sticky-cart">
+    <button type="submit" id="add-to-cart-button" class="cart-button">
+      Add Selected Fabrics to Cart
+    </button>
+  </div>
+  <!-- Popup for login required -->
+  <div id="login-popup" class="hidden fixed z-50 inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+      <h2 class="text-lg font-semibold mb-4">Login Required</h2>
+      <p class="mb-4">Please login to add items to your cart.</p>
+      <button id="close-popup" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Close</button>
+      <a href="/login" class="text-blue-500 underline mt-2 inline-block">Go to Login</a>
     </div>
+  </div>
 
-    <!-- Static Add to Cart button -->
-    <div class="sticky-cart">
-        <button type="submit" form="fabric-selection-form" class="cart-button">
-            Add to Cart
-        </button>
-    </div>
-    <%- include("partials/HomeFooter") %>
-    <!-- JS Script -->
-    <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      const designId = urlParams.get('designId'); // Get designId from query params
 
-      // Fetch the fabrics related to the selected design
-      fetch(`/fabrics/related-to-design?designId=${designId}`)
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const designId = urlParams.get('designId'); // Retrieve designId from the query params
+
+    // Check if the user is logged in by fetching session or user data
+    let isLoggedIn = false; // Default state
+    fetch('/auth/check-login', {
+      method: 'GET',
+      credentials: 'include' // Ensures cookies are sent with the request
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.loggedIn) {
+          isLoggedIn = true; // User is logged in
+        }
+      })
+      .catch(error => console.error('Error checking login:', error));
+
+    // Fetch fabrics related to the selected design
+    fetch(`/fabrics/related-to-design?designId=${designId}`)
       .then(response => response.json())
       .then(fabrics => {
         const fabricsContainer = document.getElementById('fabrics-container');
 
-        // Clear any previous fabrics
+        // Clear previous fabrics
         fabricsContainer.innerHTML = '';
 
-        // Loop through the fabrics and display them
+        // Loop through the fabrics and dynamically display them
         fabrics.forEach(fabric => {
           const fabricElement = document.createElement('div');
           fabricElement.classList.add('fabric-card', 'bg-white', 'rounded-lg', 'shadow', 'flex', 'flex-col', 'justify-between', 'mx-auto');
 
-          // Set the fabric HTML structure dynamically
+          // Create the HTML structure for the fabric
           fabricElement.innerHTML = `
-            <img class="mb-4 rounded-t-lg" src="/uploads/${fabric.imagePath}" alt="${fabric.clothName}" />
-            <h2 class="text-base font-semibold truncate-2-lines mb-1">${fabric.clothName}</h2>
-            <p class="text-gray-700 truncate-2-lines mb-1">${fabric.description}</p>
-            <p class="text-green-700 font-semibold">Rs. ${fabric.price}/m</p>
+              <img class="mb-4 rounded-t-lg" src="/uploads/${fabric.imagePath}" alt="${fabric.clothName}" />
+              <h2 class="text-base font-semibold truncate-2-lines mb-1">${fabric.clothName}</h2>
+              <p class="text-gray-700 truncate-2-lines mb-1">${fabric.description}</p>
+              <p class="text-green-700 font-semibold">Rs. ${fabric.price}/m</p>
 
-            <label for="quantity-${fabric.id}" class="block text-sm font-medium text-gray-600 mt-2">Quantity (meters):</label>
-            <input type="number" id="quantity-${fabric.id}" name="quantity" value="1" min="1" class="quantity-input mt-1 block w-full p-2 border rounded-md text-sm" data-price="${fabric.price}">
-            
-            <p class="fabric-total-price text-gray-900 font-semibold mt-2">Total: Rs. ${fabric.price}</p>
+              <label for="quantity-${fabric.id}" class="block text-sm font-medium text-gray-600 mt-2">Quantity (meters):</label>
+              <input type="number" id="quantity-${fabric.id}" name="quantity" value="1" min="1" class="quantity-input mt-1 block w-full p-2 border rounded-md text-sm" data-price="${fabric.price}">
 
-            <button class="select-fabric-button mt-3 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium py-2 px-4 rounded" data-selected="false" data-fabric-id="${fabric.id}">
-              Select Fabric
-            </button>
-          `;
+              <p class="fabric-total-price text-gray-900 font-semibold mt-2">Total: Rs. ${fabric.price}</p>
+
+              <button type="button" class="select-fabric-button mt-3 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium py-2 px-4 rounded" data-fabric-id="${fabric.id}" data-selected="false">
+                Select Fabric
+              </button>
+            `;
 
           // Append the fabric card to the container
           fabricsContainer.appendChild(fabricElement);
@@ -139,6 +106,7 @@
             const button = event.target;
             const isSelected = button.getAttribute('data-selected') === 'true';
 
+            // Toggle selection state
             if (isSelected) {
               button.textContent = 'Select Fabric';
               button.classList.replace('bg-green-500', 'bg-blue-500');
@@ -165,28 +133,41 @@
       })
       .catch(error => console.error('Error loading fabrics:', error));
 
-      // Add selected fabrics to the cart
-      document.getElementById('fabric-selection-form').addEventListener('submit', (event) => {
-        event.preventDefault(); // Prevent form submission
+    // Add selected fabrics to the cart
+    document.getElementById('add-to-cart-button').addEventListener('click', (event) => {
+      event.preventDefault(); // Prevent default button behavior
 
-        const selectedFabrics = [];
-        document.querySelectorAll('.select-fabric-button[data-selected="true"]').forEach(button => {
-          const fabricId = button.getAttribute('data-fabric-id');
-          const quantityInput = document.querySelector(`#quantity-${fabricId}`);
-          selectedFabrics.push({
-            fabricId: fabricId,
-            quantity: quantityInput.value // Get quantity in meters
-          });
+      // Check if user is logged in (based on session or role from the server)
+      if (!isLoggedIn) {
+        // Show a pop-up if the user is not logged in
+        document.getElementById('login-popup').classList.remove('hidden');
+        return;
+      }
+
+      const selectedFabrics = [];
+      document.querySelectorAll('.select-fabric-button[data-selected="true"]').forEach(button => {
+        const fabricId = button.getAttribute('data-fabric-id');
+        const quantityInput = document.querySelector(`#quantity-${fabricId}`);
+        selectedFabrics.push({
+          fabricId: fabricId,
+          quantity: quantityInput.value // Get quantity in meters
         });
+      });
 
-        // Send the selected fabrics to the server to add to the cart
-        fetch('/cart/add', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ designId, selectedFabrics })
-        })
+      // Check if any fabrics are selected
+      if (selectedFabrics.length === 0) {
+        alert('Please select at least one fabric.');
+        return;
+      }
+
+      // Send the selected fabrics to the server to add to the cart
+      fetch('/cart/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ designId, selectedFabrics })
+      })
         .then(response => response.json())
         .then(data => {
           // Handle success (e.g., redirect to cart or show a success message)
@@ -194,7 +175,16 @@
           window.location.href = '/cart';
         })
         .catch(error => console.error('Error adding fabrics to cart:', error));
-      });
-    </script>
+    });
+
+    // Close login popup
+    document.getElementById('close-popup').addEventListener('click', () => {
+      document.getElementById('login-popup').classList.add('hidden');
+    });
+
+  </script>
+
+
 </body>
+
 </html>
