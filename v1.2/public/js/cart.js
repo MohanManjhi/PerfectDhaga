@@ -1,17 +1,29 @@
-document.getElementById('scroll-left').addEventListener('click', function () {
-    const scrollContainer = document.getElementById('horizontal-scroll');
-    scrollContainer.scrollBy({
-        top: 0,
-        left: -150, // Scroll left by 150 pixels
-        behavior: 'smooth' // Smooth scroll
-    });
-});
-
-document.getElementById('scroll-right').addEventListener('click', function () {
-    const scrollContainer = document.getElementById('horizontal-scroll');
-    scrollContainer.scrollBy({
-        top: 0,
-        left: 150, // Scroll right by 150 pixels
-        behavior: 'smooth' // Smooth scroll
-    });
-});
+// fetch('/cart', {
+//     method: 'GET',
+//     credentials: 'include' // Ensure cookies are sent
+//   })
+//     .then(response => response.json())
+//     .then(cartItems => {
+//       // Update the UI with cart items
+//       const cartContainer = document.getElementById('cart-container');
+//       cartContainer.innerHTML = ''; // Clear previous content
+  
+//       cartItems.forEach(item => {
+//         const totalItemPrice = (parseFloat(item.fabricPrice) + parseFloat(item.designPrice)).toFixed(2);
+  
+//         const cartItem = `
+//           <div class="cart-item">
+//             <h3>${item.designTitle} - ${item.fabricName}</h3>
+//             <p>Quantity: ${item.quantity}</p>
+//             <p>Fabric Price: Rs. ${item.fabricPrice}</p>
+//             <p>Design Price: Rs. ${item.designPrice}</p>
+//             <p>Total Item Price: Rs. ${totalItemPrice}</p>
+//           </div>
+//         `;
+//         cartContainer.innerHTML += cartItem;
+//       });
+//     })
+//     .catch(error => {
+//       console.error('Error fetching cart items:', error);
+//     });
+  

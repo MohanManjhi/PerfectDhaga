@@ -110,9 +110,21 @@ const logoutUser = async (req, res) => {
     });
 };
 
+// const checkSession = (req, res) => {
+//     if (req.session.user) {
+//         res.json({ loggedIn: true, role: req.session.user.role });
+//     } else {
+//         res.json({ loggedIn: false });
+//     }
+// };
+
 const checkSession = (req, res) => {
     if (req.session.user) {
-        res.json({ loggedIn: true, role: req.session.user.role });
+        res.json({
+            loggedIn: true,
+            userId: req.session.user.id,  // Return userId
+            role: req.session.user.role
+        });
     } else {
         res.json({ loggedIn: false });
     }

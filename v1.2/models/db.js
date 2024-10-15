@@ -24,16 +24,7 @@ const testConnection = async () => {
   }
 };
 
-// Create the query function that executes SQL queries
-// const query = async (sql, params = []) => {
-//   try {
-//     const [rows] = await pool.execute(sql, params);
-//     return rows;
-//   } catch (error) {
-//     console.error('Query failed:', error.message);
-//     throw error; // Rethrow the error to be handled by the calling function
-//   }
-// };
+
 
 const query = async (sql, params = []) => {
   try {

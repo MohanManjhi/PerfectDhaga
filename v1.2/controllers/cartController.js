@@ -1,94 +1,148 @@
-const { addToCart, removeFromCart, getItemInCart } = require('../models/cartModel');  // MySQL queries for cart actions
-const { addToSavedForLater, removeFromSavedForLater, getItemInSaved } = require('../models/savedForLaterModel');  // MySQL queries for saved for later actions
+const { pool } = require('../models/db');
+
+// Add items to cart
+// module.exports.addToCart = async (req, res) => {
+//   try {
+//     const { userId, designId, selectedFabrics } = req.body;
+//     console.log("user id: ", userId);
+//     console.log("design id : ", designId);
+//     console.log("select fabrics id ",selectedFabrics);
+//     // Validate input data
+//     if (!userId || !designId || !selectedFabrics || selectedFabrics.length === 0) {
+//       return res.status(400).json({ message: 'Invalid data provided' });
+//     }
 
 
-// Add item to cart
+//     // Fetch the design price
+//     const [[design]] = await db.query(`
+//       SELECT COALESCE(bd.price, fcd.total_price, hcd.price) AS designPrice
+//       FROM designs d
+//       LEFT JOIN blouse_designs bd ON d.id = bd.design_id
+//       LEFT JOIN full_cloth_designs fcd ON d.id = fcd.design_id
+//       LEFT JOIN half_cloth_designs hcd ON d.id = hcd.design_id
+//       WHERE d.id = ?
+//     `, [designId]);
+
+//     if (!design) {
+//       return res.status(404).json({ message: 'Design not found' });
+//     }
+
+//     const designPrice = parseFloat(design.designPrice); // Get design price in decimal
+
+//     // Loop through each selected fabric and add the fabric and design price to the cart
+//     for (const fabric of selectedFabrics) {
+//       const { fabricId, quantity } = fabric;
+
+//       // Fetch fabric price from the clothes table
+//       const [[cloth]] = await db.query('SELECT price FROM clothes WHERE id = ?', [fabricId]);
+
+//       if (!cloth) {
+//         return res.status(404).json({ message: 'Fabric not found' });
+//       }
+
+//       const fabricPrice = parseFloat(cloth.price); // Get fabric price in decimal
+//       const totalPrice = ((fabricPrice * quantity) + designPrice).toFixed(2); // Sum design price and fabric price
+
+//       // Insert the fabric and design into the cart
+//       await db.query(`
+//         INSERT INTO cart (userId, designId, clothId, quantity, totalPrice) 
+//         VALUES (?, ?, ?, ?, ?) 
+//         ON DUPLICATE KEY UPDATE 
+//         quantity = quantity + ?, 
+//         totalPrice = totalPrice + ?`, 
+//         [userId, designId, fabricId, quantity, totalPrice, quantity, totalPrice]);
+//     }
+
+//     res.status(201).json({ message: 'Fabrics and design added to cart successfully.' });
+//   } catch (error) {
+//     console.error('Error adding items to cart:', error);
+//     res.status(500).json({ message: 'Server error.' });
+//   }
+// };
+
 exports.addToCart = async (req, res) => {
-  const { designId, selectedFabrics, quantity, totalPrice } = req.body;  // Assuming selectedFabrics is an array of fabricIds
+  const { userId, designId, selectedFabrics } = req.body;
+
+  console.log("user id: ", userId);
+  console.log("design id : ", designId);
+  console.log("select fabrics id ", selectedFabrics);
+
+  // Validate input
+  if (!userId || !designId || !selectedFabrics || selectedFabrics.length === 0) {
+    return res.status(400).json({ message: 'Invalid data. Please provide design and fabrics.' });
+  }
+
+  // Begin a transaction to ensure data consistency
+  const connection = await pool.getConnection();  // Get a connection from the pool
 
   try {
-    // Ensure the designId and selectedFabrics are valid
-    if (!designId || !Array.isArray(selectedFabrics) || selectedFabrics.length === 0) {
-      return res.status(400).json({ message: 'Invalid designId or fabrics.' });
+    await connection.beginTransaction();  // Begin the transaction
+
+    // Loop through selected fabrics and insert each one into the cart table
+    for (let fabric of selectedFabrics) {
+      const { fabricId, quantity } = fabric;
+
+      // Fetch fabric details from the clothes table
+      const [fabricDetails] = await connection.execute(
+        'SELECT price FROM clothes WHERE id = ?',
+        [fabricId]
+      );
+
+      if (fabricDetails.length === 0) {
+        return res.status(404).json({ message: `Fabric with ID ${fabricId} not found.` });
+      }
+
+      const totalPrice = parseFloat(fabricDetails[0].price) * parseInt(quantity, 10);
+
+      // Insert the fabric into the cart
+      await connection.execute(
+        'INSERT INTO cart (userId, designId, clothId, quantity, totalPrice) VALUES (?, ?, ?, ?, ?)',
+        [userId, designId, fabricId, quantity, totalPrice]
+      );
     }
 
-    // Add to the cart
-    await addToCart(designId, selectedFabrics, quantity, totalPrice);
+    // Commit the transaction if all fabrics were added successfully
+    await connection.commit();
+    res.status(200).json({ message: 'Fabrics added to cart successfully.' });
 
-    res.status(200).json({ message: 'Item added to cart successfully' });
   } catch (error) {
-    console.error('Error adding item to cart:', error);
-    res.status(500).json({ message: 'Server error', error: error.message });
+    // Rollback the transaction if there was an error
+    await connection.rollback();
+    console.error('Error adding fabrics to cart:', error);
+    res.status(500).json({ message: 'Error adding fabrics to cart. Please try again later.' });
+
+  } finally {
+    // Release the connection back to the pool
+    connection.release();
   }
 };
 
 
-// Save item for later
-exports.saveForLater = async (req, res) => {
-  const { designId, fabricIds } = req.body;
+// Get all items in the cart for a specific user
+// module.exports.getCartItems = async (req, res) => {
+//   try {
+//     const userId = req.user.id; // Assume the user ID comes from the authenticated user session
 
-  try {
-    // Check if the item exists in the cart first
-    const [cartRows] = await getItemInCart(designId); // Modify with your model method
-    if (cartRows.length === 0) {
-      return res.status(404).json({ message: 'Item not found in cart.' });
-    }
+//     const [cartItems] = await db.query(`
+//       SELECT c.id, d.title AS designTitle, cl.clothName AS fabricName, 
+//       c.quantity, c.totalPrice, cl.price AS fabricPrice, 
+//       COALESCE(bd.price, fcd.total_price, hcd.price) AS designPrice
+//       FROM cart c
+//       INNER JOIN designs d ON c.designId = d.id
+//       INNER JOIN clothes cl ON c.clothId = cl.id
+//       LEFT JOIN blouse_designs bd ON d.id = bd.design_id
+//       LEFT JOIN full_cloth_designs fcd ON d.id = fcd.design_id
+//       LEFT JOIN half_cloth_designs hcd ON d.id = hcd.design_id
+//       WHERE c.userId = ?
+//     `, [userId]);
 
-    // Move item to saved for later
-    await addToSavedForLater(designId, fabricIds);
+//     if (cartItems.length === 0) {
+//       return res.status(404).json({ message: 'Cart is empty' });
+//     }
 
-    // Remove from cart
-    await removeFromCart(designId);
-
-    res.status(200).json({ message: 'Item saved for later' });
-  } catch (error) {
-    console.error('Error saving item for later:', error);
-    res.status(500).json({ message: 'Server Error', error });
-  }
-};
-
-// Move item back to the cart
-exports.moveToCart = async (req, res) => {
-  const { designId, fabricIds } = req.body;
-
-  try {
-    // Check if the item exists in the saved for later table first
-    const [savedRows] = await getItemInSaved(designId); // Modify with your model method
-    if (savedRows.length === 0) {
-      return res.status(404).json({ message: 'Item not found in saved for later.' });
-    }
-
-    // Move saved item back to cart
-    await addToCart(designId, fabricIds);
-
-    // Remove from saved for later
-    await removeFromSavedForLater(designId);
-
-    res.status(200).json({ message: 'Item moved to cart' });
-  } catch (error) {
-    console.error('Error moving item to cart:', error);
-    res.status(500).json({ message: 'Server Error', error });
-  }
-};
-
-
-// Remove item from cart
-exports.removeFromCart = async (req, res) => {
-  const { designId } = req.params;
-
-  try {
-    // Ensure the item exists in the cart before removing
-    const [cartRows] = await getItemInCart(designId);
-    if (cartRows.length === 0) {
-      return res.status(404).json({ message: 'Item not found in cart.' });
-    }
-
-    // Remove from the cart
-    await removeFromCart(designId);
-
-    res.status(200).json({ message: 'Item removed from cart' });
-  } catch (error) {
-    console.error('Error removing item from cart:', error);
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-};
+//     res.status(200).json(cartItems);
+//   } catch (error) {
+//     console.error('Error fetching cart items:', error);
+//     res.status(500).json({ message: 'Server error.' });
+//   }
+// };
