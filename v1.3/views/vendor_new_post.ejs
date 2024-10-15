@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Dashboard</title>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="../css/vendor_home1.css">
+      <link rel="stylesheet" href="../css/vendor_new_post.css"> <!-- Link to Tailor Form CSS -->
+</head>
+
+<body>
+
+      <div class="dashboard">
+            <aside class="sidebar">
+                  <div class="profile">
+                        <img src="../images/tailoricon.jpg" alt="Tailor" class="avatar">
+                        <div class="profile-info">
+                              <h2>Vendor Name</h2>
+                              <p>Master Craftsman</p>
+                        </div>
+                  </div>
+                  <nav class="nav">
+                        <ul>
+                              <li><a href="/vendor_home" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+                              <li><a href="/vendor_all_post" class="nav-link"><i class="fas fa-plus-circle"></i>
+                                          View Post</a></li>
+                              <li><a href="/vender_order_details" class="nav-link"><i class="fas fa-clipboard-list"></i>
+                                          Orders</a></li>
+                              
+                              <li><a href="/vendor_profile" class="nav-link"><i class="fas fa-user-circle"></i>
+                                          Profile</a></li>
+                              <li><a href="/vendor_payment" class="nav-link"><i class="fas fa-dollar-sign"></i>
+                                          Payments</a></li>
+                              <li><a href="/vendor_review" class="nav-link"><i class="fas fa-star"></i> Reviews</a></li>
+                              <li><a href="/vendor_contact" class="nav-link"><i class="fas fa-map-marker-alt"></i>
+                                          Location</a></li>
+                              <li><a href="/vendor_new_post" class="nav-link"><i class="fas fa-map-marker-alt"></i>
+                                          New Post</a></li>
+                              <li><a href="/vendor_logout" class="nav-link"><i class="fas fa-sign-out-alt"></i>
+                                          </i>
+                                          log_out</a></li>
+                        </ul>
+                  </nav>
+            </aside>
+
+            <main class="main-content"> <!-- Main Content Wrapper -->
+                  <h2><i class="fas fa-tshirt"></i> New Cloth Post</h2>
+                  <div class="form-container">
+                        <form id="clothForm" method="post" action="/api/clothes" enctype="multipart/form-data">
+
+                              <div class="form-group">
+                                    <label for="clothName"><i class="fas fa-tags"></i> Cloth Name</label>
+                                    <input type="text" id="clothName" name="clothName" placeholder="Enter cloth name"
+                                          required minlength="2" maxlength="100">
+                              </div>
+                              <div class="form-group">
+                                    <label for="clothType"><i class="fas fa-clothes-hanger"></i> Cloth Type</label>
+                                    <select id="clothType" name="clothType" required>
+                                          <option value="" disabled selected>Select cloth type</option>
+                                          <option value="dress">Dress</option>
+                                          <option value="shirt">Shirt</option>
+                                          <option value="pants">Pants</option>
+                                          <option value="skirt">Skirt</option>
+                                          <option value="jacket">Jacket</option>
+                                          <option value="other">Other</option>
+                                    </select>
+                              </div>
+                              <div class="form-group">
+                                    <label for="customClothType"><i class="fas fa-pencil-alt"></i> Custom Cloth Type (if
+                                          applicable)</label>
+                                    <input type="text" id="customClothType" name="customClothType"
+                                          placeholder="Enter custom cloth type" maxlength="100">
+                              </div>
+                              <div class="form-group">
+                                    <label for="material"><i class="fas fa-fabric"></i> Material</label>
+                                    <input type="text" id="material" name="material" placeholder="Enter material"
+                                          required minlength="2" maxlength="100">
+                              </div>
+                              <div class="form-group">
+                                    <label for="price"><i class="fas "></i> Price (Rs.)</label>
+                                    <input type="number" id="price" name="price" placeholder="Enter price" required
+                                          min="0" step="0.01">
+                              </div>
+                              <div class="form-group">
+                                    <label for="description"><i class="fas fa-info-circle"></i> Description</label>
+                                    <textarea id="description" name="description"
+                                          placeholder="Enter a detailed description of the cloth" required
+                                          minlength="10" maxlength="500"></textarea>
+                              </div>
+                              <div class="form-group">
+                                    <label for="image"><i class="fas fa-image"></i> Image</label>
+                                    <input type="file" id="image" name="designPhotos"
+                                          accept="image/png, image/jpeg, image/webp" required>
+                              </div>
+
+                              <button type="submit" class="submit-button"><i class="fas fa-check-circle"></i>
+                                    Submit</button>
+                        </form>
+                  </div>
+            </main>
+      </div>
+      <script>
+            fetch('/api/clothes', {
+                  method: 'POST',
+                  body: formData,
+            })
+                  .then(response => {
+                        console.log(response); // Log the full response object
+
+                        // Check if the response is JSON
+                        const contentType = response.headers.get('content-type');
+                        if (contentType && contentType.includes('application/json')) {
+                              return response.json(); // Parse JSON if response is JSON
+                        } else {
+                              console.error('Expected JSON, received:', contentType);
+                              return response.text(); // Fall back to text (for HTML responses)
+                        }
+                  })
+                  .then(data => {
+                        console.log('Response data:', data); // Log data to check what was returned
+                        if (data.success) {
+                              alert('Cloth post created successfully!');
+                              window.location.href = '/vendor_home';
+                        } else {
+                              alert('Error: ' + (data.message || 'Unexpected response format'));
+                        }
+                  })
+                  .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while submitting the form.');
+                  });
+
+
+      </script>
+</body>
+
+</html>

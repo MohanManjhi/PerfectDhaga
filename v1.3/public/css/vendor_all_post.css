@@ -1,0 +1,167 @@
+/* Main Content */
+.main-content {
+      width: 75%;
+      padding: 20px;
+      /* Add padding around the main content */
+}
+
+/* Container for product cards */
+.all_post {
+      display: flex;
+      /* Use flexbox for layout */
+      flex-wrap: wrap;
+      /* Allow wrapping of cards */
+      justify-content: space-between;
+      /* Space between cards */
+      margin: -10px;
+      /* Adjust for card margins */
+}
+
+/* Card Styling */
+.card {
+      flex: 1 1 200px;
+      /* Allow cards to grow, shrink, and set base width */
+      background-color: white;
+      /* White background for the card */
+      padding: 20px;
+      /* Padding inside the card */
+      border-radius: 10px;
+      /* Rounded corners */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      /* Subtle shadow */
+      margin: 10px;
+      /* Space around each card */
+      min-width: 200px;
+      /* Minimum width for cards */
+      max-width: 300px;
+      /* Optional maximum width */
+      transition: transform 0.2s;
+      /* Smooth scaling effect */
+}
+
+/* Card Image */
+.card-image img {
+      width: 80%;
+      height: 160px;
+      /* Full width image */
+     
+      /* Maintain aspect ratio */
+      border-radius: 10px;
+      /* Rounded corners for image */
+}
+
+/* Card Content */
+.card-content {
+      margin-top: 15px;
+      /* Space above content */
+}
+
+/* Product Name */
+.product-name {
+      font-size: 1.5em;
+      /* Font size for product name */
+      margin: 0;
+      /* Remove default margin */
+}
+
+/* Product Price */
+.product-price {
+      font-size: 1.2em;
+      /* Font size for product price */
+      color: #3498db;
+      /* Blue color for price */
+      margin: 10px 0;
+      /* Space above and below price */
+}
+
+/* Card Footer */
+.card-footer {
+      margin-bottom: 5px;
+      /* Space above footer */
+}
+
+/* Link Styling */
+.see-more {
+      display: inline-block;
+      /* Inline-block for link */
+      padding: 10px;
+      /* Padding for the link */
+      background-color: #3498db;
+      /* Link background color */
+      color: white;
+      /* White text */
+      text-align: center;
+      /* Center text */
+      text-decoration: none;
+      /* Remove underline */
+      border-radius: 5px;
+      /* Rounded corners */
+      transition: background-color 0.3s;
+      /* Smooth color transition */
+}
+
+/* Link Hover Effect */
+.see-more:hover {
+      background-color: #2980b9;
+      /* Darker blue on hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+      .card {
+            margin: 5px;
+            /* Reduce margin on smaller screens */
+      }
+}
+.delete-post {
+      background-color: transparent;
+      border: none;
+      color: #030303;
+      /* Red color for delete action */
+      cursor: pointer;
+      font-size: 16px;
+      margin-left: 50px;
+      /* Space between buttons */
+}
+
+.delete-post:hover {
+      text-decoration: underline;
+      /* Underline on hover */
+}
+h3 {
+      font-size: 2.5rem;
+      /* Size of the font */
+      font-weight: bold;
+      /* Make the text bold */
+      color: #3498db;
+      /* Color of the text */
+      text-align: center;
+      /* Center the heading */
+      margin: 20px 0;
+      /* Top and bottom margin */
+      padding: 10px;
+      /* Padding around the text */
+      text-transform: uppercase;
+      /* Make the text uppercase */
+      letter-spacing: 1px;
+      /* Spacing between letters */
+      position: relative;
+      /* For positioning the pseudo-element */
+}
+
+h3::after {
+      content: '';
+      /* Creates a pseudo-element */
+      display: block;
+      /* Make it a block element */
+      width: 50px;
+      /* Width of the line */
+      height: 4px;
+      /* Height of the line */
+      background-color: #3498db;
+      /* Color of the line */
+      margin: 10px auto;
+      /* Center the line under the heading */
+      border-radius: 2px;
+      /* Rounded corners for the line */
+}

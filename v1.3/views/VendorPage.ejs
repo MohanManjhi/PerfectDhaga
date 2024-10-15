@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Fabrics</title>
+  
+  <!-- Tailwind CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../css/fabrics.css">
+  <link rel="stylesheet" href="/css/HomePage.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+  <div class="container mx-auto p-4 pb-20">
+    <h1 class="text-xl font-semibold mb-4">Select Fabrics for Your Design</h1>
+
+    <form id="fabric-selection-form">
+      <div id="fabrics-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6">
+        <!-- Fabrics will be dynamically injected here -->
+      </div>
+    </form>
+  </div>
+
+  <!-- Add to Cart button -->
+  <div class="sticky-cart">
+    <button type="submit" id="add-to-cart-button" class="cart-button">
+      Add Selected Fabrics to Cart
+    </button>
+  </div>
+
+  <!-- Popup for login required -->
+  <div id="login-popup" class="hidden fixed z-50 inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+      <h2 class="text-lg font-semibold mb-4">Login Required</h2>
+      <p class="mb-4">Please login to add items to your cart.</p>
+      <button id="close-popup" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Close</button>
+      <a href="/login" class="text-blue-500 underline mt-2 inline-block">Go to Login</a>
+    </div>
+  </div>
+
+  <!-- <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const designId = urlParams.get('designId'); // Retrieve designId from the query params
+  
+    let userId = null;  // Variable to store the userId
+    let isLoggedIn = false;
+  
+    // Check if the user is logged in and get the userId
+    fetch('/auth/check-login', {
+      method: 'GET',
+      credentials: 'include' // Ensures cookies are sent with the request
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.loggedIn) {
+        isLoggedIn = true;
+        userId = data.userId;  // Assuming the server returns userId in the response
+      }
+    })
+    .catch(error => console.error('Error checking login:', error));
+  
+    // Fetch fabrics related to the selected design
+    fetch(`/fabrics/related-to-design?designId=${designId}`)
+      .then(response => response.json())
+      .then(fabrics => {
+        const fabricsContainer = document.getElementById('fabrics-container');
+        fabricsContainer.innerHTML = ''; // Clear previous fabrics
+  
+        fabrics.forEach(fabric => {
+          const fabricElement = document.createElement('div');
+          fabricElement.classList.add('fabric-card', 'bg-white', 'rounded-lg', 'shadow', 'flex', 'flex-col', 'justify-between', 'mx-auto');
+  
+          fabricElement.innerHTML = `
+            <img class="mb-4 rounded-t-lg" src="/uploads/${fabric.imagePath}" alt="${fabric.clothName}" />
+            <h2 class="text-base font-semibold truncate-2-lines mb-1">${fabric.clothName}</h2>
+            <p class="text-gray-700 truncate-2-lines mb-1">${fabric.description}</p>
+            <p class="text-green-700 font-semibold">Rs. ${fabric.price}/m</p>
+  
+            <label for="quantity-${fabric.id}" class="block text-sm font-medium text-gray-600 mt-2">Quantity (meters):</label>
+            <input type="number" id="quantity-${fabric.id}" name="quantity" value="1" min="1" class="quantity-input mt-1 block w-full p-2 border rounded-md text-sm" data-price="${fabric.price}">
+  
+            <p class="fabric-total-price text-gray-900 font-semibold mt-2">Total: Rs. ${fabric.price}</p>
+  
+            <button type="button" class="select-fabric-button mt-3 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium py-2 px-4 rounded" data-fabric-id="${fabric.id}" data-selected="false">
+              Select Fabric
+            </button>
+          `;
+  
+          fabricsContainer.appendChild(fabricElement);
+        });
+  
+        // Add event listeners to fabric selection buttons
+        document.querySelectorAll('.select-fabric-button').forEach(button => {
+          button.addEventListener('click', () => {
+            // Deselect all other buttons
+            document.querySelectorAll('.select-fabric-button').forEach(otherButton => {
+              if (otherButton !== button) {
+                otherButton.textContent = 'Select Fabric';
+                otherButton.classList.replace('bg-green-500', 'bg-blue-500');
+                otherButton.classList.replace('hover:bg-green-600', 'hover:bg-blue-600');
+                otherButton.setAttribute('data-selected', 'false');
+              }
+            });
+  
+            const isSelected = button.getAttribute('data-selected') === 'true';
+            if (isSelected) {
+              button.textContent = 'Select Fabric';
+              button.classList.replace('bg-green-500', 'bg-blue-500');
+              button.classList.replace('hover:bg-green-600', 'hover:bg-blue-600');
+              button.setAttribute('data-selected', 'false');
+            } else {
+              button.textContent = 'Selected';
+              button.classList.replace('bg-blue-500', 'bg-green-500');
+              button.classList.replace('hover:bg-blue-600', 'hover:bg-green-600');
+              button.setAttribute('data-selected', 'true');
+            }
+          });
+        });
+  
+        // Update total price dynamically based on quantity
+        document.querySelectorAll('.quantity-input').forEach(input => {
+          input.addEventListener('input', event => {
+            const pricePerMeter = parseFloat(event.target.dataset.price);
+            const quantity = parseFloat(event.target.value);
+            const totalPriceElement = event.target.closest('div').querySelector('.fabric-total-price');
+            totalPriceElement.innerText = `Total: Rs. ${pricePerMeter * quantity}`;
+          });
+        });
+      })
+      .catch(error => console.error('Error loading fabrics:', error));
+  
+    // Add selected fabrics to the cart
+    document.getElementById('add-to-cart-button').addEventListener('click', event => {
+      event.preventDefault();
+  
+      if (!isLoggedIn) {
+        document.getElementById('login-popup').classList.remove('hidden');
+        return;
+      }
+  
+      const selectedFabric = document.querySelector('.select-fabric-button[data-selected="true"]');
+  
+      if (!selectedFabric) {
+        alert('Please select a fabric.');
+        return;
+      }
+  
+      const fabricId = selectedFabric.getAttribute('data-fabric-id');
+      const quantityInput = document.querySelector(`#quantity-${fabricId}`);
+      const selectedFabrics = [{
+        fabricId: fabricId,
+        quantity: quantityInput.value
+      }];
+  
+      // Send userId along with the design and selected fabrics to the cart
+      fetch('/cart/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, designId, selectedFabrics })  // Include userId in the request body
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message === 'Fabrics added to cart successfully.') {
+          alert('Fabrics added to cart successfully!');
+          window.location.href = '/cart';
+        } else {
+          alert('Error adding fabric to cart: ' + data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Error adding fabrics to cart:', error);
+        alert('There was an error adding the fabrics to the cart.');
+      });
+    });
+  
+    // Close login popup
+    document.getElementById('close-popup').addEventListener('click', () => {
+      document.getElementById('login-popup').classList.add('hidden');
+    });
+  </script> -->
+  
+
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const designId = urlParams.get('designId'); // Retrieve designId from the query params
+  
+    let userId = null;  // Variable to store the userId
+    let isLoggedIn = false;
+  
+    // Check if the user is logged in and get the userId
+    fetch('/auth/check-login', {
+      method: 'GET',
+      credentials: 'include' // Ensures cookies are sent with the request
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.loggedIn) {
+          isLoggedIn = true;
+          userId = data.userId;  // Assuming the server returns userId in the response
+        }
+      })
+      .catch(error => console.error('Error checking login:', error));
+  
+    // Fetch fabrics related to the selected design
+    fetch(`/fabrics/related-to-design?designId=${designId}`)
+      .then(response => response.json())
+      .then(fabrics => {
+        const fabricsContainer = document.getElementById('fabrics-container');
+        fabricsContainer.innerHTML = ''; // Clear previous fabrics
+  
+        fabrics.forEach(fabric => {
+          const fabricElement = document.createElement('div');
+          fabricElement.classList.add('fabric-card', 'bg-white', 'rounded-lg', 'shadow', 'flex', 'flex-col', 'justify-between', 'mx-auto');
+  
+          fabricElement.innerHTML = `
+            <img class="mb-4 rounded-t-lg" src="/uploads/${fabric.imagePath}" alt="${fabric.clothName}" />
+            <h2 class="text-base font-semibold truncate-2-lines mb-1">${fabric.clothName}</h2>
+            <p class="text-gray-700 truncate-2-lines mb-1">${fabric.description}</p>
+            <p class="text-green-700 font-semibold">Rs. ${fabric.price}/m</p>
+  
+            <label for="quantity-${fabric.id}" class="block text-sm font-medium text-gray-600 mt-2">Quantity (meters):</label>
+            <input type="number" id="quantity-${fabric.id}" name="quantity" value="1" min="1" class="quantity-input mt-1 block w-full p-2 border rounded-md text-sm" data-price="${fabric.price}">
+  
+            <p class="fabric-total-price text-gray-900 font-semibold mt-2">Total: Rs. ${fabric.price}</p>
+  
+            <button type="button" class="select-fabric-button mt-3 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium py-2 px-4 rounded" data-fabric-id="${fabric.id}" data-selected="false">
+              Select Fabric
+            </button>
+          `;
+  
+          fabricsContainer.appendChild(fabricElement);
+        });
+  
+        // Add event listeners to fabric selection buttons
+        document.querySelectorAll('.select-fabric-button').forEach(button => {
+          button.addEventListener('click', () => {
+            const isSelected = button.getAttribute('data-selected') === 'true';
+            if (isSelected) {
+              button.textContent = 'Select Fabric';
+              button.classList.replace('bg-green-500', 'bg-blue-500');
+              button.classList.replace('hover:bg-green-600', 'hover:bg-blue-600');
+              button.setAttribute('data-selected', 'false');
+            } else {
+              button.textContent = 'Selected';
+              button.classList.replace('bg-blue-500', 'bg-green-500');
+              button.classList.replace('hover:bg-blue-600', 'hover:bg-green-600');
+              button.setAttribute('data-selected', 'true');
+            }
+          });
+        });
+  
+        // Update total price dynamically based on quantity
+        document.querySelectorAll('.quantity-input').forEach(input => {
+          input.addEventListener('input', event => {
+            const pricePerMeter = parseFloat(event.target.dataset.price);
+            const quantity = parseFloat(event.target.value);
+            const totalPriceElement = event.target.closest('div').querySelector('.fabric-total-price');
+            totalPriceElement.innerText = `Total: Rs. ${pricePerMeter * quantity}`;
+          });
+        });
+      })
+      .catch(error => console.error('Error loading fabrics:', error));
+  
+    // Add selected fabrics to the cart
+    document.getElementById('add-to-cart-button').addEventListener('click', event => {
+      event.preventDefault();
+  
+      if (!isLoggedIn) {
+        document.getElementById('login-popup').classList.remove('hidden');
+        return;
+      }
+  
+      const selectedFabrics = [];
+      document.querySelectorAll('.select-fabric-button[data-selected="true"]').forEach(button => {
+        const fabricId = button.getAttribute('data-fabric-id');
+        const quantityInput = document.querySelector(`#quantity-${fabricId}`);
+        const quantity = quantityInput ? quantityInput.value : 1;
+  
+        selectedFabrics.push({
+          fabricId: fabricId,
+          quantity: quantity
+        });
+      });
+  
+      if (selectedFabrics.length === 0) {
+        alert('Please select at least one fabric.');
+        return;
+      }
+  
+      // Send userId along with the design and selected fabrics to the cart
+      fetch('/cart/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, designId, selectedFabrics })  // Include userId in the request body
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message === 'Fabrics added to cart successfully.') {
+          alert('Fabrics added to cart successfully!');
+          window.location.href = '/cart';
+        } else {
+          alert('Error adding fabric to cart: ' + data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Error adding fabrics to cart:', error);
+        alert('There was an error adding the fabrics to the cart.');
+      });
+    });
+  
+    // Close login popup
+    document.getElementById('close-popup').addEventListener('click', () => {
+      document.getElementById('login-popup').classList.add('hidden');
+    });
+  </script>
+  
+</body>
+</html>
